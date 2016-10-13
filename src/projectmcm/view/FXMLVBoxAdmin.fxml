@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.FXMLVBoxAdminController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="327.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="{{nome}}">
+            <items>
+              <MenuItem fx:id="menuItemAdminSeguranca" mnemonicParsing="false" text="Segurança" />
+                  <MenuItem fx:id="menuItemAdminSair" mnemonicParsing="false" text="Sair" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Gerenciar">
+               <items>
+                  <MenuItem fx:id="menuItemGerenciarAgencias" mnemonicParsing="false" onAction="#handleMenuItemGerenciarAgencias" text="Agencias" />
+                  <MenuItem fx:id="menuItemGerenciarGerentes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarGerentes" text="Gerentes" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Listar" />
+                  <MenuItem mnemonicParsing="false" text="Cadastrar123" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="800.0" />
+   </children>
+</VBox>
