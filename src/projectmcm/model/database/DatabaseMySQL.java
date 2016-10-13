@@ -18,7 +18,7 @@ public class DatabaseMySQL implements Database {
     public Connection conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/locaveiculos", "root","");
+            this.connection = DriverManager.getConnection("jdbc:mysql://db4free.net/projectmcm2", "projectmcm2","itabirabobado");
             return this.connection;
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DatabasePostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
