@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/model/dao/GerenteDAO.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/model/dao/FuncionarioDAO.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/gerente/FXMLAnchorPaneGerenteLocadoresController.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/gerente/FXMLVBoxGerenteController.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/view/gerente/FXMLVBoxGerente.fxml</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/Main.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/view/gerente/FXMLAnchorPaneGerenteLocadoresDialog.fxml</file>
         </group>
     </open-files>
 </project-private>
