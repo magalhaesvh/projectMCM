@@ -215,9 +215,3 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-
-
-/build/
-/dist/
-/nbproject/
-/test/
