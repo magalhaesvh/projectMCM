@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.gerente.FXMLAnchorPaneGerenteLocadoresController">
+<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.gerente.FXMLAnchorPaneGerenteVeiculosController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="142.0" layoutY="29.0" prefHeight="575.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -73,12 +73,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteId" text="Label" GridPane.columnIndex="1">
+                        <Label fx:id="labelGerenteVeiculoId" text="Label" GridPane.columnIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteValor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="labelGerenteVeiculoValor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -93,17 +93,17 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteCor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="labelGerenteVeiculoCor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerentePlaca" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="labelGerenteVeiculoPlaca" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteChassi" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Label fx:id="labelGerenteVeiculoChassi" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -113,12 +113,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteAnoModelo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Label fx:id="labelGerenteVeiculoAnoModelo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteAnoFabricacao" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                        <Label fx:id="labelGerenteVeiculoAnoFabricacao" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -143,12 +143,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteDataCompra" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                        <Label fx:id="labelGerenteVeiculoDataCompra" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                        <Label fx:id="labelGerenteVeiculoStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -158,7 +158,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteMotor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                        <Label fx:id="labelGerenteVeiculoMotor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -173,12 +173,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteModelo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="labelGerenteVeiculoModelo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteModelo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="labelGerenteVeiculoModelo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -188,7 +188,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteObservacoes" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                        <Label fx:id="labelGerenteVeiculoObservacoes" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -218,14 +218,14 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="checkBoxGerenteDirecaoHidraulica" mnemonicParsing="false" text="Direção Hidráulica" GridPane.rowIndex="2" />
-                        <CheckBox fx:id="checkBoxGerenteDirecaoEletrica" mnemonicParsing="false" text="Direção Elétrica" GridPane.rowIndex="3" />
-                        <CheckBox fx:id="checkBoxGerenteAutomatico" mnemonicParsing="false" text="Automático" GridPane.columnIndex="1" />
-                        <CheckBox fx:id="checkBoxGerenteAbs" mnemonicParsing="false" text="Freio ABS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="checkBoxGerenteAirBag" mnemonicParsing="false" text="Air Bag" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <CheckBox fx:id="checkBoxGerenteTracao4Rodas" mnemonicParsing="false" text="4x4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <CheckBox fx:id="checkBoxGerenteVidro" mnemonicParsing="false" text="Vidro Eletrico" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="checkBoxGerenteAr" mnemonicParsing="false" text="Ar Condicionado" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoDirecaoHidraulica" mnemonicParsing="false" text="Direção Hidráulica" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoDirecaoEletrica" mnemonicParsing="false" text="Direção Elétrica" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoAutomatico" mnemonicParsing="false" text="Automático" GridPane.columnIndex="1" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoAbs" mnemonicParsing="false" text="Freio ABS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoAirBag" mnemonicParsing="false" text="Air Bag" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoTracao4Rodas" mnemonicParsing="false" text="4x4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoVidro" mnemonicParsing="false" text="Vidro Eletrico" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBoxGerenteVeiculoAr" mnemonicParsing="false" text="Ar Condicionado" />
                      </children>
                   </GridPane>
                </children></AnchorPane>

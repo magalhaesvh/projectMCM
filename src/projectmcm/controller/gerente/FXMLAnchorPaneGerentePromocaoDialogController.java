@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author vh_ma
  */
-public class FXMLAnchorPaneGerenteVeiculoController implements Initializable {
+public class FXMLAnchorPaneGerentePromocaoDialogController implements Initializable {
 
     /**
      * Initializes the controller class.

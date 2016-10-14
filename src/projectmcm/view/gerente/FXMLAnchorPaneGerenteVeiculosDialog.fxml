@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.gerente.FXMLAnchorPaneGerenteLocadoresDialogController">
+<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.gerente.FXMLAnchorPaneGerenteVeiculosDialogController">
    <children>
       <GridPane layoutX="14.0" layoutY="58.0" prefHeight="275.0" prefWidth="348.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="60.0">
         <columnConstraints>
