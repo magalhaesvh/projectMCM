@@ -1,34 +1,22 @@
-package projectmcm.controller;
+package projectmcm.controller.admin;
 
 import java.net.URL;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import projectmcm.model.domain.Gerente;
+import projectmcm.model.domain.Agencia;
 
-public class FXMLAnchorPaneAdminGerentesDialogController implements Initializable {
+public class FXMLAnchorPaneAdminAgenciasDialogController implements Initializable {
 
     @FXML
-    private TextField textFieldGerenteNome;
+    private TextField textFieldAgenciaNome;
     @FXML
-    private TextField textFieldGerenteCnpj;
-    @FXML
-    private TextField textFieldGerenteEmail;
-    @FXML
-    private TextField textFieldGerenteCpf;
-    @FXML
-    private TextField textFieldGerenteRg;
-    @FXML
-    private DatePicker datePickerGerenteDataContratacao;
-    @FXML
-    private TextField textFieldGerenteSenha;
+    private TextField textFieldAgenciaCnpj;
     @FXML
     private Button buttonConfirmar;
     @FXML
@@ -36,7 +24,7 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
 
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
-    private Gerente gerente;
+    private Agencia agencia;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,18 +50,14 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
         this.buttonConfirmar.setText(texto);
     }
 
-    public Gerente getGerente() {
-        return gerente;
+    public Agencia getAgencia() {
+        return agencia;
     }
 
-    public void setGerente(Gerente gerente) {
-        this.gerente = gerente;
-        this.textFieldGerenteNome.setText(gerente.getNome());
-        this.textFieldGerenteEmail.setText(gerente.getEmail());
-        this.textFieldGerenteCpf.setText(gerente.getCpf());
-        this.textFieldGerenteRg.setText(gerente.getRg());
-        //System.out.println(this.datePickerGerenteData_contratacao.getValue());
-        //this.datePickerGerenteData_contratacao.setValue(null);
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
+        this.textFieldAgenciaNome.setText(agencia.getNome());
+        this.textFieldAgenciaCnpj.setText(agencia.getCnpj());
     }
 
     @FXML
@@ -81,12 +65,8 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
 
         if (validarEntradaDeDados()) {
 
-            gerente.setNome(textFieldGerenteNome.getText());
-            gerente.setEmail(textFieldGerenteEmail.getText());
-            gerente.setCpf(textFieldGerenteCpf.getText());
-            gerente.setRg(textFieldGerenteRg.getText());
-            //gerente.setData_contratacao((java.sql.Date) Date.from(datePickerGerenteData_contratacao.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            //gerente.setSenha(textFieldGerenteSenha.getText());
+            agencia.setNome(textFieldAgenciaNome.getText());
+            agencia.setCnpj(textFieldAgenciaCnpj.getText());
 
             buttonConfirmarClicked = true;
             dialogStage.close();
@@ -103,11 +83,11 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
     private boolean validarEntradaDeDados() {
         String errorMessage = "";
 
-        if (textFieldGerenteNome.getText() == null || textFieldGerenteNome.getText().length() == 0) {
+        if (textFieldAgenciaNome.getText() == null || textFieldAgenciaNome.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
         }
-        if (textFieldGerenteCpf.getText() == null || textFieldGerenteCpf.getText().length() == 0) {
-            errorMessage += "Cpf inválido!\n";
+        if (textFieldAgenciaCnpj.getText() == null || textFieldAgenciaCnpj.getText().length() == 0) {
+            errorMessage += "Cnpj inválido!\n";
         }
 
         if (errorMessage.length() == 0) {

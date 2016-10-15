@@ -35,12 +35,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldGerenteValor" GridPane.columnIndex="1">
+            <TextField fx:id="textFieldVeiculoValor" GridPane.columnIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldGerenteCor" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="textFieldVeiculoCor" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -60,19 +60,19 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldGerentePlaca" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="textFieldVeiculoPlaca" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldGerenteChassi" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="textFieldVeiculoChassi" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <DatePicker fx:id="datePickerAnoFabricacao" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="datePickerAnoModelo" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="textFieldGerenteMotor" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <DatePicker fx:id="datePickerVeiculoAnoFabricacao" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="datePickerVeiculoAnoModelo" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="textFieldVeiculoMotor" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
@@ -92,11 +92,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldGerenteStatus" GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
+            <ChoiceBox fx:id="choiceBoxVeiculoStatus" prefHeight="25.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="24.0" text="Cadastro/Edição de Veículos" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
@@ -117,14 +113,14 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <CheckBox fx:id="checkBoxGerenteDirecaoHidraulica" mnemonicParsing="false" text="Direção Hidráulica" GridPane.rowIndex="2" />
-            <CheckBox fx:id="checkBoxGerenteDirecaoEletrica" mnemonicParsing="false" text="Direção Elétrica" GridPane.rowIndex="3" />
-            <CheckBox fx:id="checkBoxGerenteAutomatico" mnemonicParsing="false" text="Automático" GridPane.columnIndex="1" />
-            <CheckBox fx:id="checkBoxGerenteAbs" mnemonicParsing="false" text="Freio ABS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckBox fx:id="checkBoxGerenteAirBag" mnemonicParsing="false" text="Air Bag" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <CheckBox fx:id="checkBoxGerenteTracao4Rodas" mnemonicParsing="false" text="4x4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <CheckBox fx:id="checkBoxGerenteVidro" mnemonicParsing="false" text="Vidro Eletrico" GridPane.rowIndex="1" />
-            <CheckBox fx:id="checkBoxGerenteAr" mnemonicParsing="false" text="Ar Condicionado" />
+            <CheckBox fx:id="checkBoxVeiculoDirecaoHidraulica" mnemonicParsing="false" text="Direção Hidráulica" GridPane.rowIndex="2" />
+            <CheckBox fx:id="checkBoxVeiculoDirecaoEletrica" mnemonicParsing="false" text="Direção Elétrica" GridPane.rowIndex="3" />
+            <CheckBox fx:id="checkBoxVeiculoAutomatico" mnemonicParsing="false" text="Automático" GridPane.columnIndex="1" />
+            <CheckBox fx:id="checkBoxVeiculoAbs" mnemonicParsing="false" text="Freio ABS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="checkBoxVeiculoAirBag" mnemonicParsing="false" text="Air Bag" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="checkBoxVeiculoTracao4Rodas" mnemonicParsing="false" text="4x4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="checkBoxVeiculoVidro" mnemonicParsing="false" text="Vidro Eletrico" GridPane.rowIndex="1" />
+            <CheckBox fx:id="checkBoxVeiculoAr" mnemonicParsing="false" text="Ar Condicionado" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="137.0" />

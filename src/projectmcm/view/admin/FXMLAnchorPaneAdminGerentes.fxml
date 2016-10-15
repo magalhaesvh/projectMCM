@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.FXMLAnchorPaneAdminGerentesController">
+<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.admin.FXMLAnchorPaneAdminGerentesController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="142.0" layoutY="29.0" prefHeight="575.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -20,7 +20,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TableView layoutY="114.0" prefHeight="461.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <TableView fx:id="tableViewGerentes" layoutY="114.0" prefHeight="461.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="tableColumnGerenteNome" prefWidth="75.0" text="Nome" />
                       <TableColumn fx:id="tableColumnGerenteCpf" prefWidth="75.0" text="CPF" />
@@ -65,12 +65,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteNome" text="Label" GridPane.columnIndex="1">
+                        <Label fx:id="labelGerenteNome" GridPane.columnIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="labelGerenteEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -90,27 +90,27 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteCpf" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="labelGerenteCpf" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteRg" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="labelGerenteRg" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteDataContratacao" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="labelGerenteDataContratacao" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label text="Status:" GridPane.rowIndex="5">
+                        <Label text="Agência:" GridPane.rowIndex="5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGerenteStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="labelGerenteAgencia" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font size="14.0" />
                            </font>

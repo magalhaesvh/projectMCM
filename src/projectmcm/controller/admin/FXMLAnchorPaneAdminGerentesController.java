@@ -1,8 +1,9 @@
-package projectmcm.controller;
+package projectmcm.controller.admin;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
 import projectmcm.model.dao.GerenteDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
-import projectmcm.model.domain.Gerente;
 import projectmcm.model.domain.Gerente;
 
 public class FXMLAnchorPaneAdminGerentesController implements Initializable {
@@ -56,6 +56,9 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
     private Label labelGerenteRg;
     @FXML
     private Label labelGerenteDataContratacao;
+    @FXML
+    private Label labelGerenteAgencia;
+    
 
     private List<Gerente> listGerentes;
     private ObservableList<Gerente> observableListGerentes;
@@ -94,13 +97,15 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
             labelGerenteEmail.setText(gerente.getEmail());
             labelGerenteCpf.setText(gerente.getCpf());
             labelGerenteRg.setText(gerente.getRg());
-            labelGerenteDataContratacao.setText(gerente.getDataContratacao().toString());
+            labelGerenteDataContratacao.setText(gerente.getDataContratacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));            
+            labelGerenteAgencia.setText(gerente.getAgencia().getNome());
         } else {
             labelGerenteNome.setText("");
             labelGerenteEmail.setText("");
             labelGerenteCpf.setText("");
             labelGerenteRg.setText("");
             labelGerenteDataContratacao.setText("");
+            labelGerenteAgencia.setText("");
         }
 
     }
@@ -165,9 +170,10 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         }
     }
     
-    public boolean showFXMLAnchorPaneAdminGerentesDialog(Gerente gerente) throws IOException {
+    public boolean showFXMLAnchorPaneAdminGerentesDialog(Gerente gerente) throws IOException {   
+        
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(FXMLAnchorPaneAdminGerentesDialogController.class.getResource("/projectmcm/view/FXMLAnchorPaneAdminGerentesDialog.fxml"));
+        loader.setLocation(FXMLAnchorPaneAdminGerentesDialogController.class.getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminGerentesDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         // Criando um Estágio de Diálogo (Stage Dialog)
@@ -179,7 +185,14 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         // Setando o gerente no Controller.
         FXMLAnchorPaneAdminGerentesDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
+        if(gerente.getIdFuncionario() == 0){
+            controller.setLabelTitleAdminGerente("Cadastro de Gerente");
+        }else{
+            
+            controller.setLabelTitleAdminGerente("Edição de Gerente");
+        }
         controller.setGerente(gerente);
+        
 
         // Mostra o Dialog e espera até que o usuário o feche
         dialogStage.showAndWait();

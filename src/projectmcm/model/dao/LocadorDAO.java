@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projectmcm.model.domain.Agencia;
 import projectmcm.model.domain.Locador;
 
 public class LocadorDAO extends FuncionarioDAO {
@@ -26,9 +27,18 @@ public class LocadorDAO extends FuncionarioDAO {
                 locador.setSenha(resultado.getString("senha"));
                 locador.setCpf(resultado.getString("cpf"));
                 locador.setRg(resultado.getString("rg"));
-                locador.setDataContratacao(resultado.getDate("data_contratacao"));
+                locador.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 locador.setTipo(resultado.getByte("tipo"));
                 locador.setComissao(resultado.getInt("comissao"));
+                
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(super.getConnection());
+                locador.setAgencia(agenciaDAO.buscar(agencia));
+                
                 retorno.add(locador);
             }
         } catch (SQLException ex) {
@@ -53,9 +63,18 @@ public class LocadorDAO extends FuncionarioDAO {
                 locador.setSenha(resultado.getString("senha"));
                 locador.setCpf(resultado.getString("cpf"));
                 locador.setRg(resultado.getString("rg"));
-                locador.setDataContratacao(resultado.getDate("data_contratacao"));
+                locador.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 locador.setTipo(resultado.getByte("tipo"));
                 locador.setComissao(resultado.getFloat("comissao"));
+                
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(super.getConnection());
+                locador.setAgencia(agenciaDAO.buscar(agencia));
+                
                 retorno.add(locador);
             }
         } catch (SQLException ex) {

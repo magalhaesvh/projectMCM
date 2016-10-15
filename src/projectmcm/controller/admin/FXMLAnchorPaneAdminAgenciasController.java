@@ -1,4 +1,4 @@
-package projectmcm.controller;
+package projectmcm.controller.admin;
 
 import java.io.IOException;
 import java.net.URL;
@@ -147,7 +147,7 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
     
     public boolean showFXMLAnchorPaneAdminAgenciasDialog(Agencia agencia) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(FXMLAnchorPaneAdminAgenciasDialogController.class.getResource("/projectmcm/view/FXMLAnchorPaneAdminAgenciasDialog.fxml"));
+        loader.setLocation(FXMLAnchorPaneAdminAgenciasDialogController.class.getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminAgenciasDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         // Criando um Estágio de Diálogo (Stage Dialog)

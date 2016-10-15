@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectmcm.controller;
+package projectmcm.controller.admin;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,13 +40,13 @@ public class FXMLVBoxAdminController implements Initializable {
     
     @FXML
     public void handleMenuItemGerenciarAgencias() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/FXMLAnchorPaneAdminAgencias.fxml"));
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminAgencias.fxml"));
         anchorPane.getChildren().setAll(a);
     }
     
     @FXML
     public void handleMenuItemGerenciarGerentes() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/FXMLAnchorPaneAdminGerentes.fxml"));
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminGerentes.fxml"));
         anchorPane.getChildren().setAll(a);
     }
     

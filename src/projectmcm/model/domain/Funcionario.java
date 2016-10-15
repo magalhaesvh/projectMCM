@@ -1,7 +1,7 @@
 package projectmcm.model.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Funcionario implements Serializable {
     private int idFuncionario;
@@ -10,8 +10,9 @@ public class Funcionario implements Serializable {
     private String senha;
     private String cpf;
     private String rg;
-    private Date dataContratacao;
+    private LocalDate dataContratacao;
     private byte tipo;
+    private Agencia agencia;
 
     public int getIdFuncionario() {
         return idFuncionario;
@@ -37,7 +38,7 @@ public class Funcionario implements Serializable {
         return rg;
     }
 
-    public Date getDataContratacao() {
+    public LocalDate getDataContratacao() {
         return dataContratacao;
     }
 
@@ -69,8 +70,8 @@ public class Funcionario implements Serializable {
         this.rg = rg;
     }
 
-    public void setDataContratacao(Date data_contratacao) {
-        this.dataContratacao = data_contratacao;
+    public void setDataContratacao(LocalDate dataContratacao) {
+        this.dataContratacao = dataContratacao;
     }
 
     public void setTipo(byte tipo) {
@@ -80,6 +81,14 @@ public class Funcionario implements Serializable {
     @Override
     public String toString() {
         return this.nome;
+    }
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
     }
     
     

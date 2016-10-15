@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projectmcm.model.domain.Agencia;
 import projectmcm.model.domain.Gerente;
 
 public class GerenteDAO extends FuncionarioDAO {
@@ -17,16 +18,25 @@ public class GerenteDAO extends FuncionarioDAO {
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
-                Gerente funcionario = new Gerente();
-                funcionario.setIdFuncionario(resultado.getInt("id_funcionario"));
-                funcionario.setNome(resultado.getString("nome"));
-                funcionario.setEmail(resultado.getString("email"));
-                funcionario.setSenha(resultado.getString("senha"));
-                funcionario.setCpf(resultado.getString("cpf"));
-                funcionario.setRg(resultado.getString("rg"));
-                funcionario.setDataContratacao(resultado.getDate("data_contratacao"));
-                funcionario.setTipo(resultado.getByte("tipo"));
-                retorno.add(funcionario);
+                Gerente gerente = new Gerente();
+                gerente.setIdFuncionario(resultado.getInt("id_funcionario"));
+                gerente.setNome(resultado.getString("nome"));
+                gerente.setEmail(resultado.getString("email"));
+                gerente.setSenha(resultado.getString("senha"));
+                gerente.setCpf(resultado.getString("cpf"));
+                gerente.setRg(resultado.getString("rg"));
+                gerente.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
+                gerente.setTipo(resultado.getByte("tipo"));
+                
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(super.getConnection());
+                gerente.setAgencia(agenciaDAO.buscar(agencia));
+                
+                retorno.add(gerente);
             }
         } catch (SQLException ex) {
             Logger.getLogger(GerenteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,8 +60,17 @@ public class GerenteDAO extends FuncionarioDAO {
                 gerente.setSenha(resultado.getString("senha"));
                 gerente.setCpf(resultado.getString("cpf"));
                 gerente.setRg(resultado.getString("rg"));
-                gerente.setDataContratacao(resultado.getDate("data_contratacao"));
+                gerente.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 gerente.setTipo(resultado.getByte("tipo"));
+                
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(super.getConnection());
+                gerente.setAgencia(agenciaDAO.buscar(agencia));
+                
                 retorno.add(gerente);
             }
         } catch (SQLException ex) {

@@ -3,17 +3,19 @@ package projectmcm.model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import projectmcm.model.domain.Administrador;
+import projectmcm.model.domain.Agencia;
 
 public class AdministradorDAO extends FuncionarioDAO {
    
     @Override
     public List<Administrador> listar() {
-        String sql = "SELECT * FROM administrador WHERE tipo=1";
+        String sql = "SELECT * FROM funcionario WHERE tipo=1";
         List<Administrador> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = super.getConnection().prepareStatement(sql);
@@ -26,8 +28,17 @@ public class AdministradorDAO extends FuncionarioDAO {
                 administrador.setSenha(resultado.getString("senha"));
                 administrador.setCpf(resultado.getString("cpf"));
                 administrador.setRg(resultado.getString("rg"));
-                administrador.setDataContratacao(resultado.getDate("data_contratacao"));
+                administrador.setDataContratacao(resultado.getDate("dataContratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 administrador.setTipo(resultado.getByte("tipo"));
+                
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(super.getConnection());
+                administrador.setAgencia(agenciaDAO.buscar(agencia));
+                
                 retorno.add(administrador);
             }
         } catch (SQLException ex) {
@@ -37,7 +48,7 @@ public class AdministradorDAO extends FuncionarioDAO {
     }
         
     public List<Administrador> buscar(String texto) {
-        String sql = "SELECT * FROM administrador WHERE tipo=1 AND (nome=? OR CPF=?)";
+        String sql = "SELECT * FROM funcionario WHERE tipo=1 AND (nome=? OR CPF=?)";
         List<Administrador> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = getConnection().prepareStatement(sql);
@@ -52,8 +63,17 @@ public class AdministradorDAO extends FuncionarioDAO {
                 administrador.setSenha(resultado.getString("senha"));
                 administrador.setCpf(resultado.getString("cpf"));
                 administrador.setRg(resultado.getString("rg"));
-                administrador.setDataContratacao(resultado.getDate("data_contratacao"));
+                administrador.setDataContratacao(resultado.getDate("data_contratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 administrador.setTipo(resultado.getByte("tipo"));
+                
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(super.getConnection());
+                administrador.setAgencia(agenciaDAO.buscar(agencia));
+                
                 retorno.add(administrador);
             }
         } catch (SQLException ex) {
