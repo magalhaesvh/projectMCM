@@ -79,12 +79,12 @@
                         <Button fx:id="buttonAlterar" layoutX="113.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="33.0" prefWidth="78.0" text="Alterar" />
                      </children>
                   </Group>
-                  <Label layoutX="152.0" layoutY="175.0" text="Estatísticas">
+                  <Label layoutX="108.0" layoutY="177.0" text="Situação dos veículos">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <PieChart layoutX="60.0" layoutY="228.0" prefHeight="247.0" prefWidth="277.0" />
+                  <PieChart fx:id="graficoVeiculoAgencia" layoutX="60.0" layoutY="228.0" prefHeight="247.0" prefWidth="277.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import projectmcm.model.domain.Agencia;
@@ -117,6 +119,25 @@ public class AgenciaDAO {
                 agencia.setCnpj(resultado.getString("cnpj"));
                 retorno = agencia;
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(AgenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    
+    public Map<String, Integer> listarStatusVeiculos(Agencia agencia){
+        String sql = "SELECT count(v.id_veiculo) AS quantidade, s.nome FROM veiculo AS v LEFT JOIN status AS s ON v.id_status=s.id_status WHERE v.id_agencia = ? AND s.tipo=1 GROUP BY v.id_status";
+        Map<String, Integer> retorno = new HashMap();
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, agencia.getIdAgencia());
+            ResultSet resultado = stmt.executeQuery();
+
+            while (resultado.next()) {
+                retorno.put(resultado.getString("nome"), resultado.getInt("quantidade"));
+            }
+            return retorno;
         } catch (SQLException ex) {
             Logger.getLogger(AgenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

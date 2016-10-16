@@ -29,7 +29,9 @@ public class FXMLVBoxAdminController implements Initializable {
     @FXML
     private MenuItem menuItemGerenciarAgencias;
     @FXML
-    private MenuItem menuItemGerenciarGerentes;     
+    private MenuItem menuItemGerenciarGerentes;    
+    @FXML
+    private MenuItem menuItemGerenciarSituacoes;   
     @FXML
     private AnchorPane anchorPane;
     
@@ -51,8 +53,9 @@ public class FXMLVBoxAdminController implements Initializable {
     }
     
     @FXML
-    public void teste(){
-        System.out.println("teste");
+    public void handleMenuItemGerenciarSituacoes() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminSituacoes.fxml"));
+        anchorPane.getChildren().setAll(a);
     }
     
     

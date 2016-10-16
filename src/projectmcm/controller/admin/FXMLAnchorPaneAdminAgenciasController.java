@@ -3,7 +3,9 @@ package projectmcm.controller.admin;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,9 +52,12 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
     private Label labelAgenciaNome;
     @FXML
     private Label labelAgenciaCnpj;
+    @FXML
+    private PieChart graficoVeiculoAgencia;
 
     private List<Agencia> listAgencias;
     private ObservableList<Agencia> observableListAgencias;
+    private ObservableList<PieChart.Data> pieChartData;
 
     //Atributos para manipulação de Banco de Dados
     private final Database database = DatabaseFactory.getDatabase("mysql");
@@ -78,18 +84,32 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
         observableListAgencias = FXCollections.observableArrayList(listAgencias);
         tableViewAgencias.setItems(observableListAgencias);
     }
-    
-    public void selecionarItemTableViewAgencias(Agencia agencia){
+
+    public void selecionarItemTableViewAgencias(Agencia agencia) {
         if (agencia != null) {
             labelAgenciaNome.setText(agencia.getNome());
             labelAgenciaCnpj.setText(agencia.getCnpj());
+            pieChartData = FXCollections.observableArrayList();
+
+            Map<String, Integer> dados = agenciaDAO.listarStatusVeiculos(agencia);
+            if (!dados.isEmpty()) {
+                for (Map.Entry<String, Integer> entry : dados.entrySet()) {
+                    pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+                    graficoVeiculoAgencia.setData(pieChartData);
+                }
+            } else {
+                pieChartData.add(new PieChart.Data("", 0));
+                graficoVeiculoAgencia.setData(pieChartData);
+            }
+
         } else {
             labelAgenciaNome.setText("");
             labelAgenciaCnpj.setText("");
+            graficoVeiculoAgencia.setData(null);
         }
 
     }
-    
+
     @FXML
     public void handleButtonCadastrar() throws IOException {
         Agencia agencia = new Agencia();
@@ -129,22 +149,22 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
             alert.show();
         }
     }
-    
+
     @FXML
     public void handleButtonPesquisar() throws IOException {
         tableColumnAgenciaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnAgenciaCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 
-        if (!textFieldPesquisar.getText().equals("")){
+        if (!textFieldPesquisar.getText().equals("")) {
             listAgencias = agenciaDAO.buscar(textFieldPesquisar.getText());
 
             observableListAgencias = FXCollections.observableArrayList(listAgencias);
             tableViewAgencias.setItems(observableListAgencias);
-        }else{
+        } else {
             carregarTableViewAgencia();
         }
     }
-    
+
     public boolean showFXMLAnchorPaneAdminAgenciasDialog(Agencia agencia) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneAdminAgenciasDialogController.class.getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminAgenciasDialog.fxml"));
@@ -167,7 +187,5 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
         return controller.isButtonConfirmarClicked();
 
     }
-
-
 
 }
