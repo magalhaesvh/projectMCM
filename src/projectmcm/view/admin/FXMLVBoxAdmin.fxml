@@ -20,7 +20,6 @@
                <items>
                   <MenuItem fx:id="menuItemGerenciarAgencias" mnemonicParsing="false" onAction="#handleMenuItemGerenciarAgencias" text="Agências" />
                   <MenuItem fx:id="menuItemGerenciarGerentes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarGerentes" text="Gerentes" />
-                  <MenuItem fx:id="menuItemGerenciarSituacoes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarSituacoes" text="Situações" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">

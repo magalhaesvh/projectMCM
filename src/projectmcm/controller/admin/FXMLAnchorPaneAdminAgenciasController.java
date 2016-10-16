@@ -98,7 +98,7 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
                     graficoVeiculoAgencia.setData(pieChartData);
                 }
             } else {
-                pieChartData.add(new PieChart.Data("", 0));
+                pieChartData.clear();
                 graficoVeiculoAgencia.setData(pieChartData);
             }
 
