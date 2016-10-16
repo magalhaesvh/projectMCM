@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/model/dao/FuncionarioDAO.java</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/gerente/FXMLAnchorPaneGerenteLocadoresController.java</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/gerente/FXMLVBoxGerenteController.java</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/view/gerente/FXMLVBoxGerente.fxml</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/Main.java</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/view/gerente/FXMLAnchorPaneGerenteLocadoresDialog.fxml</file>
+            <file>file:/G:/User/Victor/Documents/NetBeansProjects/projectMCM/src/projectmcm/view/admin/FXMLAnchorPaneAdminSeguranca.fxml</file>
+            <file>file:/G:/User/Victor/Documents/NetBeansProjects/projectMCM/src/projectmcm/controller/gerente/FXMLAnchorPaneGerenteSegurancaController.java</file>
+            <file>file:/G:/User/Victor/Documents/NetBeansProjects/projectMCM/src/projectmcm/view/gerente/FXMLAnchorPaneGerenteSeguranca.fxml</file>
+            <file>file:/G:/User/Victor/Documents/NetBeansProjects/projectMCM/src/projectmcm/view/gerente/FXMLAnchorPaneGerentePromocao.fxml</file>
         </group>
     </open-files>
 </project-private>
