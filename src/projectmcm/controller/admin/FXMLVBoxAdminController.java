@@ -11,9 +11,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import projectmcm.model.domain.Funcionario;
 
 /**
  * FXML Controller class
@@ -22,6 +23,9 @@ import javafx.scene.layout.AnchorPane;
  */
 public class FXMLVBoxAdminController implements Initializable {
 
+    
+    private Funcionario logado;
+    
     @FXML
     private MenuItem menuItemAdminSeguranca;
     @FXML
@@ -34,10 +38,12 @@ public class FXMLVBoxAdminController implements Initializable {
     private MenuItem menuItemGerenciarSituacoes;   
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Menu menuAdmin;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        menuAdmin.setText(logado.getNome());
     }
     
     @FXML
@@ -56,6 +62,14 @@ public class FXMLVBoxAdminController implements Initializable {
     public void handleMenuItemGerenciarSituacoes() throws IOException {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminSituacoes.fxml"));
         anchorPane.getChildren().setAll(a);
+    }
+
+    public Funcionario getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Funcionario logado) {
+        this.logado = logado;
     }
     
     

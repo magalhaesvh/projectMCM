@@ -28,6 +28,8 @@ import projectmcm.model.domain.Gerente;
 
 public class FXMLAnchorPaneAdminGerentesController implements Initializable {
 
+    private Gerente logado;
+    
     @FXML
     private TableView<Gerente> tableViewGerentes;
     @FXML
@@ -199,6 +201,14 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
 
         return controller.isButtonConfirmarClicked();
 
+    }
+
+    public Gerente getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Gerente logado) {
+        this.logado = logado;
     }
 
 

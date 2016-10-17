@@ -10,7 +10,7 @@
    <children>
       <MenuBar prefHeight="25.0" prefWidth="327.0">
         <menus>
-          <Menu mnemonicParsing="false" text="{{nome}}">
+          <Menu mnemonicParsing="false" text="{{nome}}" fx:id="menuAdmin">
             <items>
               <MenuItem fx:id="menuItemAdminSeguranca" mnemonicParsing="false" text="Segurança" />
                   <MenuItem fx:id="menuItemAdminSair" mnemonicParsing="false" text="Sair" />

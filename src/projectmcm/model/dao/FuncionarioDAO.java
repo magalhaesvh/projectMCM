@@ -126,7 +126,7 @@ public abstract class FuncionarioDAO {
                 funcionario.setSenha(resultado.getString("senha"));
                 funcionario.setCpf(resultado.getString("cpf"));
                 funcionario.setRg(resultado.getString("rg"));
-                funcionario.setDataContratacao(resultado.getDate("data_contratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                funcionario.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 funcionario.setTipo(resultado.getByte("tipo"));
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
