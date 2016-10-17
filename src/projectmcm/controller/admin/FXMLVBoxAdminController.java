@@ -43,7 +43,7 @@ public class FXMLVBoxAdminController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        menuAdmin.setText(logado.getNome());
+        //menuAdmin.setText(logado.getNome());
     }
     
     @FXML

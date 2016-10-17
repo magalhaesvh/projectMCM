@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import projectmcm.controller.admin.FXMLVBoxAdminController;
@@ -59,11 +60,10 @@ public class FXMLLoginPrincipalController implements Initializable {
             switch (funcionario.getTipo()) {
                 case 1:
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(FXMLVBoxAdminController.class.getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
-                    VBox page = loader.load();
+                    VBox page = loader.load(FXMLVBoxAdminController.class.getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
                     scene = new Scene(page);
                     FXMLVBoxAdminController controller = loader.getController();
-                    controller.setLogado(this.funcionario);
+                    //controller.setLogado(this.funcionario);
                     stage.close();
                     
                     break;
