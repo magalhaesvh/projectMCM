@@ -7,6 +7,7 @@ public class Vistoria implements Serializable {
     private Veiculo veiculo;
     private Funcionario funcionario;
     private Status status;
+    private String observacoes;
 
     public int getIdVistoria() {
         return idVistoria;
@@ -38,6 +39,14 @@ public class Vistoria implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 }
 

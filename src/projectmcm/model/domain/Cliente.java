@@ -12,6 +12,7 @@ public class Cliente implements Serializable {
     private Date dataNascimento;
     private Date dataVinculo;
     private String email;
+    private Endereco endereco;
 
        
     @Override
@@ -81,5 +82,13 @@ public class Cliente implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

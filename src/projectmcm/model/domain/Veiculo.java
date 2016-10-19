@@ -6,6 +6,8 @@ import java.sql.Date;
 public class Veiculo implements Serializable {
 
     private int idVeiculo;
+    private String modelo;
+    private String marca;
     private String cor;
     private float valor;
     private String placa;
@@ -46,9 +48,17 @@ public class Veiculo implements Serializable {
         this.airBag = false;
         this.tracao4x4 = false;
     }
-    
+
     public int getIdVeiculo() {
         return idVeiculo;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public String getMarca() {
+        return marca;
     }
 
     public String getCor() {
@@ -127,6 +137,14 @@ public class Veiculo implements Serializable {
         this.idVeiculo = idVeiculo;
     }
 
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public void setCor(String cor) {
         this.cor = cor;
     }
@@ -159,7 +177,7 @@ public class Veiculo implements Serializable {
         this.observacoes = observacoes;
     }
 
-    public void setStatus(Status idStatus) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -198,4 +216,6 @@ public class Veiculo implements Serializable {
     public void setTracao4x4(boolean tracao4x4) {
         this.tracao4x4 = tracao4x4;
     }
+    
+   
 }

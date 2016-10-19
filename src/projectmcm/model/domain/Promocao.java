@@ -5,17 +5,12 @@ import java.sql.Date;
 
 public class Promocao implements Serializable {
     private int idPromocao;
-    private int nome;
     private Date dataInicio;
     private Date dataTermino;
     private int quantidade;
 
     public int getIdPromocao() {
         return idPromocao;
-    }
-
-    public int getNome() {
-        return nome;
     }
 
     public Date getDataInicio() {
@@ -32,10 +27,6 @@ public class Promocao implements Serializable {
 
     public void setIdPromocao(int idPromocao) {
         this.idPromocao = idPromocao;
-    }
-
-    public void setNome(int nome) {
-        this.nome = nome;
     }
 
     public void setDataInicio(Date dataInicio) {

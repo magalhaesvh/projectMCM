@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Locacao implements Serializable {
-    private Locacao locacao;
+    private int idLocacao;
     private Cliente cliente;
     private Plano plano;
     private Funcionario locador;
@@ -15,8 +15,8 @@ public class Locacao implements Serializable {
     private Status status;
     private Agencia agenciaDevolucao;
 
-    public Locacao getLocacao() {
-        return locacao;
+    public int getIdLocacao() {
+        return idLocacao;
     }
 
     public Cliente getCliente() {
@@ -55,8 +55,8 @@ public class Locacao implements Serializable {
         return agenciaDevolucao;
     }
 
-    public void setLocacao(Locacao locacao) {
-        this.locacao = locacao;
+    public void setIdLocacao(int idLocacao) {
+        this.idLocacao = idLocacao;
     }
 
     public void setCliente(Cliente cliente) {
@@ -71,29 +71,28 @@ public class Locacao implements Serializable {
         this.locador = locador;
     }
 
-    public void setDataInicio(Date data_inicio) {
-        this.dataInicio = data_inicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public void setDataFinal(Date data_final) {
-        this.dataFinal = data_final;
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
 
-    public void setKmInicial(float km_inicial) {
-        this.kmInicial = km_inicial;
+    public void setKmInicial(float kmInicial) {
+        this.kmInicial = kmInicial;
     }
 
-    public void setKmFinal(float km_final) {
-        this.kmFinal = km_final;
+    public void setKmFinal(float kmFinal) {
+        this.kmFinal = kmFinal;
     }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void setAgenciaDevolucao(Agencia agencia_devolucao) {
-        this.agenciaDevolucao = agencia_devolucao;
+    public void setAgenciaDevolucao(Agencia agenciaDevolucao) {
+        this.agenciaDevolucao = agenciaDevolucao;
     }
 
-    
 }
