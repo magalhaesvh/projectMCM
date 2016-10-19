@@ -14,7 +14,7 @@ public class Veiculo implements Serializable {
     private Date anoFabricacao;
     private Date dataCompra;
     private String observacoes;
-    private int idStatus;
+    private Status status;
     private boolean arCondicionado;
     private boolean vidroEletrico;
     private boolean travaEletrica;
@@ -35,7 +35,7 @@ public class Veiculo implements Serializable {
         this.anoFabricacao = null;
         this.dataCompra = null;
         this.observacoes = "";
-        this.idStatus = -1;
+        this.status = null;
         this.arCondicionado = false;
         this.vidroEletrico = false;
         this.travaEletrica = false;
@@ -83,8 +83,8 @@ public class Veiculo implements Serializable {
         return observacoes;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
     public boolean isArCondicionado() {
@@ -159,8 +159,8 @@ public class Veiculo implements Serializable {
         this.observacoes = observacoes;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status idStatus) {
+        this.status = status;
     }
 
     public void setArCondicionado(boolean arCondicionado) {

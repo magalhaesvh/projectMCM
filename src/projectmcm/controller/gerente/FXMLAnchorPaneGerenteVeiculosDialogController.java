@@ -1,17 +1,26 @@
 package projectmcm.controller.gerente;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import projectmcm.model.dao.StatusDAO;
+import projectmcm.model.database.Database;
+import projectmcm.model.database.DatabaseFactory;
+import projectmcm.model.domain.Status;
 import projectmcm.model.domain.Veiculo;
 
 public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializable {
@@ -55,14 +64,28 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
     @FXML
     private CheckBox checkBoxVeiculoTracao4x4;
     @FXML
-    private ChoiceBox choiceBoxVeiculoStatus;
+    private ComboBox choiceBoxVeiculoStatus;
 
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
     private Veiculo veiculo;
+    
+    private final Database database = DatabaseFactory.getDatabase("mysql");
+    private final Connection connection = database.conectar();
+    private final StatusDAO statusDAO = new StatusDAO();
+    private ObservableList<Status> observableListStatus;
+    private List<Status> listarStatus;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        statusDAO.setConnection(connection);
+        carregarComboBoxVeiculoStatus();
+    }
+    
+    public void carregarComboBoxVeiculoStatus(){
+        listarStatus = statusDAO.listar();
+        observableListStatus = FXCollections.observableArrayList(listarStatus);
+        choiceBoxVeiculoStatus.setItems(observableListStatus);
     }
 
     public Stage getDialogStage() {

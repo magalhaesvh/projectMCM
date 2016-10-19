@@ -26,15 +26,15 @@ public class LocacaoDAO {
         String sql = "INSERT INTO locacao (id_cliente, id_plano, id_locador, data_inicio, data_final, km_inicial, km_final, id_status, id_agencia_devolucao) VALUES(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getIdCliente());
-            stmt.setInt(2, locacao.getIdPlano());
-            stmt.setInt(3, locacao.getIdLocador());
+            stmt.setInt(1, locacao.getCliente());
+            stmt.setInt(2, locacao.getPlano());
+            stmt.setInt(3, locacao.getLocador());
             stmt.setDate(4, locacao.getDataInicio());
             stmt.setDate(5, locacao.getDataFinal());
             stmt.setFloat(6, locacao.getKmInicial());
             stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(8, locacao.getIdStatus());
-            stmt.setInt(9, locacao.getIdAgenciaDevolucao());
+            stmt.setInt(8, locacao.getStatus());
+            stmt.setInt(9, locacao.getAgenciaDevolucao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -47,16 +47,16 @@ public class LocacaoDAO {
         String sql = "UPDATE locacao SET (id_cliente=?, id_plano=?, id_locador=?, data_inicio=?, data_final=?, km_inicial=?, km_final=?, id_status=?, id_agencia_devolucao) WHERE id_locacao=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getIdCliente());
-            stmt.setInt(2, locacao.getIdPlano());
-            stmt.setInt(3, locacao.getIdLocador());
+            stmt.setInt(1, locacao.getCliente());
+            stmt.setInt(2, locacao.getPlano());
+            stmt.setInt(3, locacao.getLocador());
             stmt.setDate(4, locacao.getDataInicio());
             stmt.setDate(5, locacao.getDataFinal());
             stmt.setFloat(6, locacao.getKmInicial());
             stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(8, locacao.getIdStatus());
-            stmt.setInt(9, locacao.getIdAgenciaDevolucao());
-            stmt.setInt(9, locacao.getIdLocacao());
+            stmt.setInt(8, locacao.getStatus());
+            stmt.setInt(9, locacao.getAgenciaDevolucao());
+            stmt.setInt(9, locacao.getLocacao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -69,7 +69,7 @@ public class LocacaoDAO {
         String sql = "DELETE FROM locacao WHERE id_locacao=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getIdLocacao());
+            stmt.setInt(1, locacao.getLocacao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -86,17 +86,17 @@ public class LocacaoDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Locacao locacao = new Locacao();
-                locacao.setIdLocacao(resultado.getInt("id_locacao"));
-                locacao.setIdLocacao(resultado.getInt("id_locacao"));
-                locacao.setIdLocacao(resultado.getInt("id_locacao"));
+                locacao.setLocacao(resultado.getInt("id_locacao"));
+                locacao.setLocacao(resultado.getInt("id_locacao"));
+                locacao.setLocacao(resultado.getInt("id_locacao"));
                 locacao.setIPlano(resultado.getInt("id_plano"));
-                locacao.setIdLocador(resultado.getInt("id_locador"));
+                locacao.setLocador(resultado.getInt("id_locador"));
                 locacao.setDataInicio(resultado.getDate("data_inicio"));
                 locacao.setDataFinal(resultado.getDate("data_final"));
                 locacao.setKmInicial(resultado.getFloat("km_inicial"));
                 locacao.setKmFinal(resultado.getFloat("km_final"));
-                locacao.setIdStatus(resultado.getInt("id_status"));
-                locacao.setIdAgenciaDevolucao(resultado.getInt("id_agencia_devolucao"));
+                locacao.setStatus(resultado.getInt("id_status"));
+                locacao.setAgenciaDevolucao(resultado.getInt("id_agencia_devolucao"));
                 retorno.add(locacao);
             }
         } catch (SQLException ex) {
@@ -110,20 +110,20 @@ public class LocacaoDAO {
         Locacao retorno = new Locacao();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getIdLocacao());
+            stmt.setInt(1, locacao.getLocacao());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                locacao.setIdLocacao(resultado.getInt("id_locacao"));
-                locacao.setIdLocacao(resultado.getInt("id_locacao"));
-                locacao.setIdLocacao(resultado.getInt("id_locacao"));
+                locacao.setLocacao(resultado.getInt("id_locacao"));
+                locacao.setLocacao(resultado.getInt("id_locacao"));
+                locacao.setLocacao(resultado.getInt("id_locacao"));
                 locacao.setIPlano(resultado.getInt("id_plano"));
-                locacao.setIdLocador(resultado.getInt("id_locador"));
+                locacao.setLocador(resultado.getInt("id_locador"));
                 locacao.setDataInicio(resultado.getDate("data_inicio"));
                 locacao.setDataFinal(resultado.getDate("data_final"));
                 locacao.setKmInicial(resultado.getFloat("km_inicial"));
                 locacao.setKmFinal(resultado.getFloat("km_final"));
-                locacao.setIdStatus(resultado.getInt("id_status"));
-                locacao.setIdAgenciaDevolucao(resultado.getInt("id_agencia_devolucao"));
+                locacao.setStatus(resultado.getInt("id_status"));
+                locacao.setAgenciaDevolucao(resultado.getInt("id_agencia_devolucao"));
                 retorno = locacao;
             }
         } catch (SQLException ex) {

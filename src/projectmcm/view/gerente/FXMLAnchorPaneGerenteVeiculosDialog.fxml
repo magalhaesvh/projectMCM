@@ -92,7 +92,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="choiceBoxVeiculoStatus" prefHeight="25.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ComboBox fx:id="choiceBoxVeiculoStatus" prefHeight="25.0" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="24.0" text="Cadastro/Edição de Veículos" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">

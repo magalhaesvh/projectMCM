@@ -21,21 +21,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import projectmcm.model.dao.GerenteDAO;
+import projectmcm.model.dao.FuncionarioDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
-import projectmcm.model.domain.Gerente;
+import projectmcm.model.domain.Funcionario;
 
 public class FXMLAnchorPaneAdminGerentesController implements Initializable {
 
-    private Gerente logado;
+    private Funcionario logado;
     
     @FXML
-    private TableView<Gerente> tableViewGerentes;
+    private TableView<Funcionario> tableViewGerentes;
     @FXML
-    private TableColumn<Gerente, String> tableColumnGerenteNome;
+    private TableColumn<Funcionario, String> tableColumnGerenteNome;
     @FXML
-    private TableColumn<Gerente, String> tableColumnGerenteCpf;
+    private TableColumn<Funcionario, String> tableColumnGerenteCpf;
     @FXML
     private Button buttonCadastrar;
     @FXML
@@ -62,13 +62,13 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
     private Label labelGerenteAgencia;
     
 
-    private List<Gerente> listGerentes;
-    private ObservableList<Gerente> observableListGerentes;
+    private List<Funcionario> listGerentes;
+    private ObservableList<Funcionario> observableListGerentes;
 
     //Atributos para manipulação de Banco de Dados
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
-    private final GerenteDAO gerenteDAO = new GerenteDAO();
+    private final FuncionarioDAO gerenteDAO = new FuncionarioDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -86,14 +86,14 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         tableColumnGerenteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnGerenteCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
-        listGerentes = gerenteDAO.listar();
+        listGerentes = gerenteDAO.listarGerentes();
         if (!listGerentes.isEmpty()){
             observableListGerentes = FXCollections.observableArrayList(listGerentes);
             tableViewGerentes.setItems(observableListGerentes);
         }
     }
     
-    public void selecionarItemTableViewGerentes(Gerente gerente){
+    public void selecionarItemTableViewGerentes(Funcionario gerente){
         if (gerente != null) {
             labelGerenteNome.setText(gerente.getNome());
             labelGerenteEmail.setText(gerente.getEmail());
@@ -114,7 +114,7 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
     
     @FXML
     public void handleButtonCadastrar() throws IOException {
-        Gerente gerente = new Gerente();
+        Funcionario gerente = new Funcionario();
         boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminGerentesDialog(gerente);
         if (buttonConfirmarClicked) {
             gerenteDAO.inserir(gerente);
@@ -124,9 +124,9 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
 
     @FXML
     public void handleButtonAlterar() throws IOException {
-        Gerente gerente = null;
+        Funcionario gerente = null;
         if (!listGerentes.isEmpty())
-            gerente = (Gerente)tableViewGerentes.getSelectionModel().getSelectedItem();
+            gerente = (Funcionario)tableViewGerentes.getSelectionModel().getSelectedItem();
         if (gerente != null) {
             boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminGerentesDialog(gerente);
             if (buttonConfirmarClicked) {
@@ -143,9 +143,9 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
 
     @FXML
     public void handleButtonRemover() throws IOException {
-        Gerente gerente = null;
+        Funcionario gerente = null;
         if (!listGerentes.isEmpty())
-            gerente = (Gerente)tableViewGerentes.getSelectionModel().getSelectedItem();
+            gerente = (Funcionario)tableViewGerentes.getSelectionModel().getSelectedItem();
         if (gerente != null) {
             gerenteDAO.remover(gerente);
             carregarTableViewGerente();
@@ -162,7 +162,7 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         tableColumnGerenteCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
         if (!textFieldPesquisar.getText().equals("")){
-            listGerentes = gerenteDAO.buscar(textFieldPesquisar.getText());
+            listGerentes = gerenteDAO.buscarGerentes(textFieldPesquisar.getText());
             if (!listGerentes.isEmpty()){
                 observableListGerentes = FXCollections.observableArrayList(listGerentes);
                 tableViewGerentes.setItems(observableListGerentes);
@@ -172,7 +172,7 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         }
     }
     
-    public boolean showFXMLAnchorPaneAdminGerentesDialog(Gerente gerente) throws IOException {   
+    public boolean showFXMLAnchorPaneAdminGerentesDialog(Funcionario gerente) throws IOException {   
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneAdminGerentesDialogController.class.getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminGerentesDialog.fxml"));
@@ -203,11 +203,11 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
 
     }
 
-    public Gerente getLogado() {
+    public Funcionario getLogado() {
         return logado;
     }
 
-    public void setLogado(Gerente logado) {
+    public void setLogado(Funcionario logado) {
         this.logado = logado;
     }
 

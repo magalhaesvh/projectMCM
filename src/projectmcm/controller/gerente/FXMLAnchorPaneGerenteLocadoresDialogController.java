@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import projectmcm.model.domain.Locador;
+import projectmcm.model.domain.Funcionario;
 
 public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializable {
 
@@ -34,7 +34,7 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
 
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
-    private Locador gerente;
+    private Funcionario gerente;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,11 +60,11 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
         this.buttonConfirmar.setText(texto);
     }
 
-    public Locador getLocador() {
+    public Funcionario getLocador() {
         return gerente;
     }
 
-    public void setLocador(Locador gerente) {
+    public void setLocador(Funcionario gerente) {
         this.gerente = gerente;
         this.textFieldLocadorNome.setText(gerente.getNome());
         this.textFieldLocadorEmail.setText(gerente.getEmail());

@@ -4,31 +4,31 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Locacao implements Serializable {
-    private int idLocacao;
-    private int idCliente;
-    private int idPlano;
-    private int idLocador;
+    private Locacao locacao;
+    private Cliente cliente;
+    private Plano plano;
+    private Funcionario locador;
     private Date dataInicio;
     private Date dataFinal;
     private float kmInicial;
     private float kmFinal;
-    private int idStatus;
-    private int idAgenciaDevolucao;
+    private Status status;
+    private Agencia agenciaDevolucao;
 
-    public int getIdLocacao() {
-        return idLocacao;
+    public Locacao getLocacao() {
+        return locacao;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public int getIdPlano() {
-        return idPlano;
+    public Plano getPlano() {
+        return plano;
     }
 
-    public int getIdLocador() {
-        return idLocador;
+    public Funcionario getLocador() {
+        return locador;
     }
 
     public Date getDataInicio() {
@@ -47,28 +47,28 @@ public class Locacao implements Serializable {
         return kmFinal;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public int getIdAgenciaDevolucao() {
-        return idAgenciaDevolucao;
+    public Agencia getAgenciaDevolucao() {
+        return agenciaDevolucao;
     }
 
-    public void setIdLocacao(int id_locacao) {
-        this.idLocacao = id_locacao;
+    public void setLocacao(Locacao locacao) {
+        this.locacao = locacao;
     }
 
-    public void setIdCliente(int id_cliente) {
-        this.idCliente = id_cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public void setIPlano(int id_plano) {
-        this.idPlano = id_plano;
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 
-    public void setIdLocador(int id_locador) {
-        this.idLocador = id_locador;
+    public void setLocador(Funcionario locador) {
+        this.locador = locador;
     }
 
     public void setDataInicio(Date data_inicio) {
@@ -87,12 +87,12 @@ public class Locacao implements Serializable {
         this.kmFinal = km_final;
     }
 
-    public void setIdStatus(int id_status) {
-        this.idStatus = id_status;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public void setIdAgenciaDevolucao(int id_agencia_devolucao) {
-        this.idAgenciaDevolucao = id_agencia_devolucao;
+    public void setAgenciaDevolucao(Agencia agencia_devolucao) {
+        this.agenciaDevolucao = agencia_devolucao;
     }
 
     

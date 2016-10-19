@@ -14,11 +14,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import projectmcm.controller.admin.FXMLVBoxAdminController;
-import projectmcm.model.dao.GerenteDAO;
+import projectmcm.controller.gerente.FXMLVBoxGerenteController;
+import projectmcm.model.dao.FuncionarioDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
 import projectmcm.model.domain.Funcionario;
@@ -34,7 +34,7 @@ public class FXMLLoginPrincipalController implements Initializable {
 
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
-    private final GerenteDAO funcionarioDAO = new GerenteDAO();
+    private final FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     private Funcionario funcionario = new Funcionario();
     private Stage dialogStage;
     private Stage stage;
@@ -46,9 +46,9 @@ public class FXMLLoginPrincipalController implements Initializable {
 
     public boolean handleLoginButtonEntrar() throws IOException {
         funcionarioDAO.setConnection(connection);
-        getAux().setEmail(loginTextFieldEmail.getText());
-        getAux().setSenha(loginPassFieldSenha.getText());
-        setAux(funcionarioDAO.logar(getAux()));
+        funcionario.setEmail(loginTextFieldEmail.getText());
+        funcionario.setSenha(loginPassFieldSenha.getText());
+        setAux(funcionarioDAO.logar(funcionario));
         if (getAux() == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro");
@@ -56,32 +56,22 @@ public class FXMLLoginPrincipalController implements Initializable {
             alert.showAndWait();
         } else {
             Parent root;
-            Scene scene;
-            switch (funcionario.getTipo()) {
-                case 1:
+            Scene scene =null;
+            if (funcionario.getTipo() == 1){
                     FXMLLoader loader = new FXMLLoader();
                     VBox page = loader.load(FXMLVBoxAdminController.class.getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
                     scene = new Scene(page);
                     FXMLVBoxAdminController controller = loader.getController();
                     //controller.setLogado(this.funcionario);
                     stage.close();
-                    
-                    break;
-                case 2:
-                    root = FXMLLoader.load(getClass().getResource("view/gerente/FXMLVBoxGerente.fxml"));
-                    scene = new Scene(root);
-                    break;
-                /*case 3:
-                    Parent root = FXMLLoader.load(getClass().getResource("view/admin/FXMLVBoxAdmin.fxml"));
-                    Scene scene = new Scene(root);
-                    break;*/
-                default:
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Erro");
-                    alert.setHeaderText("Ocorreu um erro");
-                    alert.showAndWait();
-                    return false;
-            }
+            }else if (funcionario.getTipo() == 2){
+                    FXMLLoader loader = new FXMLLoader();
+                    VBox page = loader.load(FXMLVBoxGerenteController.class.getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
+                    scene = new Scene(page);
+                    FXMLVBoxGerenteController controller = loader.getController();
+                    //controller.setLogado(this.funcionario);
+                    stage.close();
+            }        
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Aluguel de carros - Project MCM");

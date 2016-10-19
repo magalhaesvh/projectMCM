@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projectmcm.model.domain.Cidade;
 import projectmcm.model.domain.Endereco;
 
 public class EnderecoDAO {
@@ -26,13 +27,13 @@ public class EnderecoDAO {
         String sql = "INSERT INTO endereco (id_cidade, logradouro, numero, complemento, bairro, id_cliente, tipo, comissao, id_status) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, endereco.getIdCidade());
+            stmt.setInt(1, endereco.getCidade().getIdCidade());
             stmt.setString(2, endereco.getLogradouro());
             stmt.setInt(3, endereco.getNumero());
             stmt.setString(4, endereco.getComplemento());
             stmt.setString(5, endereco.getBairro());
-            stmt.setInt(6, endereco.getIdCliente());
-            stmt.setInt(7, endereco.getIdAgencia());
+            stmt.setInt(6, endereco.getCliente().getIdCliente());
+            stmt.setInt(7, endereco.getAgencia()).getIdAgencia();
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -45,13 +46,13 @@ public class EnderecoDAO {
         String sql = "UPDATE endereco SET (id_cidade=?, logradouro=?, numero=?, complemento=?, bairro=?, id_cliente=?, id_agencia=?) WHERE id_endereco=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, endereco.getIdCidade());
+            stmt.setInt(1, endereco.getCidade().getIdCidade());
             stmt.setString(2, endereco.getLogradouro());
             stmt.setInt(3, endereco.getNumero());
             stmt.setString(4, endereco.getComplemento());
             stmt.setString(5, endereco.getBairro());
-            stmt.setInt(6, endereco.getIdCliente());
-            stmt.setInt(7, endereco.getIdAgencia());
+            stmt.setInt(6, endereco.getCliente().getIdCliente());
+            stmt.setInt(7, endereco.getAgencia().getIdAgencia());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -81,14 +82,18 @@ public class EnderecoDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Endereco endereco = new Endereco();
-                endereco.setIdEndereco(resultado.getInt("id_endereco"));
-                endereco.setIdCidade(resultado.getInt("id_cidade"));
+                endereco.setIdEndereco(resultado.getInt("id_endereco"));                
                 endereco.setLogradouro(resultado.getString("logradouro"));
                 endereco.setNumero(resultado.getInt("numero"));
                 endereco.setComplemento(resultado.getString("complemento"));
                 endereco.setBairro(resultado.getString("bairro"));
-                endereco.setIdCliente(resultado.getInt("id_cliente"));
-                endereco.setIdAgencia(resultado.getInt("id_agencia"));
+                
+                Cidade cidade = new Cidade();
+                cidade.setIdCidade(resultado.getInt("idCidade"));
+                CidadeDAO cidadeDAO = new CidadeDAO();                
+                cidadeDAO.setConnection(getConnection());
+                endereco.setCidade(cidadeDAO.buscar(cidade));
+                
                 retorno.add(endereco);
             }
         } catch (SQLException ex) {
@@ -105,13 +110,16 @@ public class EnderecoDAO {
             stmt.setInt(1, endereco.getIdEndereco());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                endereco.setIdCidade(resultado.getInt("id_cidade"));
                 endereco.setLogradouro(resultado.getString("logradouro"));
                 endereco.setNumero(resultado.getInt("numero"));
                 endereco.setComplemento(resultado.getString("complemento"));
                 endereco.setBairro(resultado.getString("bairro"));
-                endereco.setIdCliente(resultado.getInt("id_cliente"));
-                endereco.setIdAgencia(resultado.getInt("id_agencia"));
+                
+                Cidade cidade = new Cidade();
+                cidade.setIdCidade(resultado.getInt("idCidade"));
+                CidadeDAO cidadeDAO = new CidadeDAO();                
+                cidadeDAO.setConnection(getConnection());
+                endereco.setCidade(cidadeDAO.buscar(cidade));
                 retorno = endereco;
             }
         } catch (SQLException ex) {

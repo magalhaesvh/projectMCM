@@ -1,44 +1,43 @@
 package projectmcm.model.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public class Vistoria implements Serializable {
     private int idVistoria;
-    private int idVeiculo;
-    private int idFuncionario;
-    private int idStatus;
+    private Veiculo veiculo;
+    private Funcionario funcionario;
+    private Status status;
 
     public int getIdVistoria() {
         return idVistoria;
     }
 
-    public int getIdVeiculo() {
-        return idVeiculo;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public Status getStatus() {
+        return status;
     }
 
     public void setIdVistoria(int idVistoria) {
         this.idVistoria = idVistoria;
     }
 
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
 

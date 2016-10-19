@@ -20,19 +20,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import projectmcm.model.dao.LocadorDAO;
+import projectmcm.model.dao.FuncionarioDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
-import projectmcm.model.domain.Locador;
+import projectmcm.model.domain.Funcionario;
 
 public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
 
     @FXML
-    private TableView<Locador> tableViewLocadores;
+    private TableView<Funcionario> tableViewLocadores;
     @FXML
-    private TableColumn<Locador, String> tableColumnLocadorNome;
+    private TableColumn<Funcionario, String> tableColumnLocadorNome;
     @FXML
-    private TableColumn<Locador, String> tableColumnLocadorCpf;
+    private TableColumn<Funcionario, String> tableColumnLocadorCpf;
     @FXML
     private Button buttonCadastrar;
     @FXML
@@ -56,13 +56,13 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
     @FXML
     private Label labelLocadorDataContratacao;
 
-    private List<Locador> listLocadores;
-    private ObservableList<Locador> observableListLocadores;
+    private List<Funcionario> listLocadores;
+    private ObservableList<Funcionario> observableListLocadores;
 
     //Atributos para manipulação de Banco de Dados
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
-    private final LocadorDAO locadorDAO = new LocadorDAO();
+    private final FuncionarioDAO locadorDAO = new FuncionarioDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,14 +80,14 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
         tableColumnLocadorNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnLocadorCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
-        listLocadores = locadorDAO.listar();
+        listLocadores = locadorDAO.listarLocador();
         if (!listLocadores.isEmpty()){
             observableListLocadores = FXCollections.observableArrayList(listLocadores);
             tableViewLocadores.setItems(observableListLocadores);
         }
     }
     
-    public void selecionarItemTableViewLocadores(Locador locador){
+    public void selecionarItemTableViewLocadores(Funcionario locador){
         if (locador != null) {
             labelLocadorNome.setText(locador.getNome());
             labelLocadorEmail.setText(locador.getEmail());
@@ -106,7 +106,7 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
     
     @FXML
     public void handleButtonCadastrar() throws IOException {
-        Locador locador = new Locador();
+        Funcionario locador = new Funcionario();
         boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminLocadoresDialog(locador);
         if (buttonConfirmarClicked) {
             locadorDAO.inserir(locador);
@@ -116,9 +116,9 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
 
     @FXML
     public void handleButtonAlterar() throws IOException {
-        Locador locador = null;
+        Funcionario locador = null;
         if (!listLocadores.isEmpty())
-            locador = (Locador)tableViewLocadores.getSelectionModel().getSelectedItem();
+            locador = (Funcionario)tableViewLocadores.getSelectionModel().getSelectedItem();
         if (locador != null) {
             boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminLocadoresDialog(locador);
             if (buttonConfirmarClicked) {
@@ -135,9 +135,9 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
 
     @FXML
     public void handleButtonRemover() throws IOException {
-        Locador locador = null;
+        Funcionario locador = null;
         if (!listLocadores.isEmpty())
-            locador = (Locador)tableViewLocadores.getSelectionModel().getSelectedItem();
+            locador = (Funcionario)tableViewLocadores.getSelectionModel().getSelectedItem();
         if (locador != null) {
             locadorDAO.remover(locador);
             carregarTableViewLocador();
@@ -154,7 +154,7 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
         tableColumnLocadorCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
         if (!textFieldPesquisar.getText().equals("")){
-            listLocadores = locadorDAO.buscar(textFieldPesquisar.getText());
+            listLocadores = locadorDAO.buscarGerentes(textFieldPesquisar.getText());
             if (!listLocadores.isEmpty()){
                 observableListLocadores = FXCollections.observableArrayList(listLocadores);
                 tableViewLocadores.setItems(observableListLocadores);
@@ -164,14 +164,14 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
         }
     }
     
-    public boolean showFXMLAnchorPaneAdminLocadoresDialog(Locador locador) throws IOException {
+    public boolean showFXMLAnchorPaneAdminLocadoresDialog(Funcionario locador) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneGerenteLocadoresDialogController.class.getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteLocadoresDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         // Criando um Estágio de Diálogo (Stage Dialog)
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Cadastro de Locador");
+        dialogStage.setTitle("Cadastro de Funcionario");
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 

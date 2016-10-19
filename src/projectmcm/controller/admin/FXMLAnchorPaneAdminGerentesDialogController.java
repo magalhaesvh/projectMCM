@@ -16,11 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import projectmcm.model.dao.AgenciaDAO;
-import projectmcm.model.dao.GerenteDAO;
+import projectmcm.model.dao.FuncionarioDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
 import projectmcm.model.domain.Agencia;
-import projectmcm.model.domain.Gerente;
+import projectmcm.model.domain.Funcionario;
 import util.Seguranca;
 
 public class FXMLAnchorPaneAdminGerentesDialogController implements Initializable {
@@ -49,14 +49,14 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
     
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
-    private final GerenteDAO gerenteDAO = new GerenteDAO();
+    private final FuncionarioDAO gerenteDAO = new FuncionarioDAO();
     private final AgenciaDAO agenciaDAO = new AgenciaDAO();
     private ObservableList<Agencia> observableListAgencia;
     private List<Agencia> listarAgencias;
     
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
-    private Gerente gerente;
+    private Funcionario gerente;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         agenciaDAO.setConnection(connection);
@@ -99,11 +99,11 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
         this.buttonConfirmar.setText(texto);
     }
 
-    public Gerente getGerente() {
+    public Funcionario getGerente() {
         return gerente;
     }
 
-    public void setGerente(Gerente gerente) {
+    public void setGerente(Funcionario gerente) {
         this.gerente = gerente;
         this.textFieldGerenteNome.setText(gerente.getNome());
         this.textFieldGerenteEmail.setText(gerente.getEmail());

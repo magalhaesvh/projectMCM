@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Plano implements Serializable {
     private int idPlano;
-    private int idPromocao;
+    private Promocao promocao;
     private String nome;
     private String regulamento;
     private String descricao;
@@ -20,8 +20,8 @@ public class Plano implements Serializable {
         return idPlano;
     }
 
-    public int getIdPromocao() {
-        return idPromocao;
+    public Promocao getPromocao() {
+        return promocao;
     }
 
     public String getNome() {
@@ -68,8 +68,8 @@ public class Plano implements Serializable {
         this.idPlano = idPlano;
     }
 
-    public void setIdPromocao(int idPromocao) {
-        this.idPromocao = idPromocao;
+    public void setIdPromocao(Promocao promocao) {
+        this.promocao = promocao;
     }
 
     public void setNome(String nome) {

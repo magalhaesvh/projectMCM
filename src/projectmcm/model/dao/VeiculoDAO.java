@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projectmcm.model.domain.Status;
 import projectmcm.model.domain.Veiculo;
 
 public class VeiculoDAO {
@@ -45,7 +46,7 @@ public class VeiculoDAO {
             stmt.setBoolean(15, veiculo.isAbs());
             stmt.setBoolean(16, veiculo.isAirBag());
             stmt.setBoolean(17, veiculo.isTracao4x4());
-            stmt.setInt(18, veiculo.getIdStatus());
+            stmt.setInt(18, veiculo.getStatus().getIdStatus());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -75,7 +76,7 @@ public class VeiculoDAO {
             stmt.setBoolean(15, veiculo.isAbs());
             stmt.setBoolean(16, veiculo.isAirBag());
             stmt.setBoolean(17, veiculo.isTracao4x4());
-            stmt.setInt(18, veiculo.getIdStatus());
+            stmt.setInt(18, veiculo.getStatus().getIdStatus());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -106,7 +107,7 @@ public class VeiculoDAO {
             while (resultado.next()) {
                 Veiculo veiculo = new Veiculo();
                 veiculo.setIdVeiculo(resultado.getInt("id_veiculo"));
-                veiculo.setCor(resultado.getString("nome"));
+                veiculo.setCor(resultado.getString("cor"));
                 veiculo.setValor(resultado.getFloat("valor"));
                 veiculo.setPlaca(resultado.getString("placa"));
                 veiculo.setChassi(resultado.getString("chassi"));
@@ -119,11 +120,19 @@ public class VeiculoDAO {
                 veiculo.setVidroEletrico(resultado.getBoolean("vidro_eletrico"));
                 veiculo.setTravaEletrica(resultado.getBoolean("trava_eletrica"));
                 veiculo.setDirecaoEletrica(resultado.getBoolean("direcao_eletrica"));
-                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_autmotico"));
+                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_automatico"));
                 veiculo.setAbs(resultado.getBoolean("abs"));
-                veiculo.setAirBag(resultado.getBoolean("ait_bag"));
+                veiculo.setAirBag(resultado.getBoolean("air_bag"));
                 veiculo.setTracao4x4(resultado.getBoolean("4x4"));
-                veiculo.setIdStatus(resultado.getInt("id_status"));
+                
+                Status status = new Status();
+                status.setIdStatus(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                veiculo.setStatus(statusDAO.buscar(status));
+                
                 retorno.add(veiculo);
             }
         } catch (SQLException ex) {
@@ -140,7 +149,7 @@ public class VeiculoDAO {
             stmt.setInt(1, veiculo.getIdVeiculo());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                veiculo.setCor(resultado.getString("nome"));
+                veiculo.setCor(resultado.getString("cor"));
                 veiculo.setValor(resultado.getFloat("valor"));
                 veiculo.setPlaca(resultado.getString("placa"));
                 veiculo.setChassi(resultado.getString("chassi"));
@@ -153,11 +162,17 @@ public class VeiculoDAO {
                 veiculo.setVidroEletrico(resultado.getBoolean("vidro_eletrico"));
                 veiculo.setTravaEletrica(resultado.getBoolean("trava_eletrica"));
                 veiculo.setDirecaoEletrica(resultado.getBoolean("direcao_eletrica"));
-                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_autmotico"));
+                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_automatico"));
                 veiculo.setAbs(resultado.getBoolean("abs"));
-                veiculo.setAirBag(resultado.getBoolean("ait_bag"));
+                veiculo.setAirBag(resultado.getBoolean("air_bag"));
                 veiculo.setTracao4x4(resultado.getBoolean("4x4"));
-                veiculo.setIdStatus(resultado.getInt("id_status"));
+                Status status = new Status();
+                status.setIdStatus(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                veiculo.setStatus(statusDAO.buscar(status));
                 retorno = veiculo;
             }
         } catch (SQLException ex) {
@@ -176,7 +191,7 @@ public List<Veiculo> buscar(String texto) {
             while (resultado.next()) {
                 Veiculo veiculo = new Veiculo();
                 veiculo.setIdVeiculo(resultado.getInt("id_veiculo"));
-                veiculo.setCor(resultado.getString("nome"));
+                veiculo.setCor(resultado.getString("cor"));
                 veiculo.setValor(resultado.getFloat("valor"));
                 veiculo.setPlaca(resultado.getString("placa"));
                 veiculo.setChassi(resultado.getString("chassi"));
@@ -189,11 +204,17 @@ public List<Veiculo> buscar(String texto) {
                 veiculo.setVidroEletrico(resultado.getBoolean("vidro_eletrico"));
                 veiculo.setTravaEletrica(resultado.getBoolean("trava_eletrica"));
                 veiculo.setDirecaoEletrica(resultado.getBoolean("direcao_eletrica"));
-                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_autmotico"));
+                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_automatico"));
                 veiculo.setAbs(resultado.getBoolean("abs"));
-                veiculo.setAirBag(resultado.getBoolean("ait_bag"));
+                veiculo.setAirBag(resultado.getBoolean("air_bag"));
                 veiculo.setTracao4x4(resultado.getBoolean("4x4"));
-                veiculo.setIdStatus(resultado.getInt("id_status"));
+                Status status = new Status();
+                status.setIdStatus(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                veiculo.setStatus(statusDAO.buscar(status));
                 retorno.add(veiculo);
             }
         } catch (SQLException ex) {
