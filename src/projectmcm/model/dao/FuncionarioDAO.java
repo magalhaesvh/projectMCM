@@ -85,8 +85,7 @@ public class FuncionarioDAO {
             PreparedStatement stmt = getConnection().prepareStatement(sql);
             stmt.setString(1, String.valueOf(func.getIdFuncionario()));
             ResultSet resultado = stmt.executeQuery();
-            while (resultado.next()) {                
-                Agencia agencia = new Agencia();
+            while (resultado.next()) {              
                 Funcionario funcionario = new Funcionario();
                 funcionario.setIdFuncionario(resultado.getInt("id_funcionario"));
                 funcionario.setNome(resultado.getString("nome"));
@@ -95,9 +94,10 @@ public class FuncionarioDAO {
                 funcionario.setCpf(resultado.getString("cpf"));
                 funcionario.setRg(resultado.getString("rg"));
                 funcionario.setDataContratacao(resultado.getDate("data_contratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                funcionario.setTipo(resultado.getByte("tipo"));
+                funcionario.setTipo(resultado.getByte("tipo")); 
                 
-                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+                Agencia agencia = new Agencia();                
+                agencia.setIdAgencia(resultado.getInt("id_agencia")); 
 
                 //Obtendo os dados completos da Agencia associada ao gerente
                 AgenciaDAO agenciaDAO = new AgenciaDAO();

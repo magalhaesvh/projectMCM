@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projectmcm.model.domain.Agencia;
+import projectmcm.model.domain.Cliente;
 import projectmcm.model.domain.Locacao;
+import projectmcm.model.domain.Plano;
+import projectmcm.model.domain.Status;
 
 public class LocacaoDAO {
 
@@ -26,15 +30,15 @@ public class LocacaoDAO {
         String sql = "INSERT INTO locacao (id_cliente, id_plano, id_locador, data_inicio, data_final, km_inicial, km_final, id_status, id_agencia_devolucao) VALUES(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getCliente());
-            stmt.setInt(2, locacao.getPlano());
-            stmt.setInt(3, locacao.getLocador());
+            stmt.setInt(1, locacao.getCliente().getIdCliente());
+            stmt.setInt(2, locacao.getPlano().getIdPlano());
+            stmt.setInt(3, locacao.getLocador().getIdFuncionario());
             stmt.setDate(4, locacao.getDataInicio());
             stmt.setDate(5, locacao.getDataFinal());
             stmt.setFloat(6, locacao.getKmInicial());
             stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(8, locacao.getStatus());
-            stmt.setInt(9, locacao.getAgenciaDevolucao());
+            stmt.setInt(8, locacao.getStatus().getIdStatus());
+            stmt.setInt(9, locacao.getAgenciaDevolucao().getIdAgencia());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -47,16 +51,16 @@ public class LocacaoDAO {
         String sql = "UPDATE locacao SET (id_cliente=?, id_plano=?, id_locador=?, data_inicio=?, data_final=?, km_inicial=?, km_final=?, id_status=?, id_agencia_devolucao) WHERE id_locacao=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getCliente());
-            stmt.setInt(2, locacao.getPlano());
-            stmt.setInt(3, locacao.getLocador());
+            stmt.setInt(1, locacao.getCliente().getIdCliente());
+            stmt.setInt(2, locacao.getPlano().getIdPlano());
+            stmt.setInt(3, locacao.getLocador().getIdFuncionario());
             stmt.setDate(4, locacao.getDataInicio());
             stmt.setDate(5, locacao.getDataFinal());
             stmt.setFloat(6, locacao.getKmInicial());
             stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(8, locacao.getStatus());
-            stmt.setInt(9, locacao.getAgenciaDevolucao());
-            stmt.setInt(9, locacao.getLocacao());
+            stmt.setInt(8, locacao.getStatus().getIdStatus());
+            stmt.setInt(9, locacao.getAgenciaDevolucao().getIdAgencia());
+            stmt.setInt(10, locacao.getIdLocacao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -69,7 +73,7 @@ public class LocacaoDAO {
         String sql = "DELETE FROM locacao WHERE id_locacao=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getLocacao());
+            stmt.setInt(1, locacao.getIdLocacao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -86,17 +90,42 @@ public class LocacaoDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Locacao locacao = new Locacao();
-                locacao.setLocacao(resultado.getInt("id_locacao"));
-                locacao.setLocacao(resultado.getInt("id_locacao"));
-                locacao.setLocacao(resultado.getInt("id_locacao"));
-                locacao.setIPlano(resultado.getInt("id_plano"));
-                locacao.setLocador(resultado.getInt("id_locador"));
+                locacao.setIdLocacao(resultado.getInt("id_locacao"));
                 locacao.setDataInicio(resultado.getDate("data_inicio"));
                 locacao.setDataFinal(resultado.getDate("data_final"));
                 locacao.setKmInicial(resultado.getFloat("km_inicial"));
                 locacao.setKmFinal(resultado.getFloat("km_final"));
-                locacao.setStatus(resultado.getInt("id_status"));
-                locacao.setAgenciaDevolucao(resultado.getInt("id_agencia_devolucao"));
+                
+                Cliente cliente = new Cliente();                
+                cliente.setIdCliente(resultado.getInt("id_cliente")); 
+                ClienteDAO clienteDAO = new ClienteDAO();
+                clienteDAO.setConnection(connection);
+                locacao.setCliente(clienteDAO.buscar(cliente));
+                
+                Plano plano = new Plano();                
+                plano.setIdPlano(resultado.getInt("id_plano")); 
+                PlanoDAO planoDAO = new PlanoDAO();
+                planoDAO.setConnection(connection);
+                locacao.setPlano(planoDAO.buscar(plano));
+                
+                Locador locador = new Locador();                
+                locador.setIdLocador(resultado.getInt("id_locador")); 
+                LocadorDAO locadorDAO = new LocadorDAO();
+                locadorDAO.setConnection(connection);
+                locacao.setLocador(locadorDAO.buscar(locador));
+                                
+                Agencia agencia = new Agencia();                
+                agencia.setIdAgencia(resultado.getInt("id_agencia")); 
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                locacao.setAgencia(agenciaDAO.buscar(locador));
+                
+                
+                Status status = new Status();                
+                status.setIdStatus(resultado.getInt("id_status")); 
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                locacao.setStatus(statusDAO.buscar(status));
                 retorno.add(locacao);
             }
         } catch (SQLException ex) {
@@ -110,20 +139,45 @@ public class LocacaoDAO {
         Locacao retorno = new Locacao();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, locacao.getLocacao());
+            stmt.setInt(1, locacao.getIdLocacao());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                locacao.setLocacao(resultado.getInt("id_locacao"));
-                locacao.setLocacao(resultado.getInt("id_locacao"));
-                locacao.setLocacao(resultado.getInt("id_locacao"));
-                locacao.setIPlano(resultado.getInt("id_plano"));
-                locacao.setLocador(resultado.getInt("id_locador"));
+                locacao.setIdLocacao(resultado.getInt("id_locacao"));
                 locacao.setDataInicio(resultado.getDate("data_inicio"));
                 locacao.setDataFinal(resultado.getDate("data_final"));
                 locacao.setKmInicial(resultado.getFloat("km_inicial"));
                 locacao.setKmFinal(resultado.getFloat("km_final"));
-                locacao.setStatus(resultado.getInt("id_status"));
-                locacao.setAgenciaDevolucao(resultado.getInt("id_agencia_devolucao"));
+                
+                Cliente cliente = new Cliente();                
+                cliente.setIdCliente(resultado.getInt("id_cliente")); 
+                ClienteDAO clienteDAO = new ClienteDAO();
+                clienteDAO.setConnection(connection);
+                locacao.setCliente(clienteDAO.buscar(cliente));
+                
+                Plano plano = new Plano();                
+                plano.setIdPlano(resultado.getInt("id_plano")); 
+                PlanoDAO planoDAO = new PlanoDAO();
+                planoDAO.setConnection(connection);
+                locacao.setPlano(planoDAO.buscar(plano));
+                
+                Locador locador = new Locador();                
+                locador.setIdLocador(resultado.getInt("id_locador")); 
+                LocadorDAO locadorDAO = new LocadorDAO();
+                locadorDAO.setConnection(connection);
+                locacao.setLocador(locadorDAO.buscar(locador));
+                                
+                Agencia agencia = new Agencia();                
+                agencia.setIdAgencia(resultado.getInt("id_agencia")); 
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                locacao.setAgencia(agenciaDAO.buscar(locador));
+                
+                
+                Status status = new Status();                
+                status.setIdStatus(resultado.getInt("id_status")); 
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                locacao.setStatus(statusDAO.buscar(status));
                 retorno = locacao;
             }
         } catch (SQLException ex) {
