@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
+import projectmcm.model.domain.Funcionario;
 
 /**
  * FXML Controller class
@@ -22,7 +23,11 @@ import javafx.scene.layout.AnchorPane;
  * @author Monica
  */
 public class FXMLVBoxGerenteController implements Initializable {
-
+    
+    private Funcionario logado;
+    private int id;
+    @FXML
+    private Menu menuAdmin;
     @FXML
     private MenuItem menuItemGerenteSeguranca;
     @FXML
@@ -78,6 +83,23 @@ public class FXMLVBoxGerenteController implements Initializable {
     @FXML
     public void teste(){
         System.out.println("teste");
+    }
+    
+    public Funcionario getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Funcionario logado) {
+        this.logado = logado;
+        menuAdmin.setText(this.logado.getNome());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     

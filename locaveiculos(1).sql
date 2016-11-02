@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Out-2016 às 13:50
+-- Generation Time: 02-Nov-2016 às 14:31
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -29,48 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `agencia` (
   `id_agencia` int(11) NOT NULL,
   `nome` varchar(250) NOT NULL,
-  `cnpj` varchar(20) NOT NULL
+  `cnpj` varchar(20) NOT NULL,
+  `telefone` varchar(40) NOT NULL,
+  `id_endereco` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `agencia`
 --
 
-INSERT INTO `agencia` (`id_agencia`, `nome`, `cnpj`) VALUES
-(1, 'Agencia 1', '123456789'),
-(3, 'Agência', '00000001');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `carro`
---
-
-CREATE TABLE `carro` (
-  `id_carro` int(11) NOT NULL,
-  `ar_condicionado` tinyint(1) NOT NULL DEFAULT '0',
-  `vidro_eletrico` tinyint(1) NOT NULL DEFAULT '0',
-  `trava_eletrica` tinyint(1) NOT NULL DEFAULT '0',
-  `direcao_eletrica` tinyint(1) NOT NULL DEFAULT '0',
-  `cambio_automatico` tinyint(1) NOT NULL DEFAULT '0',
-  `motor` float NOT NULL,
-  `observações` text,
-  `abs` tinyint(1) NOT NULL DEFAULT '0',
-  `air bag` tinyint(1) NOT NULL DEFAULT '0',
-  `4x4` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `cidade`
---
-
-CREATE TABLE `cidade` (
-  `id_cidade` int(11) NOT NULL,
-  `id_estado` int(11) NOT NULL,
-  `nome` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `agencia` (`id_agencia`, `nome`, `cnpj`, `telefone`, `id_endereco`) VALUES
+(1, 'Agencia 1', '123456789', '', 0),
+(4, 'teste', '123456', '', 0);
 
 -- --------------------------------------------------------
 
@@ -86,7 +56,8 @@ CREATE TABLE `cliente` (
   `cnh` varchar(12) NOT NULL,
   `data_nascimento` date NOT NULL,
   `data_vinculo` datetime NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `id_endereco` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -97,25 +68,12 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `endereco` (
   `id_endereco` int(11) NOT NULL,
-  `id_cidade` int(11) NOT NULL,
   `logradouro` text NOT NULL,
   `numero` int(11) NOT NULL,
   `complemento` text NOT NULL,
   `bairro` varchar(100) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  `id_agencia` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `estado`
---
-
-CREATE TABLE `estado` (
-  `id_estado` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `sigla` varchar(2) NOT NULL
+  `cidade` varchar(200) NOT NULL,
+  `estado` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,23 +84,31 @@ CREATE TABLE `estado` (
 
 CREATE TABLE `funcionario` (
   `id_funcionario` int(11) NOT NULL,
+  `id_agencia` int(11) NOT NULL,
   `nome` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   `senha` varchar(500) NOT NULL,
   `cpf` varchar(11) NOT NULL,
   `rg` varchar(20) NOT NULL,
-  `data_contratacao` datetime NOT NULL,
-  `tipo` smallint(6) NOT NULL,
-  `comissao` float DEFAULT NULL,
-  `id_status` int(11) NOT NULL
+  `data_contratacao` date DEFAULT NULL,
+  `tipo` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`id_funcionario`, `nome`, `email`, `senha`, `cpf`, `rg`, `data_contratacao`, `tipo`, `comissao`, `id_status`) VALUES
-(3, 'raphael', 'teste@teste.com', '123', '321', '123', '2016-10-09 00:00:00', 1, NULL, 1);
+INSERT INTO `funcionario` (`id_funcionario`, `id_agencia`, `nome`, `email`, `senha`, `cpf`, `rg`, `data_contratacao`, `tipo`) VALUES
+(3, 0, 'raphael', 'admin@email.com', '123', '321', '123', '2016-10-09', 1),
+(4, 4, '123', 'gerente@email.com', '123', '123', '321', '2016-10-17', 2),
+(5, 0, '321', '123', 'senhaPadrao123', '321', '123', NULL, 0),
+(6, 0, 'Gerten 1', 'gerente1@teste.com', 'senhaPadrao123', '12345', '1234', NULL, 0),
+(7, 0, '123321', '123321', 'senhaPadrao123', '123321', '123321', NULL, 0),
+(8, 0, 'teste1610', 'teste1610', 'senhaPadrao123', 'teste1610', 'teste1610', NULL, 0),
+(9, 0, 'teste 16:42', 'teste 16:42', 'AC5CF46A04EB753EDC223FC5F92C7FFFE37861BF5AAACAF3A72D29D1E13435AA', 'teste 16:42', 'teste 16:42', '2016-10-15', 0),
+(11, 1, 'teste 16:51', 'teste 16:51', 'AC5CF46A04EB753EDC223FC5F92C7FFFE37861BF5AAACAF3A72D29D1E13435AA', 'teste 16:51', 'teste 16:51', '2016-10-15', 2),
+(12, 3, 'teste123', '321', 'F7AD38B949E1CD6F7499072E723927A8903F37D046C9FD945179D0A188FFC4AF', '123', '321', '2016-10-15', 2),
+(13, 1, 'teste', 'teste', 'AC5CF46A04EB753EDC223FC5F92C7FFFE37861BF5AAACAF3A72D29D1E13435AA', '2312123', '12321', '2016-10-15', 2);
 
 -- --------------------------------------------------------
 
@@ -166,22 +132,11 @@ CREATE TABLE `locacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `moto`
---
-
-CREATE TABLE `moto` (
-  `id_moto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `plano`
 --
 
 CREATE TABLE `plano` (
   `id_plano` int(11) NOT NULL,
-  `id_promocao` int(11) DEFAULT NULL,
   `nome` varchar(100) NOT NULL,
   `regulamento` text NOT NULL,
   `descricao` text NOT NULL,
@@ -192,20 +147,6 @@ CREATE TABLE `plano` (
   `valor_custo` decimal(10,0) NOT NULL,
   `diaria` tinyint(1) NOT NULL,
   `valor_diaria` decimal(11,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `promocao`
---
-
-CREATE TABLE `promocao` (
-  `id_promocao` int(11) NOT NULL,
-  `nome` varchar(250) NOT NULL,
-  `data_inicio` datetime NOT NULL,
-  `data_termino` datetime NOT NULL,
-  `quantidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -225,21 +166,13 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id_status`, `nome`, `tipo`) VALUES
-(1, 'ativo', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `telefone`
---
-
-CREATE TABLE `telefone` (
-  `id_telefone` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  `id_agencia` int(11) DEFAULT NULL,
-  `telefone` varchar(15) NOT NULL,
-  `id_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(1, 'ativo', 1),
+(2, 'desativo', 1),
+(3, 'Em funcionamento', 2),
+(4, 'Fechada', 2),
+(5, 'Disponível', 3),
+(6, 'Alugado', 3),
+(7, 'Manutenção', 3);
 
 -- --------------------------------------------------------
 
@@ -249,19 +182,37 @@ CREATE TABLE `telefone` (
 
 CREATE TABLE `veiculo` (
   `id_veiculo` int(11) NOT NULL,
+  `id_agencia` int(11) NOT NULL,
   `cor` varchar(100) NOT NULL,
-  `descricao` text NOT NULL,
   `valor` float NOT NULL,
   `placa` varchar(8) NOT NULL,
   `chassi` varchar(30) NOT NULL,
-  `ano_modelo` year(4) NOT NULL,
-  `ano_fabricacao` year(4) NOT NULL,
+  `ano_modelo` date NOT NULL,
+  `ano_fabricacao` date NOT NULL,
   `data_compra` datetime NOT NULL,
   `observacoes` text NOT NULL,
   `id_status` int(11) NOT NULL,
-  `id_carro` int(11) DEFAULT NULL,
-  `id_moto` int(11) DEFAULT NULL
+  `ar_condicionado` tinyint(1) NOT NULL DEFAULT '0',
+  `vidro_eletrico` tinyint(1) NOT NULL DEFAULT '0',
+  `trava_eletrica` tinyint(1) NOT NULL DEFAULT '0',
+  `direcao_eletrica` tinyint(1) NOT NULL DEFAULT '0',
+  `cambio_automatico` tinyint(1) NOT NULL DEFAULT '0',
+  `motor` float NOT NULL,
+  `observações` text,
+  `abs` tinyint(1) NOT NULL DEFAULT '0',
+  `air_bag` tinyint(1) NOT NULL DEFAULT '0',
+  `4x4` tinyint(1) NOT NULL DEFAULT '0',
+  `marca` varchar(250) NOT NULL,
+  `modelo` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `veiculo`
+--
+
+INSERT INTO `veiculo` (`id_veiculo`, `id_agencia`, `cor`, `valor`, `placa`, `chassi`, `ano_modelo`, `ano_fabricacao`, `data_compra`, `observacoes`, `id_status`, `ar_condicionado`, `vidro_eletrico`, `trava_eletrica`, `direcao_eletrica`, `cambio_automatico`, `motor`, `observações`, `abs`, `air_bag`, `4x4`, `marca`, `modelo`) VALUES
+(1, 1, 'azul', 14000, 'mda-1231', 'sadsade2233ewqswe', '0000-00-00', '0000-00-00', '2016-10-16 00:00:00', 'teste', 1, 0, 0, 0, 0, 0, 3, 'dsadsd', 0, 0, 0, '', ''),
+(2, 1, 'xxxxxxxx', 123, '123', '123', '0000-00-00', '0000-00-00', '2016-10-27 00:00:00', '123', 2, 0, 0, 0, 0, 0, 3, '123', 0, 0, 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -285,48 +236,28 @@ CREATE TABLE `vistoria` (
 -- Indexes for table `agencia`
 --
 ALTER TABLE `agencia`
-  ADD PRIMARY KEY (`id_agencia`);
-
---
--- Indexes for table `carro`
---
-ALTER TABLE `carro`
-  ADD PRIMARY KEY (`id_carro`);
-
---
--- Indexes for table `cidade`
---
-ALTER TABLE `cidade`
-  ADD PRIMARY KEY (`id_cidade`),
-  ADD KEY `id_estado` (`id_estado`);
+  ADD PRIMARY KEY (`id_agencia`),
+  ADD KEY `id_endereco` (`id_endereco`);
 
 --
 -- Indexes for table `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id_cliente`);
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD KEY `id_endereco` (`id_endereco`);
 
 --
 -- Indexes for table `endereco`
 --
 ALTER TABLE `endereco`
-  ADD PRIMARY KEY (`id_endereco`),
-  ADD KEY `id_cidade` (`id_cidade`),
-  ADD KEY `id_cliente` (`id_cliente`,`id_agencia`),
-  ADD KEY `id_agencia` (`id_agencia`);
-
---
--- Indexes for table `estado`
---
-ALTER TABLE `estado`
-  ADD PRIMARY KEY (`id_estado`);
+  ADD PRIMARY KEY (`id_endereco`);
 
 --
 -- Indexes for table `funcionario`
 --
 ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`id_funcionario`),
-  ADD KEY `id_status` (`id_status`);
+  ADD KEY `id_agencia` (`id_agencia`);
 
 --
 -- Indexes for table `locacao`
@@ -340,24 +271,11 @@ ALTER TABLE `locacao`
   ADD KEY `id_ status` (`id_ status`);
 
 --
--- Indexes for table `moto`
---
-ALTER TABLE `moto`
-  ADD PRIMARY KEY (`id_moto`);
-
---
 -- Indexes for table `plano`
 --
 ALTER TABLE `plano`
   ADD PRIMARY KEY (`id_plano`),
-  ADD KEY `id_tipo` (`id_tipo`),
-  ADD KEY `id_promoca` (`id_promocao`);
-
---
--- Indexes for table `promocao`
---
-ALTER TABLE `promocao`
-  ADD PRIMARY KEY (`id_promocao`);
+  ADD KEY `id_tipo` (`id_tipo`);
 
 --
 -- Indexes for table `status`
@@ -366,22 +284,12 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`id_status`);
 
 --
--- Indexes for table `telefone`
---
-ALTER TABLE `telefone`
-  ADD PRIMARY KEY (`id_telefone`),
-  ADD KEY `id_cliente` (`id_cliente`,`id_agencia`),
-  ADD KEY `id_agencia` (`id_agencia`),
-  ADD KEY `status` (`id_status`);
-
---
 -- Indexes for table `veiculo`
 --
 ALTER TABLE `veiculo`
   ADD PRIMARY KEY (`id_veiculo`),
-  ADD KEY `id_status` (`id_status`,`id_carro`,`id_moto`),
-  ADD KEY `id_carro` (`id_carro`),
-  ADD KEY `id_moto` (`id_moto`);
+  ADD KEY `id_status` (`id_status`),
+  ADD KEY `id_agencia` (`id_agencia`);
 
 --
 -- Indexes for table `vistoria`
@@ -402,16 +310,6 @@ ALTER TABLE `vistoria`
 ALTER TABLE `agencia`
   MODIFY `id_agencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `carro`
---
-ALTER TABLE `carro`
-  MODIFY `id_carro` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `cidade`
---
-ALTER TABLE `cidade`
-  MODIFY `id_cidade` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
@@ -422,25 +320,15 @@ ALTER TABLE `cliente`
 ALTER TABLE `endereco`
   MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `estado`
---
-ALTER TABLE `estado`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `locacao`
 --
 ALTER TABLE `locacao`
   MODIFY `id_locacao` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `moto`
---
-ALTER TABLE `moto`
-  MODIFY `id_moto` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `plano`
 --
@@ -450,17 +338,12 @@ ALTER TABLE `plano`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `telefone`
---
-ALTER TABLE `telefone`
-  MODIFY `id_telefone` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `veiculo`
 --
 ALTER TABLE `veiculo`
-  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `vistoria`
 --
@@ -471,24 +354,10 @@ ALTER TABLE `vistoria`
 --
 
 --
--- Limitadores para a tabela `cidade`
+-- Limitadores para a tabela `cliente`
 --
-ALTER TABLE `cidade`
-  ADD CONSTRAINT `cidade_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `endereco`
---
-ALTER TABLE `endereco`
-  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`id_cidade`) REFERENCES `cidade` (`id_cidade`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `endereco_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  ADD CONSTRAINT `endereco_ibfk_3` FOREIGN KEY (`id_agencia`) REFERENCES `agencia` (`id_agencia`);
-
---
--- Limitadores para a tabela `funcionario`
---
-ALTER TABLE `funcionario`
-  ADD CONSTRAINT `funcionario_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`);
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id_endereco`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `locacao`
@@ -501,26 +370,11 @@ ALTER TABLE `locacao`
   ADD CONSTRAINT `locacao_ibfk_5` FOREIGN KEY (`id_ status`) REFERENCES `status` (`id_status`);
 
 --
--- Limitadores para a tabela `plano`
---
-ALTER TABLE `plano`
-  ADD CONSTRAINT `plano_ibfk_1` FOREIGN KEY (`id_promocao`) REFERENCES `promocao` (`id_promocao`);
-
---
--- Limitadores para a tabela `telefone`
---
-ALTER TABLE `telefone`
-  ADD CONSTRAINT `telefone_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  ADD CONSTRAINT `telefone_ibfk_2` FOREIGN KEY (`id_agencia`) REFERENCES `agencia` (`id_agencia`),
-  ADD CONSTRAINT `telefone_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`);
-
---
 -- Limitadores para a tabela `veiculo`
 --
 ALTER TABLE `veiculo`
-  ADD CONSTRAINT `veiculo_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`),
-  ADD CONSTRAINT `veiculo_ibfk_2` FOREIGN KEY (`id_moto`) REFERENCES `moto` (`id_moto`),
-  ADD CONSTRAINT `veiculo_ibfk_3` FOREIGN KEY (`id_carro`) REFERENCES `carro` (`id_carro`);
+  ADD CONSTRAINT `veiculo_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `veiculo_ibfk_2` FOREIGN KEY (`id_agencia`) REFERENCES `agencia` (`id_agencia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `vistoria`

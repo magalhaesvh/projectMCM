@@ -59,7 +59,7 @@ public class FXMLLoginPrincipalController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 FXMLVBoxAdminController controller = fxmlLoader.<FXMLVBoxAdminController>getController();
-                //controller.setLogado(funcionario);
+                controller.setLogado(funcionario);
                 Scene scene = new Scene(root);
 
                 stage.setScene(scene);
@@ -67,14 +67,18 @@ public class FXMLLoginPrincipalController implements Initializable {
                 stage.setTitle("Aluguel de carros - Project MCM");
                 stage.setResizable(false);
                 stage.show();
-                //stage.close();
             } else if (funcionario.getTipo() == 2) {
-                FXMLLoader loader = new FXMLLoader();
-                VBox page = loader.load(FXMLVBoxGerenteController.class.getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
-                Scene scene = new Scene(page);
-                FXMLVBoxGerenteController controller = loader.getController();
-                //controller.setLogado(funcionario);
-                stage.close();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                FXMLVBoxGerenteController controller = fxmlLoader.<FXMLVBoxGerenteController>getController();
+                controller.setLogado(funcionario);
+                Scene scene = new Scene(root);
+
+                stage.setScene(scene);
+            
+                stage.setTitle("Aluguel de carros - Project MCM");
+                stage.setResizable(false);
+                stage.show();
             }
             return true;
         }

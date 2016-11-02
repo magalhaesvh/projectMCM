@@ -33,81 +33,12 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteNome" GridPane.columnIndex="1">
+                  <Label fx:id="labelFuncionarioSegurancaNome" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="CPF:" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="RG:" GridPane.rowIndex="4">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelGerenteCpf" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelGerenteRg" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelAdminSegurancaNome" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="labelAdminSegurancaSenha" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="LlbelAdminSegurancaCpf" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="labelAdminSegurancaRg" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Senha:" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelAdminSegurancaEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="82.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="171.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="303.0" prefHeight="584.0" prefWidth="293.0">
-         <children>
-            <GridPane layoutX="20.0" layoutY="108.0" prefHeight="132.0" prefWidth="253.0">
-               <children>
-                  <Label text="Nome: ">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="E-mail:" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelGerenteNome1" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelGerenteEmail1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="labelFuncionarioSegurancaEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -122,20 +53,82 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteCpf1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="labelFuncionarioSegurancaCpf" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteRg1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="labelFuncionarioSegurancaRg" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldAdminSegurancaNome" GridPane.columnIndex="1" />
-                  <TextField fx:id="textFieldAdminSegurancaEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="textFieldAdminSegurancaCpf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="textFieldAdminSegurancaRg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="textFieldFuncionarioSegurancaNome" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="textFieldFuncionarioSegurancaCpf" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="textFieldFuncionarioSegurancaRg" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="textFieldFuncionarioSegurancaEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="82.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="171.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="300.0" layoutY="14.0" prefHeight="584.0" prefWidth="293.0">
+         <children>
+            <GridPane layoutX="20.0" layoutY="108.0" prefHeight="132.0" prefWidth="253.0">
+               <children>
+                  <Label text="Nome: ">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="E-mail:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelFuncionarioSegurancaNome1" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelFuncionarioSegurancaEmail1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="CPF:" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="RG:" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelFuncionarioSegurancaCpf1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelFuncionarioSegurancaRg1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textFieldFuncionarioSegurancaNome" GridPane.columnIndex="1" />
+                  <TextField fx:id="textFieldFuncionarioSegurancaEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textFieldFuncionarioSegurancaCpf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldFuncionarioSegurancaRg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="82.0" />
@@ -170,12 +163,12 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteNome11" GridPane.columnIndex="1">
+                  <Label fx:id="labelFuncionarioSegurancaNome11" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteEmail11" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="labelFuncionarioSegurancaEmail11" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -185,7 +178,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteCpf11" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="labelFuncionarioSegurancaCpf11" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>

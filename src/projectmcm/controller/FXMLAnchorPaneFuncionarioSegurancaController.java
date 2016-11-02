@@ -7,6 +7,7 @@ package projectmcm.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -20,35 +21,58 @@ import projectmcm.model.domain.Funcionario;
  */
 public class FXMLAnchorPaneFuncionarioSegurancaController implements Initializable {
 
+    @FXML
     private Label labelFuncionarioSegurancaCpf;
+    @FXML
     private TextField textFieldFuncionarioSegurancaNome;
+    @FXML
     private TextField textFieldFuncionarioSegurancaEmail;
+    @FXML
     private TextField textFieldFuncionarioSegurancaCpf;
+    @FXML
     private TextField textFieldFuncionarioSegurancaRg;
+    @FXML
     private Label labelFuncionarioNome;
+    @FXML
     private Label labelFuncionarioEmail;
+    @FXML
     private Label labelFuncionarioCpf;
+    @FXML
     private Label labelFuncionarioRg;
+    @FXML
     private Label labelFuncionarioSegurancaNome;
+    @FXML
     private Label labelFuncionarioSegurancaSenha;
+    @FXML
     private Label labelFuncionarioSegurancaRg;
+    @FXML
     private Label labelFuncionarioSegurancaEmail;
+    @FXML
     private Label labelFuncionarioNome1;
+    @FXML
     private Label labelFuncionarioEmail1;
+    @FXML
     private Label labelFuncionarioCpf1;
+    @FXML
     private Label labelFuncionarioRg1;
+    @FXML
     private Label labelFuncionarioNome11;
+    @FXML
     private Label labelFuncionarioEmail11;
+    @FXML
     private Label labelFuncionarioCpf11;
+    @FXML
     private PasswordField passwordFieldFuncionarioSegurancaSenhaAtual;
+    @FXML
     private PasswordField passwordFieldFuncionarioSegurancaNovaSenha;
+    @FXML
     private PasswordField passwordFieldFuncionarioSegurancaConfirmarSenha;
 
     private Funcionario funcionarioLogado;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
-
+    public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("123");
     }
 
     public Funcionario getFuncionarioLogado() {

@@ -46,7 +46,6 @@ public class FXMLVBoxAdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //menuAdmin.setText(logado.getNome());
     }
 
     @FXML
@@ -66,15 +65,15 @@ public class FXMLVBoxAdminController implements Initializable {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminSituacoes.fxml"));
         anchorPane.getChildren().setAll(a);
     }
-
+    
     @FXML
     public void handleMenuItemAdminSeguranca() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane a = (AnchorPane) loader.load(FXMLAnchorPaneFuncionarioSegurancaController.class.getResource("/projectmcm/view/FXMLAnchorPaneFuncionarioSeguranca.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/FXMLAnchorPaneFuncionarioSeguranca.fxml"));
+        AnchorPane a = (AnchorPane) fxmlLoader.load();
         
-        FXMLAnchorPaneFuncionarioSegurancaController funcSeguranca = loader.<FXMLAnchorPaneFuncionarioSegurancaController>getController();
-        //funcSeguranca.setFuncionarioLogado(logado);
         anchorPane.getChildren().setAll(a);
+        FXMLAnchorPaneFuncionarioSegurancaController funcionarioSeguranca = fxmlLoader.<FXMLAnchorPaneFuncionarioSegurancaController>getController();
+        funcionarioSeguranca.setFuncionarioLogado(this.logado);
     }
 
     public Funcionario getLogado() {
@@ -83,6 +82,7 @@ public class FXMLVBoxAdminController implements Initializable {
 
     public void setLogado(Funcionario logado) {
         this.logado = logado;
+        menuAdmin.setText(this.logado.getNome());
     }
 
     public int getId() {
