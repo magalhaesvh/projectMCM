@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import projectmcm.model.domain.Agencia;
 import projectmcm.model.domain.Cliente;
+import projectmcm.model.domain.Funcionario;
 import projectmcm.model.domain.Locacao;
 import projectmcm.model.domain.Plano;
 import projectmcm.model.domain.Status;
@@ -108,9 +109,9 @@ public class LocacaoDAO {
                 planoDAO.setConnection(connection);
                 locacao.setPlano(planoDAO.buscar(plano));
                 
-                Locador locador = new Locador();                
-                locador.setIdLocador(resultado.getInt("id_locador")); 
-                LocadorDAO locadorDAO = new LocadorDAO();
+                Funcionario locador = new Funcionario();                
+                locador.setIdFuncionario(resultado.getInt("id_funcionario")); 
+                FuncionarioDAO locadorDAO = new FuncionarioDAO();
                 locadorDAO.setConnection(connection);
                 locacao.setLocador(locadorDAO.buscar(locador));
                                 
@@ -118,8 +119,7 @@ public class LocacaoDAO {
                 agencia.setIdAgencia(resultado.getInt("id_agencia")); 
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
-                locacao.setAgencia(agenciaDAO.buscar(locador));
-                
+                locacao.setAgenciaDevolucao(agenciaDAO.buscar(agencia));                
                 
                 Status status = new Status();                
                 status.setIdStatus(resultado.getInt("id_status")); 
@@ -160,9 +160,9 @@ public class LocacaoDAO {
                 planoDAO.setConnection(connection);
                 locacao.setPlano(planoDAO.buscar(plano));
                 
-                Locador locador = new Locador();                
-                locador.setIdLocador(resultado.getInt("id_locador")); 
-                LocadorDAO locadorDAO = new LocadorDAO();
+                Funcionario locador = new Funcionario();                
+                locador.setIdFuncionario(resultado.getInt("id_funcionario")); 
+                FuncionarioDAO locadorDAO = new FuncionarioDAO();
                 locadorDAO.setConnection(connection);
                 locacao.setLocador(locadorDAO.buscar(locador));
                                 
@@ -170,7 +170,7 @@ public class LocacaoDAO {
                 agencia.setIdAgencia(resultado.getInt("id_agencia")); 
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
-                locacao.setAgencia(agenciaDAO.buscar(locador));
+                locacao.setAgenciaDevolucao(agenciaDAO.buscar(agencia));
                 
                 
                 Status status = new Status();                

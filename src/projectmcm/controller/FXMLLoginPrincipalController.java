@@ -55,28 +55,27 @@ public class FXMLLoginPrincipalController implements Initializable {
             alert.setHeaderText("Senha ou email inválidos");
             alert.showAndWait();
         } else {
-            Parent root;
-            Scene scene =null;
-            if (funcionario.getTipo() == 1){
-                    FXMLLoader loader = new FXMLLoader();
-                    VBox page = loader.load(FXMLVBoxAdminController.class.getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
-                    scene = new Scene(page);
-                    FXMLVBoxAdminController controller = loader.getController();
-                    //controller.setLogado(this.funcionario);
-                    stage.close();
-            }else if (funcionario.getTipo() == 2){
-                    FXMLLoader loader = new FXMLLoader();
-                    VBox page = loader.load(FXMLVBoxGerenteController.class.getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
-                    scene = new Scene(page);
-                    FXMLVBoxGerenteController controller = loader.getController();
-                    //controller.setLogado(this.funcionario);
-                    stage.close();
-            }        
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Aluguel de carros - Project MCM");
-            stage.setResizable(false);
-            stage.show();
+            if (funcionario.getTipo() == 1) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                FXMLVBoxAdminController controller = fxmlLoader.<FXMLVBoxAdminController>getController();
+                //controller.setLogado(funcionario);
+                Scene scene = new Scene(root);
+
+                stage.setScene(scene);
+            
+                stage.setTitle("Aluguel de carros - Project MCM");
+                stage.setResizable(false);
+                stage.show();
+                //stage.close();
+            } else if (funcionario.getTipo() == 2) {
+                FXMLLoader loader = new FXMLLoader();
+                VBox page = loader.load(FXMLVBoxGerenteController.class.getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
+                Scene scene = new Scene(page);
+                FXMLVBoxGerenteController controller = loader.getController();
+                //controller.setLogado(funcionario);
+                stage.close();
+            }
             return true;
         }
         return false;

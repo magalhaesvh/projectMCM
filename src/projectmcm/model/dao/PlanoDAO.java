@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import projectmcm.model.domain.Plano;
-import projectmcm.model.domain.Promocao;
 
 public class PlanoDAO {
 
@@ -24,7 +23,7 @@ public class PlanoDAO {
     }
 
     public boolean inserir(Plano plano) {
-        String sql = "INSERT INTO plano (nome, regulamento, descricao, id_tipo, calculo_quilometragem, valor_quilometragem, custo_fixo, valor_custo, diaria, valor_diaria, id_promocao) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO plano (nome, regulamento, descricao, id_tipo, calculo_quilometragem, valor_quilometragem, custo_fixo, valor_custo, diaria, valor_diaria) VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, plano.getNome());
@@ -37,7 +36,6 @@ public class PlanoDAO {
             stmt.setFloat(8, plano.getValorCusto());
             stmt.setBoolean(9, plano.isDiaria());
             stmt.setFloat(10, plano.getValorDiaria());
-            stmt.setInt(11, plano.getPromocao().getIdPromocao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -47,7 +45,7 @@ public class PlanoDAO {
     }
 
     public boolean alterar(Plano plano) {
-        String sql = "UPDATE plano SET nome=?, regulamento=?, descricao=?, id_tipo=?, calculo_quilometragem=?, valor_quilometragem=?, custo_fixo=?, valor_custo=?, diaria=?, valor_diaria=?, id_promocao=? WHERE id_cliente=?";
+        String sql = "UPDATE plano SET nome=?, regulamento=?, descricao=?, id_tipo=?, calculo_quilometragem=?, valor_quilometragem=?, custo_fixo=?, valor_custo=?, diaria=?, valor_diaria=? WHERE id_plano=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, plano.getNome());
@@ -60,7 +58,6 @@ public class PlanoDAO {
             stmt.setFloat(8, plano.getValorCusto());
             stmt.setBoolean(9, plano.isDiaria());
             stmt.setFloat(10, plano.getValorDiaria());
-            stmt.setInt(11, plano.getPromocao().getIdPromocao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -101,12 +98,6 @@ public class PlanoDAO {
                 plano.setDiaria(resultado.getBoolean("diaria"));
                 plano.setValorDiaria(resultado.getFloat("valor_diaria"));
                 
-                Promocao promocao = new Promocao();                
-                promocao.setIdPromocao(resultado.getInt("id_promocao")); 
-                PromocaoDAO promocaoDAO = new PromocaoDAO();
-                promocaoDAO.setConnection(connection);
-                promocao.setPromocao(promocaoDAO.buscar(promocao));
-                
                 retorno.add(plano);
             }
         } catch (SQLException ex) {
@@ -133,12 +124,6 @@ public class PlanoDAO {
                 plano.setValorCusto(resultado.getFloat("valor_custo"));
                 plano.setDiaria(resultado.getBoolean("diaria"));
                 plano.setValorDiaria(resultado.getFloat("valor_diaria"));
-                
-                Promocao promocao = new Promocao();                
-                promocao.setIdPromocao(resultado.getInt("id_promocao")); 
-                PromocaoDAO promocaoDAO = new PromocaoDAO();
-                promocaoDAO.setConnection(connection);
-                promocao.setPromocao(promocaoDAO.buscar(promocao));
                 retorno = plano;
             }
         } catch (SQLException ex) {

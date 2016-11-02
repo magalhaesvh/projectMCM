@@ -13,7 +13,7 @@ import projectmcm.model.domain.Agencia;
 import projectmcm.model.domain.Funcionario;
 
 public class FuncionarioDAO {
-    
+
     private Connection connection;
 
     public Connection getConnection() {
@@ -34,7 +34,7 @@ public class FuncionarioDAO {
             stmt.setString(4, funcionario.getCpf());
             stmt.setString(5, funcionario.getRg());
             stmt.setDate(6, java.sql.Date.valueOf(funcionario.getDataContratacao()));
-            stmt.setByte(7, funcionario.getTipo());            
+            stmt.setByte(7, funcionario.getTipo());
             stmt.setInt(8, funcionario.getAgencia().getIdAgencia());
             stmt.execute();
             return true;
@@ -78,14 +78,14 @@ public class FuncionarioDAO {
         }
     }
 
-    public List<Funcionario> buscar(Funcionario func){
+    public Funcionario buscar(Funcionario func) {
         String sql = "SELECT * FROM funcionario WHERE id_funcionario=?";
-        List<Funcionario> retorno = new ArrayList<>();
+        Funcionario retorno = new Funcionario();
         try {
             PreparedStatement stmt = getConnection().prepareStatement(sql);
             stmt.setString(1, String.valueOf(func.getIdFuncionario()));
             ResultSet resultado = stmt.executeQuery();
-            while (resultado.next()) {              
+            if (resultado.next()) {
                 Funcionario funcionario = new Funcionario();
                 funcionario.setIdFuncionario(resultado.getInt("id_funcionario"));
                 funcionario.setNome(resultado.getString("nome"));
@@ -94,29 +94,29 @@ public class FuncionarioDAO {
                 funcionario.setCpf(resultado.getString("cpf"));
                 funcionario.setRg(resultado.getString("rg"));
                 funcionario.setDataContratacao(resultado.getDate("data_contratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                funcionario.setTipo(resultado.getByte("tipo")); 
-                
-                Agencia agencia = new Agencia();                
-                agencia.setIdAgencia(resultado.getInt("id_agencia")); 
+                funcionario.setTipo(resultado.getByte("tipo"));
+
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
                 //Obtendo os dados completos da Agencia associada ao gerente
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 funcionario.setAgencia(agenciaDAO.buscar(agencia));
-                retorno.add(funcionario);
+                retorno = funcionario;
             }
         } catch (SQLException ex) {
             Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;
     }
-    
+
     public Funcionario logar(Funcionario funcionario) {
         String sql = "SELECT * FROM funcionario WHERE email=? AND senha=?";
         Funcionario retorno = new Funcionario();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, funcionario.getEmail());            
+            stmt.setString(1, funcionario.getEmail());
             stmt.setString(2, funcionario.getSenha());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
@@ -134,7 +134,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 funcionario.setAgencia(agenciaDAO.buscar(agencia));
-            }else{
+            } else {
                 funcionario = null;
             }
             retorno = funcionario;
@@ -143,7 +143,7 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
-    
+
     public List<Funcionario> listarGerentes() {
         String sql = "SELECT * FROM funcionario WHERE tipo=2";
         List<Funcionario> retorno = new ArrayList<>();
@@ -160,7 +160,7 @@ public class FuncionarioDAO {
                 gerente.setRg(resultado.getString("rg"));
                 gerente.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 gerente.setTipo(resultado.getByte("tipo"));
-                
+
                 Agencia agencia = new Agencia();
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
@@ -168,7 +168,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 gerente.setAgencia(agenciaDAO.buscar(agencia));
-                
+
                 retorno.add(gerente);
             }
         } catch (SQLException ex) {
@@ -176,7 +176,7 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
-        
+
     public List<Funcionario> buscarGerentes(String texto) {
         String sql = "SELECT * FROM funcionario WHERE tipo=2 AND (nome=? OR CPF=?)";
         List<Funcionario> retorno = new ArrayList<>();
@@ -195,7 +195,7 @@ public class FuncionarioDAO {
                 gerente.setRg(resultado.getString("rg"));
                 gerente.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 gerente.setTipo(resultado.getByte("tipo"));
-                
+
                 Agencia agencia = new Agencia();
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
@@ -203,7 +203,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 gerente.setAgencia(agenciaDAO.buscar(agencia));
-                
+
                 retorno.add(gerente);
             }
         } catch (SQLException ex) {
@@ -211,7 +211,7 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
-    
+
     public List<Funcionario> listarLocador() {
         String sql = "SELECT * FROM funcionario WHERE tipo=3";
         List<Funcionario> retorno = new ArrayList<>();
@@ -228,7 +228,7 @@ public class FuncionarioDAO {
                 locador.setRg(resultado.getString("rg"));
                 locador.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 locador.setTipo(resultado.getByte("tipo"));
-                
+
                 Agencia agencia = new Agencia();
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
@@ -236,7 +236,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 locador.setAgencia(agenciaDAO.buscar(agencia));
-                
+
                 retorno.add(locador);
             }
         } catch (SQLException ex) {
@@ -244,7 +244,7 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
-        
+
     public List<Funcionario> buscarLocador(String texto) {
         String sql = "SELECT * FROM funcionario WHERE tipo=3 AND (nome=? OR CPF=?)";
         List<Funcionario> retorno = new ArrayList<>();
@@ -263,7 +263,7 @@ public class FuncionarioDAO {
                 locador.setRg(resultado.getString("rg"));
                 locador.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
                 locador.setTipo(resultado.getByte("tipo"));
-                
+
                 Agencia agencia = new Agencia();
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
@@ -271,7 +271,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 locador.setAgencia(agenciaDAO.buscar(agencia));
-                
+
                 retorno.add(locador);
             }
         } catch (SQLException ex) {
@@ -279,7 +279,7 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
-    
+
     public List<Funcionario> listarAdmin() {
         String sql = "SELECT * FROM funcionario WHERE tipo=1";
         List<Funcionario> retorno = new ArrayList<>();
@@ -296,7 +296,7 @@ public class FuncionarioDAO {
                 administrador.setRg(resultado.getString("rg"));
                 administrador.setDataContratacao(resultado.getDate("dataContratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 administrador.setTipo(resultado.getByte("tipo"));
-                
+
                 Agencia agencia = new Agencia();
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
@@ -304,7 +304,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 administrador.setAgencia(agenciaDAO.buscar(agencia));
-                
+
                 retorno.add(administrador);
             }
         } catch (SQLException ex) {
@@ -312,7 +312,7 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
-        
+
     public List<Funcionario> buscarAdmin(String texto) {
         String sql = "SELECT * FROM funcionario WHERE tipo=1 AND (nome=? OR CPF=?)";
         List<Funcionario> retorno = new ArrayList<>();
@@ -331,7 +331,7 @@ public class FuncionarioDAO {
                 administrador.setRg(resultado.getString("rg"));
                 administrador.setDataContratacao(resultado.getDate("data_contratacao").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 administrador.setTipo(resultado.getByte("tipo"));
-                
+
                 Agencia agencia = new Agencia();
                 agencia.setIdAgencia(resultado.getInt("id_agencia"));
 
@@ -339,7 +339,7 @@ public class FuncionarioDAO {
                 AgenciaDAO agenciaDAO = new AgenciaDAO();
                 agenciaDAO.setConnection(connection);
                 administrador.setAgencia(agenciaDAO.buscar(agencia));
-                
+
                 retorno.add(administrador);
             }
         } catch (SQLException ex) {

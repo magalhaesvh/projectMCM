@@ -7,38 +7,37 @@
 <?import javafx.scene.layout.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectmcm.controller.gerente.FXMLVBoxGerenteController">
-   <children>
-      <MenuBar prefHeight="25.0" prefWidth="327.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="{{nome}}">
-            <items>
-              <MenuItem fx:id="menuItemGerenteSeguranca" mnemonicParsing="false" text="Segurança" />
-                  <MenuItem fx:id="menuItemGerenteSair" mnemonicParsing="false" text="Sair" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Gerenciar">
-               <items>
-                  <MenuItem fx:id="menuItemGerenciarVeiculos" mnemonicParsing="false" onAction="#handleMenuItemGerenciarVeiculos" text="Veículos" />
-                  <MenuItem fx:id="menuItemGerenciarLocadores" mnemonicParsing="false" onAction="#handleMenuItemGerenciarLocadores" text="Locadores" />
-                  <MenuItem fx:id="menuItemGerenciarClientes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarClientes" text="Clientes" />
-                  <MenuItem fx:id="menuItemGerenciarPlanos" mnemonicParsing="false" onAction="#handleMenuItemGerenciarPlanos" text="Planos" />
-                  <MenuItem fx:id="menuItemGerenciarPromocoes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarPromocoes" text="Promocoes" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Locação">
-               <items>
-                  <MenuItem fx:id="menuItemLocacaoRealizar" mnemonicParsing="false" text="Realizar Locação" />
-                  <MenuItem fx:id="menuItemLocacalListar" mnemonicParsing="false" text="Ver Locações" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Vistoria">
-               <items>
-                  <MenuItem fx:id="menuItemVistoriaRelizar" mnemonicParsing="false" text="Realizar Vistoria" />
-                  <MenuItem fx:id="menuItemVistoriaListar" mnemonicParsing="false" text="Ver Vistorias" />
-               </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-      <AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="800.0" />
-   </children>
+    <children>
+        <MenuBar prefHeight="25.0" prefWidth="327.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="{{nome}}">
+                    <items>
+                        <MenuItem fx:id="menuItemGerenteSeguranca" mnemonicParsing="false" text="Segurança" />
+                        <MenuItem fx:id="menuItemGerenteSair" mnemonicParsing="false" text="Sair" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gerenciar">
+                    <items>
+                        <MenuItem fx:id="menuItemGerenciarVeiculos" mnemonicParsing="false" onAction="#handleMenuItemGerenciarVeiculos" text="Veículos" />
+                        <MenuItem fx:id="menuItemGerenciarLocadores" mnemonicParsing="false" onAction="#handleMenuItemGerenciarLocadores" text="Locadores" />
+                        <MenuItem fx:id="menuItemGerenciarClientes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarClientes" text="Clientes" />
+                        <MenuItem fx:id="menuItemGerenciarPlanos" mnemonicParsing="false" onAction="#handleMenuItemGerenciarPlanos" text="Planos" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Locação">
+                    <items>
+                        <MenuItem fx:id="menuItemLocacaoRealizar" mnemonicParsing="false" text="Realizar Locação" />
+                        <MenuItem fx:id="menuItemLocacalListar" mnemonicParsing="false" text="Ver Locações" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Vistoria">
+                    <items>
+                        <MenuItem fx:id="menuItemVistoriaRelizar" mnemonicParsing="false" text="Realizar Vistoria" />
+                        <MenuItem fx:id="menuItemVistoriaListar" mnemonicParsing="false" text="Ver Vistorias" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="800.0" />
+    </children>
 </VBox>

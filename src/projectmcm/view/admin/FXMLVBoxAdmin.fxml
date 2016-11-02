@@ -12,7 +12,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="{{nome}}" fx:id="menuAdmin">
             <items>
-              <MenuItem fx:id="menuItemAdminSeguranca" mnemonicParsing="false" text="Segurança" />
+              <MenuItem fx:id="menuItemAdminSeguranca" mnemonicParsing="false" text="Segurança" onAction="#handleMenuItemAdminSeguranca" />
                   <MenuItem fx:id="menuItemAdminSair" mnemonicParsing="false" text="Sair" />
             </items>
           </Menu>
