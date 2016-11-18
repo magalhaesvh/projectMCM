@@ -6,13 +6,20 @@
 package projectmcm.controller;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
+import projectmcm.model.dao.FuncionarioDAO;
+import projectmcm.model.database.Database;
+import projectmcm.model.database.DatabaseFactory;
 import projectmcm.model.domain.Funcionario;
+import util.Seguranca;
 
 /**
  * FXML Controller class
@@ -22,8 +29,6 @@ import projectmcm.model.domain.Funcionario;
 public class FXMLAnchorPaneFuncionarioSegurancaController implements Initializable {
 
     @FXML
-    private Label labelFuncionarioSegurancaCpf;
-    @FXML
     private TextField textFieldFuncionarioSegurancaNome;
     @FXML
     private TextField textFieldFuncionarioSegurancaEmail;
@@ -32,35 +37,13 @@ public class FXMLAnchorPaneFuncionarioSegurancaController implements Initializab
     @FXML
     private TextField textFieldFuncionarioSegurancaRg;
     @FXML
-    private Label labelFuncionarioNome;
+    private Label labelNome;
     @FXML
-    private Label labelFuncionarioEmail;
+    private Label labelEmail;
     @FXML
-    private Label labelFuncionarioCpf;
+    private Label labelCpf;
     @FXML
-    private Label labelFuncionarioRg;
-    @FXML
-    private Label labelFuncionarioSegurancaNome;
-    @FXML
-    private Label labelFuncionarioSegurancaSenha;
-    @FXML
-    private Label labelFuncionarioSegurancaRg;
-    @FXML
-    private Label labelFuncionarioSegurancaEmail;
-    @FXML
-    private Label labelFuncionarioNome1;
-    @FXML
-    private Label labelFuncionarioEmail1;
-    @FXML
-    private Label labelFuncionarioCpf1;
-    @FXML
-    private Label labelFuncionarioRg1;
-    @FXML
-    private Label labelFuncionarioNome11;
-    @FXML
-    private Label labelFuncionarioEmail11;
-    @FXML
-    private Label labelFuncionarioCpf11;
+    private Label labelRg;
     @FXML
     private PasswordField passwordFieldFuncionarioSegurancaSenhaAtual;
     @FXML
@@ -69,10 +52,14 @@ public class FXMLAnchorPaneFuncionarioSegurancaController implements Initializab
     private PasswordField passwordFieldFuncionarioSegurancaConfirmarSenha;
 
     private Funcionario funcionarioLogado;
+    
+    private final Database database = DatabaseFactory.getDatabase("mysql");
+    private final Connection connection = database.conectar();
+    private final FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("123");
+        funcionarioDAO.setConnection(connection);
     }
 
     public Funcionario getFuncionarioLogado() {
@@ -81,26 +68,55 @@ public class FXMLAnchorPaneFuncionarioSegurancaController implements Initializab
 
     public void setFuncionarioLogado(Funcionario funcionarioLogado) {
         this.funcionarioLogado = funcionarioLogado;
-        labelFuncionarioSegurancaCpf.setText(funcionarioLogado.getCpf());
         textFieldFuncionarioSegurancaNome.setText(funcionarioLogado.getNome());
         textFieldFuncionarioSegurancaEmail.setText(funcionarioLogado.getEmail());
         textFieldFuncionarioSegurancaCpf.setText(funcionarioLogado.getCpf());
         textFieldFuncionarioSegurancaRg.setText(funcionarioLogado.getRg());
-        labelFuncionarioNome.setText(funcionarioLogado.getNome());
-        labelFuncionarioEmail.setText(funcionarioLogado.getEmail());
-        labelFuncionarioCpf.setText(funcionarioLogado.getCpf());
-        labelFuncionarioRg.setText(funcionarioLogado.getRg());
-        labelFuncionarioSegurancaNome.setText(funcionarioLogado.getNome());
-        labelFuncionarioSegurancaSenha.setText(funcionarioLogado.getSenha());
-        labelFuncionarioSegurancaRg.setText(funcionarioLogado.getRg());
-        labelFuncionarioSegurancaEmail.setText(funcionarioLogado.getEmail());
-        labelFuncionarioNome1.setText(funcionarioLogado.getNome());
-        labelFuncionarioEmail1.setText(funcionarioLogado.getEmail());
-        labelFuncionarioCpf1.setText(funcionarioLogado.getCpf());
-        labelFuncionarioRg1.setText(funcionarioLogado.getRg());
-        labelFuncionarioNome11.setText(funcionarioLogado.getNome());
-        labelFuncionarioEmail11.setText(funcionarioLogado.getEmail());
-        labelFuncionarioCpf11.setText(funcionarioLogado.getCpf());
+        labelNome.setText(funcionarioLogado.getNome());
+        labelEmail.setText(funcionarioLogado.getEmail());
+        labelCpf.setText(funcionarioLogado.getCpf());
+        labelRg.setText(funcionarioLogado.getRg());
+    }
+        
+    public void handleSalvarDados(){
+        funcionarioLogado.setNome(textFieldFuncionarioSegurancaNome.getText());
+        funcionarioLogado.setCpf(textFieldFuncionarioSegurancaCpf.getText());
+        funcionarioLogado.setEmail(textFieldFuncionarioSegurancaEmail.getText());
+        funcionarioLogado.setRg(textFieldFuncionarioSegurancaRg.getText());
+        if (!funcionarioDAO.alterar(funcionarioLogado)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Ocorreu um erro tente novamente!");
+            alert.show();
+        }else{
+            JOptionPane.showMessageDialog(null, "Dados alterados com sucesso");
+            this.setFuncionarioLogado(funcionarioLogado);
+        }
     }
 
+    public void handleAlterarSenha(){
+        if (this.passwordFieldFuncionarioSegurancaSenhaAtual.getText().length() > 0 || this.passwordFieldFuncionarioSegurancaNovaSenha.getText().length() > 0 || this.passwordFieldFuncionarioSegurancaConfirmarSenha.getText().length() > 0){
+            if (Seguranca.criptografa(this.passwordFieldFuncionarioSegurancaSenhaAtual.getText()).equals(this.funcionarioLogado.getSenha())){
+                if (this.passwordFieldFuncionarioSegurancaNovaSenha.getText().equals(this.passwordFieldFuncionarioSegurancaConfirmarSenha.getText())){
+                    this.funcionarioLogado.setSenha(Seguranca.criptografa(this.passwordFieldFuncionarioSegurancaNovaSenha.getText()));
+                    this.funcionarioDAO.alterar(this.funcionarioLogado);
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso");
+                    this.passwordFieldFuncionarioSegurancaConfirmarSenha.setText("");
+                    this.passwordFieldFuncionarioSegurancaNovaSenha.setText("");
+                    this.passwordFieldFuncionarioSegurancaSenhaAtual.setText("");
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("A senha nova e sua confirmação não são iguais!");
+                    alert.show();
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Senha inválida!");
+            alert.show();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Preencha todos os campos para alterar a senha!");
+            alert.show();
+        }
+    }
 }

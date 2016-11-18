@@ -22,6 +22,7 @@ import projectmcm.model.dao.FuncionarioDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
 import projectmcm.model.domain.Funcionario;
+import util.Seguranca;
 
 public class FXMLLoginPrincipalController implements Initializable {
 
@@ -35,7 +36,6 @@ public class FXMLLoginPrincipalController implements Initializable {
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
     private final FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-    private Funcionario funcionario = new Funcionario();
     private Stage dialogStage;
     private Stage stage;
 
@@ -46,10 +46,11 @@ public class FXMLLoginPrincipalController implements Initializable {
 
     public boolean handleLoginButtonEntrar() throws IOException {
         funcionarioDAO.setConnection(connection);
+        Funcionario funcionario = new Funcionario();
         funcionario.setEmail(loginTextFieldEmail.getText());
-        funcionario.setSenha(loginPassFieldSenha.getText());
-        setAux(funcionarioDAO.logar(funcionario));
-        if (getAux() == null) {
+        funcionario.setSenha(Seguranca.criptografa(loginPassFieldSenha.getText()));
+        funcionario = funcionarioDAO.logar(funcionario);
+        if (funcionario == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText("Senha ou email inválidos");
@@ -85,15 +86,7 @@ public class FXMLLoginPrincipalController implements Initializable {
         return false;
 
     }
-
-    public Funcionario getAux() {
-        return funcionario;
-    }
-
-    public void setAux(Funcionario aux) {
-        this.funcionario = aux;
-    }
-
+    
     public Stage getStage() {
         return stage;
     }

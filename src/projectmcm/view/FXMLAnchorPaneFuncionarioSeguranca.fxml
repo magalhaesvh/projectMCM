@@ -63,10 +63,10 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="textFieldFuncionarioSegurancaNome" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="textFieldFuncionarioSegurancaCpf" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="textFieldFuncionarioSegurancaRg" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="textFieldFuncionarioSegurancaEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="labelNome" GridPane.columnIndex="1" />
+                  <Label fx:id="labelCpf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelRg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="82.0" />
@@ -183,9 +183,9 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="passwordFieldAdminSegurancaSenhaAtual" GridPane.columnIndex="1" />
-                  <PasswordField fx:id="passwordFieldAdminSegurancaNovaSenha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="passwordFieldAdminSegurancaConfirmarSenha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="passwordFieldFuncionarioSegurancaSenhaAtual" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="passwordFieldFuncionarioSegurancaNovaSenha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passwordFieldFuncionarioSegurancaConfirmarSenha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="119.0" />
@@ -197,8 +197,8 @@
                   <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button layoutX="221.0" layoutY="240.0" mnemonicParsing="false" text="Salvar" />
-            <Button layoutX="231.0" layoutY="432.0" mnemonicParsing="false" text="Salvar" />
+            <Button layoutX="221.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleSalvarDados" text="Salvar" />
+            <Button layoutX="231.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleAlterarSenha" text="Salvar" />
          </children>
       </AnchorPane>
    </children>

@@ -82,7 +82,7 @@ public class FXMLVBoxAdminController implements Initializable {
 
     public void setLogado(Funcionario logado) {
         this.logado = logado;
-        menuAdmin.setText(this.logado.getNome());
+        menuAdmin.setText("Meus dados");
     }
 
     public int getId() {

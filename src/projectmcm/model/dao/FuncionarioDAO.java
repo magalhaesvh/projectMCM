@@ -121,6 +121,7 @@ public class FuncionarioDAO {
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 Agencia agencia = new Agencia();
+                funcionario.setIdFuncionario(resultado.getInt("id_funcionario"));
                 funcionario.setNome(resultado.getString("nome"));
                 funcionario.setEmail(resultado.getString("email"));
                 funcionario.setSenha(resultado.getString("senha"));

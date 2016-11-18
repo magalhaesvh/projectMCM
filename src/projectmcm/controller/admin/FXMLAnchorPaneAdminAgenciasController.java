@@ -176,7 +176,7 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-        // Setando o agencia no Controller.
+        // Setando a agencia no Controller.
         FXMLAnchorPaneAdminAgenciasDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setAgencia(agencia);
