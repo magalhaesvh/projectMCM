@@ -45,47 +45,53 @@ public class FXMLLoginPrincipalController implements Initializable {
     }
 
     public boolean handleLoginButtonEntrar() throws IOException {
-        funcionarioDAO.setConnection(connection);
-        Funcionario funcionario = new Funcionario();
-        funcionario.setEmail(loginTextFieldEmail.getText());
-        funcionario.setSenha(Seguranca.criptografa(loginPassFieldSenha.getText()));
-        funcionario = funcionarioDAO.logar(funcionario);
-        if (funcionario == null) {
+        if (!Seguranca.validarEmail(loginTextFieldEmail.getText())) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro");
-            alert.setHeaderText("Senha ou email inválidos");
+            alert.setHeaderText("Formato de email não válido");
             alert.showAndWait();
+            return false;
         } else {
-            if (funcionario.getTipo() == 1) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                FXMLVBoxAdminController controller = fxmlLoader.<FXMLVBoxAdminController>getController();
-                controller.setLogado(funcionario);
-                controller.setStage(stage);
-                Scene scene = new Scene(root);
-                stage.setScene(scene);            
-                stage.setTitle("Aluguel de carros - Project MCM");
-                stage.setResizable(false);
-                stage.show();
-            } else if (funcionario.getTipo() == 2) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                FXMLVBoxGerenteController controller = fxmlLoader.<FXMLVBoxGerenteController>getController();
-                controller.setLogado(funcionario);
-                Scene scene = new Scene(root);
-
-                stage.setScene(scene);
-            
-                stage.setTitle("Aluguel de carros - Project MCM");
-                stage.setResizable(false);
-                stage.show();
+            funcionarioDAO.setConnection(connection);
+            Funcionario funcionario = new Funcionario();
+            funcionario.setEmail(loginTextFieldEmail.getText());
+            funcionario.setSenha(Seguranca.criptografa(loginPassFieldSenha.getText()));
+            funcionario = funcionarioDAO.logar(funcionario);
+            if (funcionario == null) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Senha ou email inválidos");
+                alert.showAndWait();
+            } else {
+                if (funcionario.getTipo() == 1) {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/admin/FXMLVBoxAdmin.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    FXMLVBoxAdminController controller = fxmlLoader.<FXMLVBoxAdminController>getController();
+                    controller.setLogado(funcionario);
+                    controller.setStage(stage);
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Aluguel de carros - Project MCM");
+                    stage.setResizable(false);
+                    stage.show();
+                } else if (funcionario.getTipo() == 2) {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    FXMLVBoxGerenteController controller = fxmlLoader.<FXMLVBoxGerenteController>getController();
+                    controller.setLogado(funcionario);
+                    controller.setStage(stage);
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Aluguel de carros - Project MCM");
+                    stage.setResizable(false);
+                    stage.show();
+                }
+                return true;
             }
-            return true;
+            return false;
         }
-        return false;
-
     }
-    
+
     public Stage getStage() {
         return stage;
     }
