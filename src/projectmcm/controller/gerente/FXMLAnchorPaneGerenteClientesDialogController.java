@@ -6,6 +6,7 @@
 package projectmcm.controller.gerente;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,30 +15,31 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import projectmcm.model.domain.Funcionario;
-import projectmcm.model.domain.Plano;
+import projectmcm.model.domain.Cliente;
 
 /**
  * FXML Controller class
  *
  * @author vh_ma
  */
-public class FXMLAnchorPaneGerentePlanosDialogController implements Initializable {
+public class FXMLAnchorPaneGerenteClientesDialogController implements Initializable {
 
-     @FXML
-    private TextField textFieldPlanoNome;
     @FXML
-    private TextField textFieldPlanoId;
+    private TextField textFieldClienteNome;
     @FXML
-    private TextField textFieldPlanoRegulamento;
+    private TextField textFieldClienteEmail;
     @FXML
-    private TextField textFieldPlanoDescricao;
+    private TextField textFieldClienteCpf;
     @FXML
-    private TextField textFieldPlanoQuilometragem;
+    private TextField textFieldClienteRg;
     @FXML
-    private TextField textFieldPlanoCustoFixo;
+    private TextField textFieldClienteCnh;
     @FXML
-    private TextField textFieldPlanoDiaria;
+    private DatePicker datePickerClienteNascimento;
+    @FXML
+    private DatePicker datePickerClienteVinculo;
+    @FXML
+    private DatePicker textFieldClienteEndereco;
     @FXML
     private Button buttonConfirmar;
     @FXML
@@ -45,12 +47,12 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
 
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
-    private Plano plano;
+    private Cliente cliente;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
+    }
     
     public Stage getDialogStage() {
         return dialogStage;
@@ -72,19 +74,21 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
         this.buttonConfirmar.setText(texto);
     }
 
-    public Plano getPlano() {
-        return plano;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setPlano(Plano plano) {
-        this.plano = plano;
-        this.textFieldPlanoNome.setText(plano.getNome());
-        this.textFieldPlanoId.setText(String.valueOf(plano.getIdPlano()));
-        this.textFieldPlanoRegulamento.setText(plano.getRegulamento());
-        this.textFieldPlanoDescricao.setText(plano.getDescricao());
-        this.textFieldPlanoQuilometragem.setText(String.valueOf(plano.getValorQuilometragem()));
-        this.textFieldPlanoCustoFixo.setText(String.valueOf(plano.getValorCusto()));
-        this.textFieldPlanoDiaria.setText(String.valueOf(plano.getValorDiaria()));
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        this.textFieldClienteNome.setText(cliente.getNome());
+        this.textFieldClienteEmail.setText(cliente.getEmail());
+        this.textFieldClienteCpf.setText(cliente.getCpf());
+        this.textFieldClienteRg.setText(cliente.getRg());
+        this.datePickerClienteNascimento.setValue(cliente.getDataNascimento()==null?null:cliente.getDataNascimento().toLocalDate());
+        this.datePickerClienteVinculo.setValue(cliente.getDataVinculo()==null?null:cliente.getDataVinculo().toLocalDate());
+        ///this.textFieldClienteEndereco.getValue(cliente.getEndereco()==null?null:cliente.getEndereco().getIdEndereco());
+        //????????????????
+       
     }
 
     @FXML
@@ -92,15 +96,11 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
 
         if (validarEntradaDeDados()) {
 
-            plano.setNome(textFieldPlanoNome.getText());
-            plano.setIdPlano((Integer.parseInt(textFieldPlanoId.getText())));
-            plano.setRegulamento(textFieldPlanoRegulamento.getText());
-            plano.setDescricao(textFieldPlanoDescricao.getText());
-            plano.setValorQuilometragem(Float.parseFloat(this.textFieldPlanoQuilometragem.getText()));
-            plano.setValorCusto(Float.parseFloat(this.textFieldPlanoCustoFixo.getText()));
-            plano.setValorDiaria(Float.parseFloat(this.textFieldPlanoDiaria.getText()));
-            //plano.setData_contratacao((java.sql.Date) Date.from(datePickerPlanoData_contratacao.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            //plano.setSenha(textFieldPlanoSenha.getText());
+            cliente.setNome(textFieldClienteNome.getText());
+            cliente.setEmail(textFieldClienteEmail.getText());
+            cliente.setCpf(textFieldClienteCpf.getText());
+            cliente.setRg(textFieldClienteRg.getText());
+            //nao sei pegar datas
 
             buttonConfirmarClicked = true;
             dialogStage.close();
@@ -117,8 +117,11 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
     private boolean validarEntradaDeDados() {
         String errorMessage = "";
 
-        if (textFieldPlanoNome.getText() == null || textFieldPlanoNome.getText().length() == 0) {
+        if (textFieldClienteNome.getText() == null || textFieldClienteNome.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
+        }
+        if (textFieldClienteCpf.getText() == null || textFieldClienteCpf.getText().length() == 0) {
+            errorMessage += "Cpf inválido!\n";
         }
 
         if (errorMessage.length() == 0) {
@@ -133,7 +136,5 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
             return false;
         }
     }
-    
-    
-    
+
 }

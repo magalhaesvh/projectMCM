@@ -63,22 +63,22 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteSegurancaNome" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="labelGerenteSegurancaSenha" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="labelGerenteSegurancaCpf" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="labelGerenteSegurancaRg" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="labelSegurancaNome" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="labelSegurancaSenha" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelSegurancaCpf" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelSegurancaRg" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Senha:" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteSegurancaEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="labelSegurancaEmail" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Agência:" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelGerenteSegurancaAgencia" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="labelSegurancaAgencia" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="82.0" />
@@ -139,16 +139,16 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldGerenteSegurancaNome" GridPane.columnIndex="1" />
-                  <TextField fx:id="textFieldGerenteSegurancaEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="textFieldGerenteSegurancaCpf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="textFieldGerenteSegurancaRg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldSegurancaNome" GridPane.columnIndex="1" />
+                  <TextField fx:id="textFieldSegurancaEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textFieldSegurancaCpf" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldSegurancaRg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Agência:" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textFieldGerenteSegurancaAgencia" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="textFieldSegurancaAgencia" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="82.0" />
@@ -204,9 +204,9 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="passwordFieldGerenteSegurancaSenhaAtual" GridPane.columnIndex="1" />
-                  <PasswordField fx:id="passwordFieldGerenteSegurancaNovaSenha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="passwordFieldGerenteSegurancaConfirmarSenha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="passwordFieldSegurancaSenhaAtual" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="passwordFieldSegurancaNovaSenha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passwordFieldSegurancaConfirmarSenha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="119.0" />

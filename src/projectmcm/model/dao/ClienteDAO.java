@@ -119,4 +119,27 @@ public class ClienteDAO {
         }
         return retorno;
     }
+    public List<Cliente> buscarNome(String texto) {
+        String sql = "SELECT * FROM cliente WHERE nome= "+ texto;
+        List<Cliente> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(2, texto);
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(resultado.getInt("id_plano"));
+                cliente.setCpf(String.valueOf(resultado.getInt("cpf")));
+                cliente.setRg(resultado.getString("rg"));
+                cliente.setCnh(resultado.getString("cnh"));
+                cliente.setDataNascimento(resultado.getDate("data_nascimento"));
+                cliente.setDataVinculo(resultado.getDate("data_vinculo"));
+                cliente.setEmail(resultado.getString("email"));
+                retorno.add(cliente);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
 }

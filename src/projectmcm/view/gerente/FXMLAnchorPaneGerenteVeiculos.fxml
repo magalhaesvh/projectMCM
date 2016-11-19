@@ -20,7 +20,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tableViewLocadores" layoutY="114.0" prefHeight="461.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <TableView fx:id="tableViewVeiculos" layoutY="114.0" prefHeight="461.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="tableColumnVeiculosModelo" prefWidth="75.0" text="Modelo" />
                       <TableColumn fx:id="tableColumnVeiculosMarca" prefWidth="75.0" text="Marca" />

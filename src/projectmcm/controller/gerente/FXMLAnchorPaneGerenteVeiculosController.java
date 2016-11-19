@@ -94,7 +94,7 @@ public class FXMLAnchorPaneGerenteVeiculosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         veiculoDAO.setConnection(connection);
-        carregarTableViewVeiculo();
+        carregarTableViewVeiculos();
 
         // Listen acionado diante de quaisquer alterações na seleção de itens do TableView
         if (!listVeiculos.isEmpty()) {
@@ -104,7 +104,7 @@ public class FXMLAnchorPaneGerenteVeiculosController implements Initializable {
 
     }
 
-    public void carregarTableViewVeiculo() {
+    public void carregarTableViewVeiculos() {
         tableColumnVeiculosMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         tableColumnVeiculosModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
         tableColumnVeiculosAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
@@ -165,7 +165,7 @@ public class FXMLAnchorPaneGerenteVeiculosController implements Initializable {
         boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminVeiculosDialog(veiculo);
         if (buttonConfirmarClicked) {
             veiculoDAO.inserir(veiculo);
-            carregarTableViewVeiculo();
+            carregarTableViewVeiculos();
         }
     }
 
@@ -180,7 +180,7 @@ public class FXMLAnchorPaneGerenteVeiculosController implements Initializable {
             if (buttonConfirmarClicked) {
                 veiculoDAO.alterar(veiculo);
                 selecionarItemTableViewVeiculos(null);
-                carregarTableViewVeiculo();
+                carregarTableViewVeiculos();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -197,7 +197,7 @@ public class FXMLAnchorPaneGerenteVeiculosController implements Initializable {
         }
         if (veiculo != null) {
             veiculoDAO.remover(veiculo);
-            carregarTableViewVeiculo();
+            carregarTableViewVeiculos();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Por favor, escolha um veiculo na Tabela!");
@@ -218,7 +218,7 @@ public class FXMLAnchorPaneGerenteVeiculosController implements Initializable {
                 tableViewVeiculos.setItems(observableListVeiculos);
             }
         } else {
-            carregarTableViewVeiculo();
+            carregarTableViewVeiculos();
         }
     }
 

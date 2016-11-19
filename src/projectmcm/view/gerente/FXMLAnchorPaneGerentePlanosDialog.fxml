@@ -16,7 +16,6 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -28,57 +27,47 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="ID da promoção:" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="textFieldGerentePlanoId" GridPane.columnIndex="1">
+            <TextField fx:id="textFieldPlanoId" GridPane.columnIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldGerentePlanoIdPromocao" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
-            <Label text="Nome:" GridPane.rowIndex="2">
+            <Label text="Nome:" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Regulamento:" GridPane.rowIndex="3">
+            <Label text="Regulamento:" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Descrição:" GridPane.rowIndex="4">
+            <Label text="Descrição:" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldGerentePlanoNome" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="textFieldPlanoNome" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldGerentePlanoRegulamento" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="textFieldPlanoRegulamento" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label text="Tipo:" GridPane.rowIndex="5">
+            <Label text="Tipo:" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldGerentePlanoDescricao" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TextField fx:id="textFieldPlanoDescricao" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label text="Valor:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label text="Valor:" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -103,20 +92,20 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <CheckBox fx:id="checkBoxGerentePlanoDiaria" mnemonicParsing="false" text="Diária" GridPane.rowIndex="2" />
-            <CheckBox fx:id="checkBoxGerentePlanoCustoFixo" mnemonicParsing="false" text="Custo Fixo" GridPane.rowIndex="1" />
-            <CheckBox fx:id="checkBoxGerentePlanoQuilometragem" mnemonicParsing="false" text="Quilometragem" />
-            <TextField fx:id="textFieldGerentePlanoDescricao1" prefHeight="42.0" prefWidth="111.0" GridPane.columnIndex="1">
+            <CheckBox fx:id="checkBoxPlanoDiaria" mnemonicParsing="false" text="Diária" GridPane.rowIndex="2" />
+            <CheckBox fx:id="checkBoxPlanoCustoFixo" mnemonicParsing="false" text="Custo Fixo" GridPane.rowIndex="1" />
+            <CheckBox fx:id="checkBoxPlanoQuilometragem" mnemonicParsing="false" text="Quilometragem" />
+            <TextField fx:id="textFieldPlanoQuilometragem" prefHeight="42.0" prefWidth="111.0" GridPane.columnIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldGerentePlanoDescricao11" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="textFieldPlanoCustoFixo" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldGerentePlanoDescricao12" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="textFieldPlanoDiaria" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>

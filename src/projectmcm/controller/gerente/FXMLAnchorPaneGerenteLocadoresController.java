@@ -107,7 +107,7 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
     @FXML
     public void handleButtonCadastrar() throws IOException {
         Funcionario locador = new Funcionario();
-        boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminLocadoresDialog(locador);
+        boolean buttonConfirmarClicked = showFXMLAnchorPaneGerenteLocadoresDialog(locador);
         if (buttonConfirmarClicked) {
             locadorDAO.inserir(locador);
             carregarTableViewLocador();
@@ -120,7 +120,7 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
         if (!listLocadores.isEmpty())
             locador = (Funcionario)tableViewLocadores.getSelectionModel().getSelectedItem();
         if (locador != null) {
-            boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminLocadoresDialog(locador);
+            boolean buttonConfirmarClicked = showFXMLAnchorPaneGerenteLocadoresDialog(locador);
             if (buttonConfirmarClicked) {
                 locadorDAO.alterar(locador);
                 selecionarItemTableViewLocadores(null);
@@ -164,7 +164,7 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
         }
     }
     
-    public boolean showFXMLAnchorPaneAdminLocadoresDialog(Funcionario locador) throws IOException {
+    public boolean showFXMLAnchorPaneGerenteLocadoresDialog(Funcionario locador) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneGerenteLocadoresDialogController.class.getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteLocadoresDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();

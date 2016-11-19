@@ -131,4 +131,32 @@ public class PlanoDAO {
         }
         return retorno;
     }
+    public List<Plano> buscarNome(String texto) {
+        String sql = "SELECT * FROM plano WHERE nome= "+ texto;
+        List<Plano> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(2, texto);
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                Plano plano = new Plano();
+                plano.setIdPlano(resultado.getInt("id_plano"));
+                plano.setNome(resultado.getString("nome"));
+                plano.setRegulamento(resultado.getString("regulamento"));
+                plano.setDescricao(resultado.getString("descricao"));
+                plano.setIdTipo(resultado.getInt("id_tipo"));
+                plano.setCalculoQuilometragem(resultado.getBoolean("calculo_quilometragem"));
+                plano.setValorQuilometragem(resultado.getFloat("valor_quilometragem"));
+                plano.setCustoFixo(resultado.getBoolean("custo_fixo"));
+                plano.setValorCusto(resultado.getFloat("valor_custo"));
+                plano.setDiaria(resultado.getBoolean("diaria"));
+                plano.setValorDiaria(resultado.getFloat("valor_diaria"));
+                
+                retorno.add(plano);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
 }
