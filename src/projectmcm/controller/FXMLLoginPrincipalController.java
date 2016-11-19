@@ -61,10 +61,9 @@ public class FXMLLoginPrincipalController implements Initializable {
                 Parent root = (Parent) fxmlLoader.load();
                 FXMLVBoxAdminController controller = fxmlLoader.<FXMLVBoxAdminController>getController();
                 controller.setLogado(funcionario);
+                controller.setStage(stage);
                 Scene scene = new Scene(root);
-
-                stage.setScene(scene);
-            
+                stage.setScene(scene);            
                 stage.setTitle("Aluguel de carros - Project MCM");
                 stage.setResizable(false);
                 stage.show();

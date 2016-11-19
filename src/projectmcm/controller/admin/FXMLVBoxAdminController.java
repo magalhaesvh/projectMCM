@@ -11,10 +11,14 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import projectmcm.controller.FXMLAnchorPaneFuncionarioSegurancaController;
+import projectmcm.controller.FXMLLoginPrincipalController;
 import projectmcm.model.domain.Funcionario;
 
 /**
@@ -43,6 +47,7 @@ public class FXMLVBoxAdminController implements Initializable {
     private Menu menuAdmin;
     @FXML
     private FXMLAnchorPaneFuncionarioSegurancaController funcSeguranca;
+    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,15 +70,29 @@ public class FXMLVBoxAdminController implements Initializable {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/admin/FXMLAnchorPaneAdminSituacoes.fxml"));
         anchorPane.getChildren().setAll(a);
     }
-    
+
     @FXML
     public void handleMenuItemAdminSeguranca() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/FXMLAnchorPaneFuncionarioSeguranca.fxml"));
         AnchorPane a = (AnchorPane) fxmlLoader.load();
-        
+
         anchorPane.getChildren().setAll(a);
         FXMLAnchorPaneFuncionarioSegurancaController funcionarioSeguranca = fxmlLoader.<FXMLAnchorPaneFuncionarioSegurancaController>getController();
         funcionarioSeguranca.setFuncionarioLogado(this.logado);
+    }
+
+    @FXML
+    public void handleSair() throws IOException {
+        this.logado = null;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/FXMLLoginPrincipal.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        FXMLLoginPrincipalController controller = fxmlLoader.<FXMLLoginPrincipalController>getController();
+        controller.setStage(stage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Aluguel de carros - Project MCM");
+        stage.setResizable(false);
+        stage.show();
     }
 
     public Funcionario getLogado() {
@@ -91,6 +110,14 @@ public class FXMLVBoxAdminController implements Initializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
 }
