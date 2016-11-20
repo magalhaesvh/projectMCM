@@ -51,7 +51,6 @@ public class FXMLAnchorPaneGerenteClientesDialogController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
     
     public Stage getDialogStage() {
@@ -84,8 +83,9 @@ public class FXMLAnchorPaneGerenteClientesDialogController implements Initializa
         this.textFieldClienteEmail.setText(cliente.getEmail());
         this.textFieldClienteCpf.setText(cliente.getCpf());
         this.textFieldClienteRg.setText(cliente.getRg());
-        this.datePickerClienteNascimento.setValue(cliente.getDataNascimento()==null?null:cliente.getDataNascimento().toLocalDate());
-        this.datePickerClienteVinculo.setValue(cliente.getDataVinculo()==null?null:cliente.getDataVinculo().toLocalDate());
+        this.textFieldClienteCnh.setText(cliente.getCnh());
+        //this.datePickerClienteNascimento.setValue(cliente.getDataNascimento()==null?null:cliente.getDataNascimento().toLocalDate());
+        //this.datePickerClienteVinculo.setValue(cliente.getDataVinculo()==null?null:cliente.getDataVinculo().toLocalDate());
         ///this.textFieldClienteEndereco.getValue(cliente.getEndereco()==null?null:cliente.getEndereco().getIdEndereco());
         //????????????????
        
@@ -100,6 +100,7 @@ public class FXMLAnchorPaneGerenteClientesDialogController implements Initializa
             cliente.setEmail(textFieldClienteEmail.getText());
             cliente.setCpf(textFieldClienteCpf.getText());
             cliente.setRg(textFieldClienteRg.getText());
+            cliente.setCnh(this.textFieldClienteCnh.getText());
             //nao sei pegar datas
 
             buttonConfirmarClicked = true;

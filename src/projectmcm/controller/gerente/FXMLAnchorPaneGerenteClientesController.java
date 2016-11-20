@@ -147,7 +147,7 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, escolha um locador na Tabela!");
+            alert.setContentText("Por favor, escolha um cliente na Tabela!");
             alert.show();
         }
     }
@@ -162,7 +162,7 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
             carregarTableViewCliente();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, escolha um locador na Tabela!");
+            alert.setContentText("Por favor, escolha um cliente na Tabela!");
             alert.show();
         }
     }
@@ -186,11 +186,12 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
     public boolean showFXMLAnchorPaneGerenteClientesDialog(Cliente cliente) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneGerenteClientesDialogController.class.getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteClientesDialog.fxml"));
+        //erro aqui -v
         AnchorPane page = (AnchorPane) loader.load();
 
         // Criando um Estágio de Diálogo (Stage Dialog)
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Cadastro de Funcionario");
+        dialogStage.setTitle("Cadastro de Cliente");
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 

@@ -99,8 +99,6 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
             plano.setValorQuilometragem(Float.parseFloat(this.textFieldPlanoQuilometragem.getText()));
             plano.setValorCusto(Float.parseFloat(this.textFieldPlanoCustoFixo.getText()));
             plano.setValorDiaria(Float.parseFloat(this.textFieldPlanoDiaria.getText()));
-            //plano.setData_contratacao((java.sql.Date) Date.from(datePickerPlanoData_contratacao.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            //plano.setSenha(textFieldPlanoSenha.getText());
 
             buttonConfirmarClicked = true;
             dialogStage.close();
