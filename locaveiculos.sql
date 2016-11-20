@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Nov-2016 às 14:31
+-- Generation Time: 19-Nov-2016 às 13:18
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -88,7 +88,7 @@ CREATE TABLE `funcionario` (
   `nome` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   `senha` varchar(500) NOT NULL,
-  `cpf` varchar(11) NOT NULL,
+  `cpf` varchar(250) NOT NULL,
   `rg` varchar(20) NOT NULL,
   `data_contratacao` date DEFAULT NULL,
   `tipo` smallint(6) NOT NULL
@@ -99,16 +99,8 @@ CREATE TABLE `funcionario` (
 --
 
 INSERT INTO `funcionario` (`id_funcionario`, `id_agencia`, `nome`, `email`, `senha`, `cpf`, `rg`, `data_contratacao`, `tipo`) VALUES
-(3, 0, 'raphael', 'admin@email.com', '123', '321', '123', '2016-10-09', 1),
-(4, 4, '123', 'gerente@email.com', '123', '123', '321', '2016-10-17', 2),
-(5, 0, '321', '123', 'senhaPadrao123', '321', '123', NULL, 0),
-(6, 0, 'Gerten 1', 'gerente1@teste.com', 'senhaPadrao123', '12345', '1234', NULL, 0),
-(7, 0, '123321', '123321', 'senhaPadrao123', '123321', '123321', NULL, 0),
-(8, 0, 'teste1610', 'teste1610', 'senhaPadrao123', 'teste1610', 'teste1610', NULL, 0),
-(9, 0, 'teste 16:42', 'teste 16:42', 'AC5CF46A04EB753EDC223FC5F92C7FFFE37861BF5AAACAF3A72D29D1E13435AA', 'teste 16:42', 'teste 16:42', '2016-10-15', 0),
-(11, 1, 'teste 16:51', 'teste 16:51', 'AC5CF46A04EB753EDC223FC5F92C7FFFE37861BF5AAACAF3A72D29D1E13435AA', 'teste 16:51', 'teste 16:51', '2016-10-15', 2),
-(12, 3, 'teste123', '321', 'F7AD38B949E1CD6F7499072E723927A8903F37D046C9FD945179D0A188FFC4AF', '123', '321', '2016-10-15', 2),
-(13, 1, 'teste', 'teste', 'AC5CF46A04EB753EDC223FC5F92C7FFFE37861BF5AAACAF3A72D29D1E13435AA', '2312123', '12321', '2016-10-15', 2);
+(3, 0, 'Raphael Corujo Moura', 'admin@email.com', '03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4', '125.287.246-16', 'MG-18.733.967', '2016-10-09', 1),
+(4, 4, '123', 'gerente@email.com', 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3', '123', '321', '2016-10-17', 2);
 
 -- --------------------------------------------------------
 

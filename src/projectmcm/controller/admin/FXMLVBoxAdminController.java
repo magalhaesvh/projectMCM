@@ -29,7 +29,6 @@ import projectmcm.model.domain.Funcionario;
 public class FXMLVBoxAdminController implements Initializable {
 
     private Funcionario logado;
-    private int id;
 
     @FXML
     private MenuItem menuItemAdminSeguranca;
@@ -102,14 +101,6 @@ public class FXMLVBoxAdminController implements Initializable {
     public void setLogado(Funcionario logado) {
         this.logado = logado;
         menuAdmin.setText("Meus dados");
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Stage getStage() {

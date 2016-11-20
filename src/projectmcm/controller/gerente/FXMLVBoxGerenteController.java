@@ -12,9 +12,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import projectmcm.model.domain.Funcionario;
 
 /**
@@ -25,7 +28,6 @@ import projectmcm.model.domain.Funcionario;
 public class FXMLVBoxGerenteController implements Initializable {
     
     private Funcionario logado;
-    private int id;
     @FXML
     private Menu menuAdmin;
     @FXML
@@ -44,6 +46,8 @@ public class FXMLVBoxGerenteController implements Initializable {
     private MenuItem menuItemGerenciarPromocoes;      
     @FXML
     private AnchorPane anchorPane;
+    
+    private Stage stage;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,6 +85,20 @@ public class FXMLVBoxGerenteController implements Initializable {
     }
     
     @FXML
+    public void handleSair() throws IOException {
+        this.logado = null;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/FXMLLoginPrincipal.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        FXMLLoginPrincipalController controller = fxmlLoader.<FXMLLoginPrincipalController>getController();
+        controller.setStage(stage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Aluguel de carros - Project MCM");
+        stage.setResizable(false);
+        stage.show();
+    }
+    
+    @FXML
     public void teste(){
         System.out.println("teste");
     }
@@ -91,15 +109,15 @@ public class FXMLVBoxGerenteController implements Initializable {
 
     public void setLogado(Funcionario logado) {
         this.logado = logado;
-        menuAdmin.setText(this.logado.getNome());
+        menuAdmin.setText("Meus dados");
     }
 
-    public int getId() {
-        return id;
+    public Stage getStage() {
+        return stage;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
     
     
