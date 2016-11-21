@@ -25,28 +25,30 @@ public class VeiculoDAO {
 
     public boolean inserir(Veiculo veiculo) {
         String sql = "INSERT INTO veiculo (cor,valor, placa, chassi, ano_modelo, "
-                + "ano_fabricacao, data_compra, observacoes, motor, ar_condicioando "
-                + "vidro_eletrico,trava_eletrica, direcao_eletrica, cambio_automatico, abs, air_bag, 4x4, id_status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "ano_fabricacao, observacoes, motor, ar_condicionado, "
+                + "vidro_eletrico,trava_eletrica, direcao_eletrica, cambio_automatico, abs, air_bag, `4x4`, id_status, marca, modelo, id_agencia) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, veiculo.getCor());
             stmt.setFloat(2, veiculo.getValor());
             stmt.setString(3, veiculo.getPlaca());
             stmt.setString(4, veiculo.getChassi());
-            stmt.setString(5, veiculo.getAnoModelo().toString());
-            stmt.setString(6, veiculo.getAnoFabricacao().toString());
-            stmt.setString(7, veiculo.getDataCompra().toString());
-            stmt.setString(8, veiculo.getObservacoes());
-            stmt.setFloat(9, veiculo.getMotor());
-            stmt.setBoolean(10, veiculo.isArCondicionado());
-            stmt.setBoolean(11, veiculo.isVidroEletrico());
-            stmt.setBoolean(12, veiculo.isTravaEletrica());
-            stmt.setBoolean(13, veiculo.isDirecaoEletrica());
-            stmt.setBoolean(14, veiculo.isCambioAutomatico());
-            stmt.setBoolean(15, veiculo.isAbs());
-            stmt.setBoolean(16, veiculo.isAirBag());
-            stmt.setBoolean(17, veiculo.isTracao4x4());
-            stmt.setInt(18, veiculo.getStatus().getIdStatus());
+            stmt.setInt(5, veiculo.getAnoModelo());
+            stmt.setInt(6, veiculo.getAnoFabricacao());
+            stmt.setString(7, veiculo.getObservacoes());
+            stmt.setFloat(8, veiculo.getMotor());
+            stmt.setBoolean(9, veiculo.isArCondicionado());
+            stmt.setBoolean(10, veiculo.isVidroEletrico());
+            stmt.setBoolean(11, veiculo.isTravaEletrica());
+            stmt.setBoolean(12, veiculo.isDirecaoEletrica());
+            stmt.setBoolean(13, veiculo.isCambioAutomatico());
+            stmt.setBoolean(14, veiculo.isAbs());
+            stmt.setBoolean(15, veiculo.isAirBag());
+            stmt.setBoolean(16, veiculo.isTracao4x4());
+            stmt.setInt(17, veiculo.getStatus().getIdStatus());
+            stmt.setString(18, veiculo.getMarca());
+            stmt.setString(19, veiculo.getModelo());            
+            stmt.setInt(20, veiculo.getAgencia().getIdAgencia());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -56,27 +58,30 @@ public class VeiculoDAO {
     }
 
     public boolean alterar(Veiculo veiculo) {
-        String sql = "UPDATE veiculo SET (cor=?, valor=?,placa=?,chassi=?,ano_modelo=?, ano_fabricacao=?, data_compra=?, observacoes=?, motor=?, ar_condicioando  vidro_eletrico=?, trava_eletrica=?, direcao_eletrica=?, cambio_automatico=?, abs=?, air_bag=?, 4x4=?, id_status=?) WHERE id_veiculo=?";
+        String sql = "UPDATE veiculo SET cor=?, valor=?,placa=?,chassi=?,ano_modelo=?, ano_fabricacao=?, observacoes=?, motor=?, ar_condicionado=?,  vidro_eletrico=?, trava_eletrica=?, direcao_eletrica=?, cambio_automatico=?, abs=?, air_bag=?, `4x4`=?, id_status=?,marca=?, modelo=?, id_agencia=? WHERE id_veiculo=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, veiculo.getCor());
             stmt.setFloat(2, veiculo.getValor());
             stmt.setString(3, veiculo.getPlaca());
             stmt.setString(4, veiculo.getChassi());
-            stmt.setString(5, veiculo.getAnoModelo().toString());
-            stmt.setString(6, veiculo.getAnoFabricacao().toString());
-            stmt.setString(7, veiculo.getDataCompra().toString());
-            stmt.setString(8, veiculo.getObservacoes());
-            stmt.setFloat(9, veiculo.getMotor());
-            stmt.setBoolean(10, veiculo.isArCondicionado());
-            stmt.setBoolean(11, veiculo.isVidroEletrico());
-            stmt.setBoolean(12, veiculo.isTravaEletrica());
-            stmt.setBoolean(13, veiculo.isDirecaoEletrica());
-            stmt.setBoolean(14, veiculo.isCambioAutomatico());
-            stmt.setBoolean(15, veiculo.isAbs());
-            stmt.setBoolean(16, veiculo.isAirBag());
-            stmt.setBoolean(17, veiculo.isTracao4x4());
-            stmt.setInt(18, veiculo.getStatus().getIdStatus());
+            stmt.setInt(5, veiculo.getAnoModelo());
+            stmt.setInt(6, veiculo.getAnoFabricacao());
+            stmt.setString(7, veiculo.getObservacoes());
+            stmt.setFloat(8, veiculo.getMotor());
+            stmt.setBoolean(9, veiculo.isArCondicionado());
+            stmt.setBoolean(10, veiculo.isVidroEletrico());
+            stmt.setBoolean(11, veiculo.isTravaEletrica());
+            stmt.setBoolean(12, veiculo.isDirecaoEletrica());
+            stmt.setBoolean(13, veiculo.isCambioAutomatico());
+            stmt.setBoolean(14, veiculo.isAbs());
+            stmt.setBoolean(15, veiculo.isAirBag());
+            stmt.setBoolean(16, veiculo.isTracao4x4());
+            stmt.setInt(17, veiculo.getStatus().getIdStatus());
+            stmt.setString(18, veiculo.getMarca());
+            stmt.setString(19, veiculo.getModelo());            
+            stmt.setInt(20, veiculo.getAgencia().getIdAgencia());
+            stmt.setInt(21, veiculo.getIdVeiculo());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -107,13 +112,14 @@ public class VeiculoDAO {
             while (resultado.next()) {
                 Veiculo veiculo = new Veiculo();
                 veiculo.setIdVeiculo(resultado.getInt("id_veiculo"));
+                veiculo.setMarca(resultado.getString("marca"));
+                veiculo.setModelo(resultado.getString("modelo"));
                 veiculo.setCor(resultado.getString("cor"));
                 veiculo.setValor(resultado.getFloat("valor"));
                 veiculo.setPlaca(resultado.getString("placa"));
                 veiculo.setChassi(resultado.getString("chassi"));
-                veiculo.setAnoModelo(resultado.getDate("ano_modelo"));
-                veiculo.setAnoFabricacao(resultado.getDate("ano_fabricacao"));
-                veiculo.setDataCompra(resultado.getDate("data_Compra"));
+                veiculo.setAnoModelo(resultado.getInt("ano_modelo"));
+                veiculo.setAnoFabricacao(resultado.getInt("ano_fabricacao"));
                 veiculo.setObservacoes(resultado.getString("observacoes"));
                 veiculo.setMotor(resultado.getFloat("motor"));
                 veiculo.setArCondicionado(resultado.getBoolean("ar_condicionado"));
@@ -150,12 +156,13 @@ public class VeiculoDAO {
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 veiculo.setCor(resultado.getString("cor"));
+                veiculo.setMarca(resultado.getString("marca"));
+                veiculo.setModelo(resultado.getString("modelo"));
                 veiculo.setValor(resultado.getFloat("valor"));
                 veiculo.setPlaca(resultado.getString("placa"));
                 veiculo.setChassi(resultado.getString("chassi"));
-                veiculo.setAnoModelo(resultado.getDate("ano_modelo"));
-                veiculo.setAnoFabricacao(resultado.getDate("ano_fabricacao"));
-                veiculo.setDataCompra(resultado.getDate("data_Compra"));
+                veiculo.setAnoModelo(resultado.getInt("ano_modelo"));
+                veiculo.setAnoFabricacao(resultado.getInt("ano_fabricacao"));
                 veiculo.setObservacoes(resultado.getString("observacoes"));
                 veiculo.setMotor(resultado.getFloat("motor"));
                 veiculo.setArCondicionado(resultado.getBoolean("ar_condicionado"));
@@ -191,13 +198,14 @@ public List<Veiculo> buscar(String texto) {
             while (resultado.next()) {
                 Veiculo veiculo = new Veiculo();
                 veiculo.setIdVeiculo(resultado.getInt("id_veiculo"));
+                veiculo.setMarca(resultado.getString("marca"));
+                veiculo.setModelo(resultado.getString("modelo"));
                 veiculo.setCor(resultado.getString("cor"));
                 veiculo.setValor(resultado.getFloat("valor"));
                 veiculo.setPlaca(resultado.getString("placa"));
                 veiculo.setChassi(resultado.getString("chassi"));
-                veiculo.setAnoModelo(resultado.getDate("ano_modelo"));
-                veiculo.setAnoFabricacao(resultado.getDate("ano_fabricacao"));
-                veiculo.setDataCompra(resultado.getDate("data_Compra"));
+                veiculo.setAnoModelo(resultado.getInt("ano_modelo"));
+                veiculo.setAnoFabricacao(resultado.getInt("ano_fabricacao"));
                 veiculo.setObservacoes(resultado.getString("observacoes"));
                 veiculo.setMotor(resultado.getFloat("motor"));
                 veiculo.setArCondicionado(resultado.getBoolean("ar_condicionado"));

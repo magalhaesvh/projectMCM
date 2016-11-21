@@ -2,8 +2,6 @@ package projectmcm.controller.gerente;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -12,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import projectmcm.model.dao.StatusDAO;
@@ -38,13 +36,7 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
     @FXML
     private TextField textFieldVeiculoChassi;
     @FXML
-    private DatePicker datePickerVeiculoAnoModelo;
-    @FXML
-    private DatePicker datePickerVeiculoAnoFabricacao;
-    @FXML
-    private DatePicker datePickerVeiculoDataCompra;
-    @FXML
-    private TextField textFieldVeiculoObservacoes;
+    private TextArea textAreaVeiculoObservacoes;
     @FXML
     private TextField textFieldVeiculoMotor;
     @FXML
@@ -65,6 +57,15 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
     private CheckBox checkBoxVeiculoTracao4x4;
     @FXML
     private ComboBox choiceBoxVeiculoStatus;
+    @FXML
+    private TextField textFieldVeiculoAnoModelo;    
+    @FXML
+    private TextField textFieldVeiculoFabricacao;
+    @FXML
+    private TextField textFieldVeiculoMarca;    
+    @FXML
+    private TextField textFieldVeiculoModelo;   
+    
 
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
@@ -118,20 +119,21 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
         this.textFieldVeiculoValor.setText(String.valueOf(veiculo.getValor()));
         this.textFieldVeiculoPlaca.setText(veiculo.getPlaca());
         this.textFieldVeiculoChassi.setText(veiculo.getChassi());
-        this.datePickerVeiculoAnoModelo.setValue(veiculo.getAnoModelo()==null?null:veiculo.getAnoModelo().toLocalDate());
-        this.datePickerVeiculoAnoFabricacao.setValue(veiculo.getAnoFabricacao()==null?null:veiculo.getAnoFabricacao().toLocalDate());
-        //this.datePickerVeiculoDataCompra.setValue(veiculo.getDataCompra()==null? null:veiculo.getDataCompra().toLocalDate());
-        //this.textFieldVeiculoObservacoes.setText(veiculo.getObservacoes());
+        this.textFieldVeiculoAnoModelo.setText(String.valueOf(veiculo.getAnoModelo()));
+        this.textFieldVeiculoFabricacao.setText(String.valueOf(veiculo.getAnoFabricacao()));
+        this.textAreaVeiculoObservacoes.setText(veiculo.getObservacoes());
         this.textFieldVeiculoMotor.setText(String.valueOf(veiculo.getMotor()));
-        //this.checkBoxVeiculoArCondicionado.setSelected(false);
-        /*this.checkBoxVeiculoVidroEletrico.setSelected(veiculo.isVidroEletrico());
+        this.checkBoxVeiculoArCondicionado.setSelected(veiculo.isArCondicionado());
+        this.checkBoxVeiculoVidroEletrico.setSelected(veiculo.isVidroEletrico());
         this.checkBoxVeiculoTravaEletrica.setSelected(veiculo.isTravaEletrica());
         this.checkBoxVeiculoDirecaoEletrica.setSelected(veiculo.isDirecaoEletrica());
         this.checkBoxVeiculoCambioAutomatico.setSelected(veiculo.isCambioAutomatico());
         this.checkBoxVeiculoAbs.setSelected(veiculo.isAbs());
         this.checkBoxVeiculoAirBag.setSelected(veiculo.isAirBag());
         this.checkBoxVeiculoTracao4x4.setSelected(veiculo.isTracao4x4());
-        this.choiceBoxVeiculoStatus.setValue(veiculo.getIdStatus());*/
+        this.choiceBoxVeiculoStatus.setValue((Status) veiculo.getStatus());
+        this.textFieldVeiculoMarca.setText(veiculo.getMarca());
+        this.textFieldVeiculoModelo.setText(veiculo.getModelo());
     }
 
     @FXML
@@ -142,10 +144,9 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
         veiculo.setValor(Float.parseFloat(this.textFieldVeiculoValor.getText()));
         veiculo.setPlaca(this.textFieldVeiculoPlaca.getText());
         veiculo.setChassi(this.textFieldVeiculoChassi.getText());
-        //veiculo.setAnoModelo((java.sql.Date) Date.from(this.datePickerVeiculoAnoModelo.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        //veiculo.setAnoFabricacao((java.sql.Date) Date.from(this.datePickerVeiculoAnoFabricacao.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        //veiculo.setDataCompra((java.sql.Date) Date.from(this.datePickerVeiculoDataCompra.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        //veiculo.setObservacoes(this.textFieldVeiculoObservacoes.getText());
+        veiculo.setAnoModelo(Integer.parseInt(this.textFieldVeiculoFabricacao.getText()));
+        veiculo.setAnoFabricacao(Integer.parseInt(this.textFieldVeiculoAnoModelo.getText()));
+        veiculo.setObservacoes(this.textAreaVeiculoObservacoes.getText());
         veiculo.setMotor(Float.parseFloat(this.textFieldVeiculoMotor.getText()));
         veiculo.setArCondicionado(this.checkBoxVeiculoArCondicionado.isSelected());
         veiculo.setVidroEletrico(this.checkBoxVeiculoVidroEletrico.isSelected());
@@ -155,7 +156,9 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
         veiculo.setAbs(this.checkBoxVeiculoAbs.isSelected());
         veiculo.setAirBag(this.checkBoxVeiculoAirBag.isSelected());
         veiculo.setTracao4x4(this.checkBoxVeiculoTracao4x4.isSelected());
-        //veiculo.setIdStatus(Status.valueOf(this.choiceBoxVeiculoStatus.getValue(), "id"));
+        veiculo.setStatus((Status) this.choiceBoxVeiculoStatus.getValue());
+        veiculo.setMarca(this.textFieldVeiculoMarca.getText());
+        veiculo.setModelo(this.textFieldVeiculoModelo.getText());
 
         buttonConfirmarClicked = true;
         dialogStage.close();

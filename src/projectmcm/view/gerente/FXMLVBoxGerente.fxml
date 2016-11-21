@@ -26,7 +26,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Locação">
                     <items>
-                        <MenuItem fx:id="menuItemLocacaoRealizar" mnemonicParsing="false" text="Realizar Locação" />
+                        <MenuItem fx:id="menuItemLocacaoRealizar" mnemonicParsing="false" onAction="#handleMenuItemLocacaoRealizar" text="Realizar Locação" />
                         <MenuItem fx:id="menuItemLocacalListar" mnemonicParsing="false" text="Ver Locações" />
                     </items>
                 </Menu>

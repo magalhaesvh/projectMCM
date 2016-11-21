@@ -12,8 +12,8 @@ public class Veiculo implements Serializable {
     private float valor;
     private String placa;
     private String chassi;
-    private Date anoModelo;
-    private Date anoFabricacao;
+    private int anoModelo;
+    private int anoFabricacao;
     private Date dataCompra;
     private String observacoes;
     private Status status;
@@ -26,6 +26,7 @@ public class Veiculo implements Serializable {
     private boolean abs;
     private boolean airBag;
     private boolean tracao4x4;
+    private Agencia agencia;
     
     public Veiculo(){
         this.idVeiculo = -1;
@@ -33,8 +34,8 @@ public class Veiculo implements Serializable {
         this.valor = 0.0f;
         this.placa = "";
         this.chassi = "";
-        this.anoModelo = null;
-        this.anoFabricacao = null;
+        this.anoModelo = -1;
+        this.anoFabricacao = -1;
         this.dataCompra = null;
         this.observacoes = "";
         this.status = null;
@@ -77,11 +78,11 @@ public class Veiculo implements Serializable {
         return chassi;
     }
 
-    public Date getAnoModelo() {
+    public int getAnoModelo() {
         return anoModelo;
     }
 
-    public Date getAnoFabricacao() {
+    public int getAnoFabricacao() {
         return anoFabricacao;
     }
 
@@ -161,11 +162,11 @@ public class Veiculo implements Serializable {
         this.chassi = chassi;
     }
 
-    public void setAnoModelo(Date anoModelo) {
+    public void setAnoModelo(int anoModelo) {
         this.anoModelo = anoModelo;
     }
 
-    public void setAnoFabricacao(Date anoFabricacao) {
+    public void setAnoFabricacao(int anoFabricacao) {
         this.anoFabricacao = anoFabricacao;
     }
 
@@ -215,6 +216,14 @@ public class Veiculo implements Serializable {
 
     public void setTracao4x4(boolean tracao4x4) {
         this.tracao4x4 = tracao4x4;
+    }
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
     }
     
    

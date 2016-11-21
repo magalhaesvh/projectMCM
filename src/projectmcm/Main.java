@@ -19,6 +19,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/FXMLLoginPrincipal.fxml"));     
+        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/gerente/FXMLAnchorPaneGerenteVeiculos.fxml"));     
         Parent root = (Parent)fxmlLoader.load();        
         Scene scene = new Scene(root);
         FXMLLoginPrincipalController controller = fxmlLoader.<FXMLLoginPrincipalController>getController();       
