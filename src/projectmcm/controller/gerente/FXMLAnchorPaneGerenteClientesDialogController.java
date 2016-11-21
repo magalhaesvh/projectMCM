@@ -39,7 +39,7 @@ public class FXMLAnchorPaneGerenteClientesDialogController implements Initializa
     @FXML
     private DatePicker datePickerClienteVinculo;
     @FXML
-    private DatePicker textFieldClienteEndereco;
+    private TextField textFieldClienteEndereco;
     @FXML
     private Button buttonConfirmar;
     @FXML

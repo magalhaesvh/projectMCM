@@ -65,7 +65,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="textFieldClienterRg" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="textFieldClienteRg" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>

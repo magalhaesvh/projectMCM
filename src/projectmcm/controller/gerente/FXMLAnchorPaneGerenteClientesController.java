@@ -109,7 +109,7 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
             labelClienteRg.setText(cliente.getRg());
             this.labelClienteNascimento.setText(cliente.getDataNascimento().toString());
             this.labelClienteVinculo.setText(cliente.getDataVinculo().toString());
-            this.labelClienteEndereco.setText(cliente.getEndereco().toString());
+            //this.labelClienteEndereco.setText(cliente.getEndereco().toString());
         } else {
             this.labelClienteId.setText("");
             labelClienteNome.setText("");
