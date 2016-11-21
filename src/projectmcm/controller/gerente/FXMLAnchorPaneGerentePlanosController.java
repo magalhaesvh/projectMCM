@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 import projectmcm.model.dao.PlanoDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
+import projectmcm.model.domain.Funcionario;
 import projectmcm.model.domain.Plano;
 
 /**
@@ -66,13 +68,15 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
     @FXML
     private Label labelPlanoCustoFixo;
     @FXML
-    private Label labelDiaria;
+    private Label labelPlanoDiaria;
     @FXML
-    private Label checkBoxPlanoQuilometragem;
+    private CheckBox checkBoxPlanoQuilometragem;
     @FXML
-    private Label checkBoxPlanoCustoFixo;
+    private CheckBox checkBoxPlanoCustoFixo;
     @FXML
-    private Label checkBoxDiaria;
+    private CheckBox checkBoxDiaria;
+    
+    private Funcionario logado;
 
     private List<Plano> listPlanos;
     private ObservableList<Plano> observableListPlanos;
@@ -86,15 +90,16 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         planoDAO.setConnection(connection);
+        this.carregarTableViewPlanos();
         
         if (!listPlanos.isEmpty())
             tableViewPlanos.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionarItemTableViewLocadores(newValue));
+                (observable, oldValue, newValue) -> selecionarItemTableViewPlanos(newValue));
     }
 
-    public void carregarTableViewLocador() {
+    public void carregarTableViewPlanos() {
         tableColumnPlanoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnPlanoTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        tableColumnPlanoTipo.setCellValueFactory(new PropertyValueFactory<>("id_tipo"));
 
         listPlanos = planoDAO.listar();
         if (!listPlanos.isEmpty()) {
@@ -103,7 +108,7 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
         }
     }
 
-    public void selecionarItemTableViewLocadores(Plano plano) {
+    public void selecionarItemTableViewPlanos(Plano plano) {
         if (plano != null) {
             this.labelPlanoId.setText(String.valueOf(plano.getIdPlano()));
             this.labelPlanoNome.setText(plano.getNome());
@@ -111,7 +116,7 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
             this.labelPlanoDescricao.setText(plano.getDescricao());
             this.labelPlanoQuilometragem.setText(String.valueOf(plano.getValorQuilometragem()));
             this.labelPlanoCustoFixo.setText(String.valueOf(plano.getValorCusto()));
-            this.labelDiaria.setText(String.valueOf(plano.getValorDiaria()));
+            this.labelPlanoDiaria.setText(String.valueOf(plano.getValorDiaria()));
         } else{
             this.labelPlanoId.setText("");
             this.labelPlanoNome.setText("");
@@ -119,7 +124,7 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
             this.labelPlanoDescricao.setText("");
             this.labelPlanoQuilometragem.setText("");
             this.labelPlanoCustoFixo.setText("");
-            this.labelDiaria.setText("");
+            this.labelPlanoDiaria.setText("");
         }
     }
     
@@ -128,7 +133,7 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
         boolean buttonConfirmarClicked = showFXMLAnchorPaneGerentePlanosDialog(plano);
         if (buttonConfirmarClicked) {
             planoDAO.inserir(plano);
-            carregarTableViewLocador();
+            carregarTableViewPlanos();
         }
     }
     
@@ -140,8 +145,8 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
             boolean buttonConfirmarClicked = showFXMLAnchorPaneGerentePlanosDialog(plano);
             if (buttonConfirmarClicked) {
                 planoDAO.alterar(plano);
-                selecionarItemTableViewLocadores(null);
-                carregarTableViewLocador();
+                selecionarItemTableViewPlanos(null);
+                carregarTableViewPlanos();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -157,7 +162,7 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
             plano = (Plano)tableViewPlanos.getSelectionModel().getSelectedItem();
         if (plano != null) {
             planoDAO.remover(plano);
-            carregarTableViewLocador();
+            carregarTableViewPlanos();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Por favor, escolha um plano na Tabela!");
@@ -177,7 +182,7 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
                 tableViewPlanos.setItems(observableListPlanos);
             }
         }else{
-            carregarTableViewLocador();
+            carregarTableViewPlanos();
         }
     }
     
