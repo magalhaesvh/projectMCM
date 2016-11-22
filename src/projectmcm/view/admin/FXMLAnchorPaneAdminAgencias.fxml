@@ -32,6 +32,7 @@
                   <TextField fx:id="textFieldPesquisar" layoutX="8.0" layoutY="64.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="81.0" />
                   <Button fx:id="buttonPesquisar" layoutX="315.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleButtonPesquisar" text="Pesquisar" AnchorPane.rightAnchor="14.0" />
                   <Button fx:id="buttonAgenciaCadastrar" layoutX="315.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="25.0" prefWidth="67.0" text="Cadastrar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                  <Button layoutX="223.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleGeraRelatorioGeral" text="Relatório" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="372.0">
