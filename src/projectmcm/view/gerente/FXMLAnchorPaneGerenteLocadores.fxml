@@ -105,16 +105,6 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label text="Comissão: " GridPane.rowIndex="5">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="labelLocadorComissao" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
                      </children>
                   </GridPane>
                   <Group layoutX="-4.0" layoutY="87.0">

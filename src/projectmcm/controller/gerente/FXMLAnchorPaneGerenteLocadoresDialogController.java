@@ -1,4 +1,4 @@
-package projectmcm.controller.gerente;
+package projectmcm.controller.locador;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -12,6 +12,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import projectmcm.model.domain.Funcionario;
+import util.Seguranca;
 
 public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializable {
 
@@ -34,7 +35,7 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
 
     private Stage dialogStage;
     private boolean buttonConfirmarClicked = false;
-    private Funcionario gerente;
+    private Funcionario locador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,17 +62,17 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
     }
 
     public Funcionario getLocador() {
-        return gerente;
+        return locador;
     }
 
-    public void setLocador(Funcionario gerente) {
-        this.gerente = gerente;
-        this.textFieldLocadorNome.setText(gerente.getNome());
-        this.textFieldLocadorEmail.setText(gerente.getEmail());
-        this.textFieldLocadorCpf.setText(gerente.getCpf());
-        this.textFieldLocadorRg.setText(gerente.getRg());
-        //System.out.println(this.datePickerLocadorData_contratacao.getValue());
-        //this.datePickerLocadorData_contratacao.setValue(null);
+    public void setLocador(Funcionario locador) {
+        this.locador = locador;
+        this.textFieldLocadorNome.setText(locador.getNome());
+        this.textFieldLocadorEmail.setText(locador.getEmail());
+        this.textFieldLocadorCpf.setText(locador.getCpf());
+        this.textFieldLocadorRg.setText(locador.getRg());
+        if (locador.getDataContratacao()!=null)
+            this.datePickerLocadorDataContratacao.setValue(locador.getDataContratacao());
     }
 
     @FXML
@@ -79,13 +80,14 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
 
         if (validarEntradaDeDados()) {
 
-            gerente.setNome(textFieldLocadorNome.getText());
-            gerente.setEmail(textFieldLocadorEmail.getText());
-            gerente.setCpf(textFieldLocadorCpf.getText());
-            gerente.setRg(textFieldLocadorRg.getText());
-            //gerente.setData_contratacao((java.sql.Date) Date.from(datePickerLocadorData_contratacao.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            //gerente.setSenha(textFieldLocadorSenha.getText());
-
+            locador.setNome(textFieldLocadorNome.getText());
+            locador.setEmail(textFieldLocadorEmail.getText());
+            locador.setCpf(textFieldLocadorCpf.getText());
+            locador.setRg(textFieldLocadorRg.getText());
+            locador.setDataContratacao(datePickerLocadorDataContratacao.getValue());
+            if(locador.getSenha() == null){
+                locador.setSenha(Seguranca.geraSenhaPadrao(textFieldLocadorNome.getText(), "LPS"));
+            }
             buttonConfirmarClicked = true;
             dialogStage.close();
         }
@@ -104,7 +106,7 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
         if (textFieldLocadorNome.getText() == null || textFieldLocadorNome.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
         }
-        if (textFieldLocadorCpf.getText() == null || textFieldLocadorCpf.getText().length() == 0) {
+        if (textFieldLocadorCpf.getText() == null || textFieldLocadorCpf.getText().length() == 0 || Seguranca.validarCpf(textFieldLocadorCpf.getText())) {
             errorMessage += "Cpf inválido!\n";
         }
 

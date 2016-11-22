@@ -67,7 +67,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <DatePicker fx:id="datePickerDataContratacao" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="datePickerLocadorDataContratacao" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="24.0" text="Cadastro/Edição de Locador" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">

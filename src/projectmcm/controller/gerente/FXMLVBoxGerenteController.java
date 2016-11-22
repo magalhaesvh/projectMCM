@@ -75,8 +75,12 @@ public class FXMLVBoxGerenteController implements Initializable {
     
     @FXML
     public void handleMenuItemGerenciarLocadores() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteLocadores.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteLocadores.fxml"));
+        AnchorPane a = (AnchorPane) fxmlLoader.load();
+
         anchorPane.getChildren().setAll(a);
+        FXMLAnchorPaneGerenteLocadoresController funcionarioSeguranca = fxmlLoader.<FXMLAnchorPaneGerenteLocadoresController>getController();
+        funcionarioSeguranca.setLogado(this.logado);
     }
     
     @FXML

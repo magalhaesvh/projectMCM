@@ -1,6 +1,7 @@
 package projectmcm.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class FuncionarioDAO {
             stmt.setString(3, funcionario.getSenha());
             stmt.setString(4, funcionario.getCpf());
             stmt.setString(5, funcionario.getRg());
-            stmt.setDate(6, java.sql.Date.valueOf(funcionario.getDataContratacao()));
+            stmt.setDate(6, Date.valueOf(funcionario.getDataContratacao()));
             stmt.setByte(7, funcionario.getTipo());
             stmt.setInt(8, funcionario.getAgencia().getIdAgencia());
             stmt.execute();

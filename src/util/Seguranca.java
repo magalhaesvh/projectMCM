@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
 
 public class Seguranca {
 
-    public static String geraSenhaPadrao(String str1, int str2) {
-
+    public static String geraSenhaPadrao(String str1, String str2) {
+        
         String[] aux = str1.split(" ");
-        String senha = aux[0] + String.valueOf(str2);
+        String senha = aux[0] + str2;
         return criptografa(senha);
 
     }

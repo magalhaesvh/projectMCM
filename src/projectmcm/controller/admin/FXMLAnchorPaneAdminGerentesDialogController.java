@@ -126,7 +126,7 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
             gerente.setDataContratacao(datePickerGerenteDataContratacao.getValue());
             gerente.setTipo((byte)2);
             if(gerente.getSenha() == null){
-                gerente.setSenha(Seguranca.geraSenhaPadrao(textFieldGerenteNome.getText(), datePickerGerenteDataContratacao.getValue().getYear()));
+                gerente.setSenha(Seguranca.geraSenhaPadrao(textFieldGerenteNome.getText(), "LPS"));
             }
             gerente.setAgencia((Agencia) comboBoxGerenteAgencia.getValue());
             buttonConfirmarClicked = true;
