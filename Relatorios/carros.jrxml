@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="carros" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ae349f9-3b4b-4f8f-9202-b4e01ea3c644">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tblPlanos" uuid="fa573c4d-cedf-4e22-abab-fa417593c95e">
+		<queryString language="SQL">
+			<![CDATA[SELECT COUNT(l.id_veiculo),c.modelo,c.marca,c.placa FROM locacao AS l INNER JOIN veiculo AS c ON l.id_veiculo = c.id_veiculo GROUP BY l.id_veiculo]]>
+		</queryString>
+		<field name="COUNT(l.id_veiculo)" class="java.lang.Long"/>
+		<field name="modelo" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="marca" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="placa" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT COUNT(l.id_veiculo),c.modelo,c.marca,c.placa FROM locacao AS l INNER JOIN veiculo AS c ON l.id_veiculo = c.id_veiculo GROUP BY l.id_veiculo]]>
+	</queryString>
+	<field name="COUNT(l.id_veiculo)" class="java.lang.Long"/>
+	<field name="modelo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="marca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="placa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="ea607006-1f69-4487-87f6-62cb246dd042"/>
+				<staticText>
+					<reportElement x="20" y="20" width="349" height="43" forecolor="#FFFFFF" uuid="adf0bafe-3639-4d4d-83c9-15bd980d3828"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Carros mais locados]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="62f11f0d-cf04-42a4-9cff-33c932b49082"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8995c9c-8cdc-436e-b2f7-4cb6918c15c3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COUNT(l.id_veiculo)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="64aadeb4-8512-4913-bd01-bb4061dc7ab0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="276" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d68ca30b-5784-4386-8e1b-2324d3b997e7"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="25b6b293-1c38-44ec-93e6-cc942bc93c40"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[placa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="76">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="552" height="76" uuid="fec2fd98-2ac3-41c9-ab76-d6fbaa33dcbc"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tblPlanos" uuid="e1853db3-d243-4211-9536-9bc73a6c382d">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="138" uuid="05bcfa36-3a41-4077-81a0-2f351355b8a9">
+						<jr:columnFooter style="table_CH" height="12" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="44" rowSpan="1">
+							<textField>
+								<reportElement x="14" y="10" width="90" height="20" uuid="6647fc6e-5235-44b5-b628-776bb9817a24"/>
+								<textElement>
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{COUNT(l.id_veiculo)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138" uuid="424075d0-715d-432b-9faf-1de48d3a808d">
+						<jr:columnFooter style="table_CH" height="12" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="44" rowSpan="1">
+							<textField>
+								<reportElement x="21" y="10" width="90" height="20" uuid="be493648-fc83-43e6-ad1d-aaaf08090e87"/>
+								<textElement>
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138" uuid="694f758c-7e86-4192-85bc-5b7369b3c1c6">
+						<jr:columnFooter style="table_CH" height="12" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="44" rowSpan="1">
+							<textField>
+								<reportElement x="20" y="10" width="90" height="20" uuid="a1acbd4c-d14b-4679-8a7a-7661e71c1b72"/>
+								<textElement>
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138" uuid="c957d5e5-8f71-4cd4-a1d1-664da15eb26b">
+						<jr:columnFooter style="table_CH" height="12" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="44" rowSpan="1">
+							<textField>
+								<reportElement x="26" y="10" width="90" height="20" uuid="8c5aba18-117b-4dd5-a313-652012158512"/>
+								<textElement>
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="552" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="b4768a2f-7256-409a-ad29-fa688e236aa9"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ProjectMCM]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
