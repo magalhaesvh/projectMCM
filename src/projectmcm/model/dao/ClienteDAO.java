@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ClienteDAO {
     }
 
     public boolean inserir(Cliente cliente) {
-        String sql = "INSERT INTO cliente (nome, email, cnh, cpf, rg, data_nascimento, tipo, comissao, id_status) VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cliente (nome, email, cnh, cpf, rg, data_nascimento, data_vinculo) VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
@@ -44,7 +45,7 @@ public class ClienteDAO {
     }
 
     public boolean alterar(Cliente cliente) {
-        String sql = "UPDATE cliente SET (nome=?, email=?, cnh=?, cpf=?, rg=?, data_nascimento=?, data_vinculo=?) WHERE id_cliente=?";
+        String sql = "UPDATE cliente SET nome=?, email=?, cnh=?, cpf=?, rg=?, data_nascimento=?, data_vinculo=? WHERE id_cliente=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
@@ -54,6 +55,7 @@ public class ClienteDAO {
             stmt.setString(5, cliente.getRg());
             stmt.setDate(6, Date.valueOf(cliente.getDataNascimento()));
             stmt.setDate(7, Date.valueOf(cliente.getDataVinculo()));
+            stmt.setInt(8, cliente.getIdCliente());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -89,8 +91,8 @@ public class ClienteDAO {
                 cliente.setCnh(resultado.getString("cnh"));
                 cliente.setCpf(resultado.getString("cpf"));
                 cliente.setRg(resultado.getString("rg"));
-                cliente.setDataNascimento(resultado.getDate("data_nascimento").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                cliente.setDataVinculo(resultado.getDate("data_vinculo").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                cliente.setDataNascimento(resultado.getDate("data_nascimento").toLocalDate());
+                cliente.setDataVinculo(resultado.getDate("data_vinculo").toLocalDate());
                 retorno.add(cliente);
             }
         } catch (SQLException ex) {
@@ -133,12 +135,12 @@ public class ClienteDAO {
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setIdCliente(resultado.getInt("id_plano"));
+                cliente.setIdCliente(resultado.getInt("id_cliente"));
                 cliente.setCpf(String.valueOf(resultado.getInt("cpf")));
                 cliente.setRg(resultado.getString("rg"));
                 cliente.setCnh(resultado.getString("cnh"));
-                cliente.setDataNascimento(resultado.getDate("data_nascimento").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                cliente.setDataVinculo(resultado.getDate("data_vinculo").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                cliente.setDataNascimento(new java.sql.Date(resultado.getDate("data_nascimento").getTime()).toLocalDate());
+                cliente.setDataVinculo(new java.sql.Date(resultado.getDate("data_vinculo").getTime()).toLocalDate());
                 cliente.setEmail(resultado.getString("email"));
                 retorno.add(cliente);
             }

@@ -6,7 +6,6 @@
 package projectmcm.controller.gerente;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -84,10 +83,8 @@ public class FXMLAnchorPaneGerenteClientesDialogController implements Initializa
         this.textFieldClienteCpf.setText(cliente.getCpf());
         this.textFieldClienteRg.setText(cliente.getRg());
         this.textFieldClienteCnh.setText(cliente.getCnh());
-        //this.datePickerClienteNascimento.setValue(cliente.getDataNascimento()==null?null:cliente.getDataNascimento().toLocalDate());
-        //this.datePickerClienteVinculo.setValue(cliente.getDataVinculo()==null?null:cliente.getDataVinculo().toLocalDate());
-        ///this.textFieldClienteEndereco.getValue(cliente.getEndereco()==null?null:cliente.getEndereco().getIdEndereco());
-        //????????????????
+        this.datePickerClienteNascimento.setValue(cliente.getDataNascimento()==null?null:cliente.getDataNascimento());
+        this.datePickerClienteVinculo.setValue(cliente.getDataVinculo()==null?null:cliente.getDataVinculo());
        
     }
 
@@ -101,7 +98,8 @@ public class FXMLAnchorPaneGerenteClientesDialogController implements Initializa
             cliente.setCpf(textFieldClienteCpf.getText());
             cliente.setRg(textFieldClienteRg.getText());
             cliente.setCnh(this.textFieldClienteCnh.getText());
-            //nao sei pegar datas
+            cliente.setDataNascimento(this.datePickerClienteNascimento.getValue());
+            cliente.setDataVinculo(this.datePickerClienteVinculo.getValue());
 
             buttonConfirmarClicked = true;
             dialogStage.close();

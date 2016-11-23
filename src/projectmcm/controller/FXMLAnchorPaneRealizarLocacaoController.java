@@ -148,9 +148,9 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
                 labelClienteNome.setText(cliente.getNome());
                 labelClienteCpf.setText(cliente.getCpf());
                 labelClienteRg.setText(cliente.getRg());
-                labelClienteNascimento.setText(cliente.getDataNascimento().toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                labelClienteNascimento.setText(cliente.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 labelClienteCnh.setText(cliente.getCnh());
-                labelClienteVinculo.setText(cliente.getDataVinculo().toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                labelClienteVinculo.setText(cliente.getDataVinculo().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 labelClienteEmail.setText(cliente.getEmail());
             } else {
                 labelClienteId.setText("");
