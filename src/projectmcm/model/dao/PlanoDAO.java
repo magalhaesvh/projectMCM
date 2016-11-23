@@ -56,6 +56,7 @@ public class PlanoDAO {
             stmt.setFloat(7, plano.getValorCusto());
             stmt.setBoolean(8, plano.isDiaria());
             stmt.setFloat(9, plano.getValorDiaria());
+            stmt.setFloat(10, plano.getIdPlano());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -128,10 +129,11 @@ public class PlanoDAO {
         return retorno;
     }
     public List<Plano> buscarNome(String texto) {
-        String sql = "SELECT * FROM plano WHERE nome= "+ texto;
+        String sql = "SELECT * FROM plano WHERE nome LIKE ? or id_plano=?";
         List<Plano> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, texto);
             stmt.setString(2, texto);
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {

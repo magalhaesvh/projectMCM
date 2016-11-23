@@ -30,12 +30,6 @@
                         <MenuItem fx:id="menuItemLocacalListar" mnemonicParsing="false" text="Ver Locações" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Vistoria">
-                    <items>
-                        <MenuItem fx:id="menuItemVistoriaRelizar" mnemonicParsing="false" text="Realizar Vistoria" />
-                        <MenuItem fx:id="menuItemVistoriaListar" mnemonicParsing="false" text="Ver Vistorias" />
-                    </items>
-                </Menu>
             </menus>
         </MenuBar>
         <AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="800.0" />

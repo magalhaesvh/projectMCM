@@ -44,8 +44,6 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
     @FXML
     private TableColumn<Plano, String> tableColumnPlanoNome;
     @FXML
-    private TableColumn<Plano, String> tableColumnPlanoTipo;
-    @FXML
     private Button buttonCadastrar;
     @FXML
     private Button buttonAlterar;
@@ -99,7 +97,6 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
 
     public void carregarTableViewPlanos() {
         tableColumnPlanoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnPlanoTipo.setCellValueFactory(new PropertyValueFactory<>("id_tipo"));
 
         listPlanos = planoDAO.listar();
         if (!listPlanos.isEmpty()) {
@@ -117,6 +114,9 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
             this.labelPlanoQuilometragem.setText(String.valueOf(plano.getValorQuilometragem()));
             this.labelPlanoCustoFixo.setText(String.valueOf(plano.getValorCusto()));
             this.labelPlanoDiaria.setText(String.valueOf(plano.getValorDiaria()));
+            this.checkBoxPlanoQuilometragem.setSelected(plano.isCalculoQuilometragem());
+            this.checkBoxDiaria.setSelected(plano.isDiaria());
+            this.checkBoxPlanoCustoFixo.setSelected(plano.isCustoFixo());
         } else{
             this.labelPlanoId.setText("");
             this.labelPlanoNome.setText("");
@@ -173,7 +173,6 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
     @FXML
     public void handleButtonPesquisar() throws IOException {
         tableColumnPlanoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnPlanoTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
         if (!textFieldPesquisar.getText().equals("")){
             listPlanos = planoDAO.buscarNome(textFieldPesquisar.getText());

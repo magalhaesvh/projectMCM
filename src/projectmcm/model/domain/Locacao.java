@@ -13,6 +13,7 @@ public class Locacao implements Serializable {
     private float kmInicial;
     private float kmFinal;
     private Agencia agenciaDevolucao;
+    private Veiculo veiculo;
 
     public int getIdLocacao() {
         return idLocacao;
@@ -84,5 +85,13 @@ public class Locacao implements Serializable {
 
     public void setAgenciaDevolucao(Agencia agenciaDevolucao) {
         this.agenciaDevolucao = agenciaDevolucao;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 }
