@@ -35,16 +35,6 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldClienteNome" GridPane.columnIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="textFieldClienteEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
             <Label text="CPF:" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -60,17 +50,6 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldClienteCpf" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="textFieldClienteRg" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <DatePicker fx:id="datePickerClienteVinculo" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Data de Nascimento:" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -81,13 +60,22 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Endereço:" GridPane.rowIndex="7">
+            <TextField fx:id="textFieldClienteNome" GridPane.columnIndex="1">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font size="14.0" />
                </font>
-            </Label>
-            <DatePicker fx:id="datePickerClienteNascimento" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="textFieldClienteEndereco" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            </TextField>
+            <TextField fx:id="textFieldClienteEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textFieldClienteCpf" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textFieldClienteRg" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -97,6 +85,8 @@
                   <Font size="14.0" />
                </font>
             </TextField>
+            <DatePicker fx:id="datePickerClienteNascimento" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="datePickerClienteVinculo" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="24.0" text="Cadastro/Edição de Cliente" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
@@ -106,8 +96,8 @@
       </Label>
       <Group layoutX="-14.0" layoutY="-209.0" AnchorPane.bottomAnchor="14.0">
          <children>
-            <Button fx:id="buttonCancelar" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="78.0" text="Cancelar" />
             <Button fx:id="buttonConfirmar" layoutX="113.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" prefHeight="33.0" prefWidth="78.0" text="Confirmar" />
+            <Button fx:id="buttonCancelar" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="78.0" text="Cancelar" />
          </children>
       </Group>
    </children>

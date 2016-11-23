@@ -61,6 +61,7 @@ public class Seguranca {
     private static String removerCaracteres(String cpf) {
         cpf = cpf.replace("-", "");
         cpf = cpf.replace(".", "");
+        cpf = cpf.replace("/", "");
         return cpf;
     }
 
@@ -122,6 +123,7 @@ public class Seguranca {
     }
     
     public static boolean validarCnpj(String cnpj) {
+        cnpj = removerCaracteres(cnpj);
         if ((cnpj == null) || (cnpj.length() != 14)) {
             return false;
         }

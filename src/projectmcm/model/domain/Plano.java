@@ -7,7 +7,6 @@ public class Plano implements Serializable {
     private String nome;
     private String regulamento;
     private String descricao;
-    private int idTipo;
     private boolean calculoQuilometragem;
     private float valorQuilometragem;
     private boolean custoFixo;
@@ -29,10 +28,6 @@ public class Plano implements Serializable {
 
     public String getDescricao() {
         return descricao;
-    }
-
-    public int getIdTipo() {
-        return idTipo;
     }
 
     public boolean isCalculoQuilometragem() {
@@ -58,10 +53,6 @@ public class Plano implements Serializable {
     public float getValorDiaria() {
         return valorDiaria;
     }
-
-    public void setIdPlano(int idPlano) {
-        this.idPlano = idPlano;
-    }
     
     public void setNome(String nome) {
         this.nome = nome;
@@ -73,10 +64,6 @@ public class Plano implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void setIdTipo(int idTipo) {
-        this.idTipo = idTipo;
     }
 
     public void setCalculoQuilometragem(boolean calculoQuilometragem) {
@@ -101,5 +88,9 @@ public class Plano implements Serializable {
 
     public void setValorDiaria(float valorDiaria) {
         this.valorDiaria = valorDiaria;
+    }
+
+    public void setIdPlano(int idPlano) {
+        this.idPlano = idPlano;
     }
 }

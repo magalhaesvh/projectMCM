@@ -151,6 +151,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <Button layoutX="221.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleSalvarDados" text="Salvar" />
             <GridPane layoutX="7.0" layoutY="335.0" prefHeight="97.0" prefWidth="268.0">
                <children>
                   <Label text="Senha Atual:">
@@ -197,7 +198,6 @@
                   <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button layoutX="221.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleSalvarDados" text="Salvar" />
             <Button layoutX="231.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleAlterarSenha" text="Salvar" />
          </children>
       </AnchorPane>

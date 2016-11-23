@@ -8,6 +8,7 @@ package projectmcm.controller.gerente;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -67,8 +68,6 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
     private Label labelClienteNascimento;
     @FXML
     private Label labelClienteVinculo;
-    @FXML
-    private Label labelClienteEndereco;
 
     private List<Cliente> listClientes;
     private ObservableList<Cliente> observableListClientes;
@@ -107,9 +106,9 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
             labelClienteEmail.setText(cliente.getEmail());
             labelClienteCpf.setText(cliente.getCpf());
             labelClienteRg.setText(cliente.getRg());
-            this.labelClienteNascimento.setText(cliente.getDataNascimento().toString());
-            this.labelClienteVinculo.setText(cliente.getDataVinculo().toString());
-            //this.labelClienteEndereco.setText(cliente.getEndereco().toString());
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            this.labelClienteNascimento.setText(cliente.getDataNascimento().format(format));
+            this.labelClienteVinculo.setText(cliente.getDataVinculo().format(format));
         } else {
             this.labelClienteId.setText("");
             labelClienteNome.setText("");
@@ -118,7 +117,6 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
             labelClienteRg.setText("");
             this.labelClienteNascimento.setText("");
             this.labelClienteVinculo.setText("");
-            this.labelClienteEndereco.setText("");
         }
 
     }
@@ -173,7 +171,7 @@ public class FXMLAnchorPaneGerenteClientesController implements Initializable {
         tableColumnClienteCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
         if (!textFieldPesquisar.getText().equals("")){
-            listClientes = clienteDAO.buscarNome(textFieldPesquisar.getText());
+            listClientes = clienteDAO.search(textFieldPesquisar.getText());
             if (!listClientes.isEmpty()){
                 observableListClientes = FXCollections.observableArrayList(listClientes);
                 tableViewClientes.setItems(observableListClientes);

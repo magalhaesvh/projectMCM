@@ -12,7 +12,6 @@ public class Locacao implements Serializable {
     private Date dataFinal;
     private float kmInicial;
     private float kmFinal;
-    private Status status;
     private Agencia agenciaDevolucao;
 
     public int getIdLocacao() {
@@ -45,10 +44,6 @@ public class Locacao implements Serializable {
 
     public float getKmFinal() {
         return kmFinal;
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     public Agencia getAgenciaDevolucao() {
@@ -87,12 +82,7 @@ public class Locacao implements Serializable {
         this.kmFinal = kmFinal;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public void setAgenciaDevolucao(Agencia agenciaDevolucao) {
         this.agenciaDevolucao = agenciaDevolucao;
     }
-
 }

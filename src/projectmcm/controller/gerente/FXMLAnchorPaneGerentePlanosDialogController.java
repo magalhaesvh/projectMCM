@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import projectmcm.model.domain.Plano;
@@ -28,9 +29,9 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
     @FXML
     private TextField textFieldPlanoId;
     @FXML
-    private TextField textFieldPlanoRegulamento;
+    private TextArea textFieldPlanoRegulamento;
     @FXML
-    private TextField textFieldPlanoDescricao;
+    private TextArea textFieldPlanoDescricao;
     @FXML
     private TextField textFieldPlanoQuilometragem;
     @FXML
@@ -54,7 +55,6 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     public Stage getDialogStage() {
@@ -86,9 +86,31 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
         this.textFieldPlanoNome.setText(plano.getNome());
         this.textFieldPlanoRegulamento.setText(plano.getRegulamento());
         this.textFieldPlanoDescricao.setText(plano.getDescricao());
+        this.checkBoxPlanoQuilometragem.setSelected(plano.isCalculoQuilometragem());
         this.textFieldPlanoQuilometragem.setText(String.valueOf(plano.getValorQuilometragem()));
-        this.textFieldPlanoCustoFixo.setText(String.valueOf(plano.getValorCusto()));
+        this.checkBoxPlanoCustoFixo.setSelected(plano.isCustoFixo());
+        this.textFieldPlanoCustoFixo.setText(String.valueOf(plano.getValorCusto()));        
+        this.checkBoxPlanoDiaria.setSelected(plano.isDiaria());
         this.textFieldPlanoDiaria.setText(String.valueOf(plano.getValorDiaria()));
+    }
+    
+    
+    @FXML
+    public void handleQuilometragem(){
+        boolean selected = checkBoxPlanoQuilometragem.isSelected();
+        textFieldPlanoQuilometragem.setDisable(!selected);
+    }
+    
+    @FXML
+    public void handleCustoFixo(){
+        boolean selected = checkBoxPlanoCustoFixo.isSelected();
+        textFieldPlanoCustoFixo.setDisable(!selected);
+    }
+    
+    @FXML
+    public void handleDiaria(){
+        boolean selected = checkBoxPlanoDiaria.isSelected();
+        textFieldPlanoDiaria.setDisable(!selected);
     }
 
     @FXML
@@ -99,22 +121,12 @@ public class FXMLAnchorPaneGerentePlanosDialogController implements Initializabl
             plano.setNome(textFieldPlanoNome.getText());
             plano.setRegulamento(textFieldPlanoRegulamento.getText());
             plano.setDescricao(textFieldPlanoDescricao.getText());
-            if (this.checkBoxPlanoQuilometragem.isSelected()) {
-                plano.setValorQuilometragem(Float.parseFloat(this.textFieldPlanoQuilometragem.getText()));
-                plano.setValorCusto(0);
-                plano.setValorDiaria(0);
-                plano.setIdTipo(1);
-            } else if (this.checkBoxPlanoCustoFixo.isSelected()) {
-                plano.setValorCusto(Float.parseFloat(this.textFieldPlanoCustoFixo.getText()));
-                plano.setValorDiaria(0);
-                plano.setValorQuilometragem(0);
-                plano.setIdTipo(2);
-            } else if (this.checkBoxPlanoDiaria.isSelected()) {
-                plano.setValorDiaria(Float.parseFloat(this.textFieldPlanoDiaria.getText()));
-                plano.setValorCusto(0);
-                plano.setValorQuilometragem(0);
-                plano.setIdTipo(3);
-            }
+            plano.setCalculoQuilometragem(this.checkBoxPlanoQuilometragem.isSelected());
+            plano.setValorQuilometragem(Float.parseFloat(this.textFieldPlanoQuilometragem.getText()));
+            plano.setCustoFixo(this.checkBoxPlanoCustoFixo.isSelected());
+            plano.setValorCusto(Float.parseFloat(this.textFieldPlanoCustoFixo.getText()));
+            plano.setDiaria(this.checkBoxPlanoDiaria.isSelected());
+            plano.setValorDiaria(Float.parseFloat(this.textFieldPlanoDiaria.getText()));
 
             buttonConfirmarClicked = true;
             dialogStage.close();

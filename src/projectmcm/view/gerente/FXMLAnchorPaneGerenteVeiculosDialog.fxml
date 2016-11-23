@@ -117,12 +117,12 @@
                   <Font size="14.0" />
                </font>
             </TextField>
+            <ComboBox fx:id="comboBoxVeiculoStatus" prefHeight="25.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Label text="Status:" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="choiceBoxVeiculoStatus" prefHeight="25.0" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <Label layoutX="24.0" layoutY="24.0" text="Cadastro/Edição de Veículos" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
@@ -130,41 +130,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Group layoutX="192.0" layoutY="1.0" AnchorPane.bottomAnchor="26.0">
-         <children>
-            <Button fx:id="buttonCancelar" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="78.0" text="Cancelar" />
-            <Button fx:id="buttonConfirmar" layoutX="113.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" prefHeight="33.0" prefWidth="78.0" text="Confirmar" />
-         </children>
-      </Group>
-      <GridPane layoutX="430.0" layoutY="276.0" prefHeight="94.0" prefWidth="290.0" AnchorPane.rightAnchor="20.0">
-         <children>
-            <Label prefHeight="20.0" prefWidth="91.0" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="checkBoxVeiculoDirecaoHidraulica" mnemonicParsing="false" text="Direção Hidráulica" GridPane.rowIndex="2" />
-            <CheckBox fx:id="checkBoxVeiculoDirecaoEletrica" mnemonicParsing="false" text="Direção Elétrica" GridPane.rowIndex="3" />
-            <CheckBox fx:id="checkBoxVeiculoCambioAutomatico" mnemonicParsing="false" text="Automático" GridPane.columnIndex="1" />
-            <CheckBox fx:id="checkBoxVeiculoAbs" mnemonicParsing="false" text="Freio ABS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckBox fx:id="checkBoxVeiculoAirBag" mnemonicParsing="false" text="Air Bag" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <CheckBox fx:id="checkBoxVeiculoTracao4x4" mnemonicParsing="false" text="4x4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <CheckBox fx:id="checkBoxVeiculoVidroEletrico" mnemonicParsing="false" text="Vidro Eletrico" GridPane.rowIndex="1" />
-            <CheckBox fx:id="checkBoxVeiculoArCondicionado" mnemonicParsing="false" text="Ar Condicionado" />
-            <CheckBox fx:id="checkBoxVeiculoTravaEletrica" mnemonicParsing="false" text="Trava Eletrica" GridPane.rowIndex="4" />
-         </children>
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="137.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="134.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="34.0" minHeight="15.0" prefHeight="19.0" />
-            <RowConstraints maxHeight="33.0" minHeight="2.0" prefHeight="22.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
       <GridPane layoutX="24.0" layoutY="60.0" prefHeight="207.0" prefWidth="329.0" AnchorPane.rightAnchor="20.0">
          <children>
             <Label text="Observações: ">
@@ -182,5 +147,35 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
+      <GridPane layoutX="430.0" layoutY="276.0" prefHeight="94.0" prefWidth="290.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <CheckBox fx:id="checkBoxVeiculoArCondicionado" mnemonicParsing="false" text="Ar Condicionado" />
+            <CheckBox fx:id="checkBoxVeiculoVidroEletrico" mnemonicParsing="false" text="Vidro Eletrico" GridPane.rowIndex="1" />
+            <CheckBox fx:id="checkBoxVeiculoDirecaoHidraulica" mnemonicParsing="false" text="Direção Hidráulica" GridPane.rowIndex="2" />
+            <CheckBox fx:id="checkBoxVeiculoDirecaoEletrica" mnemonicParsing="false" text="Direção Elétrica" GridPane.rowIndex="3" />
+            <CheckBox fx:id="checkBoxVeiculoTravaEletrica" mnemonicParsing="false" text="Trava Eletrica" GridPane.rowIndex="4" />
+            <CheckBox fx:id="checkBoxVeiculoCambioAutomatico" mnemonicParsing="false" text="Automático" GridPane.columnIndex="1" />
+            <CheckBox fx:id="checkBoxVeiculoAbs" mnemonicParsing="false" text="Freio ABS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="checkBoxVeiculoAirBag" mnemonicParsing="false" text="Air Bag" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="checkBoxVeiculoTracao4x4" mnemonicParsing="false" text="4x4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="137.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="134.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="34.0" minHeight="15.0" prefHeight="19.0" />
+            <RowConstraints maxHeight="33.0" minHeight="2.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Group layoutX="192.0" layoutY="1.0" AnchorPane.bottomAnchor="26.0">
+         <children>
+            <Button fx:id="buttonCancelar" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="78.0" text="Cancelar" />
+            <Button fx:id="buttonConfirmar" layoutX="113.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" prefHeight="33.0" prefWidth="78.0" text="Confirmar" />
+         </children>
+      </Group>
    </children>
 </AnchorPane>

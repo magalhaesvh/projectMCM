@@ -136,10 +136,17 @@ public class FXMLAnchorPaneGerenteLocadoresController implements Initializable {
         Funcionario locador = new Funcionario();
         boolean buttonConfirmarClicked = showFXMLAnchorPaneGerenteLocadoresDialog(locador);
         if (buttonConfirmarClicked) {
-            locador.setAgencia(this.getLogado().getAgencia());
-            locador.setTipo((byte) 3);
-            locadorDAO.inserir(locador);
-            carregarTableViewLocador();
+            if (!locadorDAO.buscarCpf(locador.getCpf()).isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro no cadastro");
+                alert.setHeaderText("CPF já cadastrado");
+                alert.show();
+            }else{
+                locador.setAgencia(this.getLogado().getAgencia());
+                locador.setTipo((byte) 3);
+                locadorDAO.inserir(locador);
+                carregarTableViewLocador();
+            }
         }
     }
 

@@ -1,6 +1,8 @@
-package projectmcm.controller.locador;
+package projectmcm.controller.gerente;
 
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -106,8 +108,17 @@ public class FXMLAnchorPaneGerenteLocadoresDialogController implements Initializ
         if (textFieldLocadorNome.getText() == null || textFieldLocadorNome.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
         }
-        if (textFieldLocadorCpf.getText() == null || textFieldLocadorCpf.getText().length() == 0 || Seguranca.validarCpf(textFieldLocadorCpf.getText())) {
+        if (textFieldLocadorCpf.getText() == null || textFieldLocadorCpf.getText().length() == 0 || !Seguranca.validarCpf(textFieldLocadorCpf.getText())) {
             errorMessage += "Cpf inválido!\n";
+        }
+        if (textFieldLocadorEmail.getText() == null || textFieldLocadorEmail.getText().length() == 0 || !Seguranca.validarEmail(textFieldLocadorEmail.getText())) {
+            errorMessage += "E-mail inválido!\n";
+        }
+        if (textFieldLocadorRg.getText() == null || textFieldLocadorRg.getText().length() == 0 || !Seguranca.validarRg(textFieldLocadorRg.getText())) {
+            errorMessage += "RG inválido!\n";
+        }
+        if (datePickerLocadorDataContratacao.getValue() == null || !(Date.from(datePickerLocadorDataContratacao.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime() > 0)) {
+            errorMessage += "Data de contratação inválida!\n";
         }
 
         if (errorMessage.length() == 0) {

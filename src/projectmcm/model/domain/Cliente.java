@@ -1,7 +1,7 @@
 package projectmcm.model.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Cliente implements Serializable {
     private int idCliente;
@@ -9,10 +9,9 @@ public class Cliente implements Serializable {
     private String cpf;
     private String rg;
     private String cnh;
-    private Date dataNascimento;
-    private Date dataVinculo;
+    private LocalDate dataNascimento;
+    private LocalDate dataVinculo;
     private String email;
-    private Endereco endereco;
 
        
     @Override
@@ -40,11 +39,11 @@ public class Cliente implements Serializable {
         return cnh;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public Date getDataVinculo() {
+    public LocalDate getDataVinculo() {
         return dataVinculo;
     }
 
@@ -72,23 +71,15 @@ public class Cliente implements Serializable {
         this.cnh = cnh;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setDataVinculo(Date dataVinculo) {
+    public void setDataVinculo(LocalDate dataVinculo) {
         this.dataVinculo = dataVinculo;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 }

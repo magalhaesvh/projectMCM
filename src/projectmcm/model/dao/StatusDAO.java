@@ -25,11 +25,10 @@ public class StatusDAO {
     }
 
     public boolean inserir(Status status) {
-        String sql = "INSERT INTO status (nome, tipo) VALUES(?,?)";
+        String sql = "INSERT INTO status (nome) VALUES(?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, status.getNome());
-            stmt.setString(2, String.valueOf(status.getTipo()));
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -39,12 +38,11 @@ public class StatusDAO {
     }
 
     public boolean alterar(Status status) {
-        String sql = "UPDATE status SET nome=?, tipo=? WHERE id_status=?";
+        String sql = "UPDATE status SET nome=?, WHERE id_status=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, status.getNome());
-            stmt.setString(2, String.valueOf(status.getTipo()));
-            stmt.setInt(3, status.getIdStatus());
+            stmt.setInt(2, status.getIdStatus());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -76,7 +74,6 @@ public class StatusDAO {
                 Status status = new Status();
                 status.setIdStatus(resultado.getInt("id_status"));
                 status.setNome(resultado.getString("nome"));
-                status.setTipo(resultado.getByte("tipo"));
                 retorno.add(status);
             }
         } catch (SQLException ex) {
@@ -97,7 +94,6 @@ public class StatusDAO {
                 Status status = new Status();
                 status.setIdStatus(resultado.getInt("id_status"));
                 status.setNome(resultado.getString("nome"));
-                status.setTipo(resultado.getByte("tipo"));
                 retorno.add(status);
             }
         } catch (SQLException ex) {
@@ -115,7 +111,6 @@ public class StatusDAO {
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 status.setNome(resultado.getString("nome"));
-                status.setTipo(resultado.getByte("tipo"));
                 retorno = status;
             }
         } catch (SQLException ex) {

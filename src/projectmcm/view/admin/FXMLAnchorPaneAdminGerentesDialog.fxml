@@ -84,8 +84,8 @@
       </Label>
       <Group layoutX="-14.0" layoutY="-209.0" AnchorPane.bottomAnchor="14.0">
          <children>
-            <Button fx:id="buttonCancelar" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="78.0" text="Cancelar" />
             <Button fx:id="buttonConfirmar" layoutX="113.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" prefHeight="33.0" prefWidth="78.0" text="Confirmar" />
+            <Button fx:id="buttonCancelar" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="33.0" prefWidth="78.0" text="Cancelar" />
          </children>
       </Group>
    </children>

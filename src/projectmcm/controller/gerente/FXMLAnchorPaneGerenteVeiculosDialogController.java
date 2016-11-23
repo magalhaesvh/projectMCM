@@ -8,10 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -56,7 +56,7 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
     @FXML
     private CheckBox checkBoxVeiculoTracao4x4;
     @FXML
-    private ComboBox choiceBoxVeiculoStatus;
+    private ComboBox comboBoxVeiculoStatus;
     @FXML
     private TextField textFieldVeiculoAnoModelo;    
     @FXML
@@ -81,12 +81,18 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
     public void initialize(URL url, ResourceBundle rb) {
         statusDAO.setConnection(connection);
         carregarComboBoxVeiculoStatus();
+        if (listarStatus.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Erro.");
+            alert.show();
+            dialogStage.close();            
+        } 
     }
     
     public void carregarComboBoxVeiculoStatus(){
         listarStatus = statusDAO.listar();
         observableListStatus = FXCollections.observableArrayList(listarStatus);
-        choiceBoxVeiculoStatus.setItems(observableListStatus);
+        comboBoxVeiculoStatus.setItems(observableListStatus);
     }
 
     public Stage getDialogStage() {
@@ -131,7 +137,7 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
         this.checkBoxVeiculoAbs.setSelected(veiculo.isAbs());
         this.checkBoxVeiculoAirBag.setSelected(veiculo.isAirBag());
         this.checkBoxVeiculoTracao4x4.setSelected(veiculo.isTracao4x4());
-        this.choiceBoxVeiculoStatus.setValue((Status) veiculo.getStatus());
+        this.comboBoxVeiculoStatus.setValue((Status) veiculo.getStatus());
         this.textFieldVeiculoMarca.setText(veiculo.getMarca());
         this.textFieldVeiculoModelo.setText(veiculo.getModelo());
     }
@@ -156,7 +162,7 @@ public class FXMLAnchorPaneGerenteVeiculosDialogController implements Initializa
         veiculo.setAbs(this.checkBoxVeiculoAbs.isSelected());
         veiculo.setAirBag(this.checkBoxVeiculoAirBag.isSelected());
         veiculo.setTracao4x4(this.checkBoxVeiculoTracao4x4.isSelected());
-        veiculo.setStatus((Status) this.choiceBoxVeiculoStatus.getValue());
+        veiculo.setStatus((Status) this.comboBoxVeiculoStatus.getValue());
         veiculo.setMarca(this.textFieldVeiculoMarca.getText());
         veiculo.setModelo(this.textFieldVeiculoModelo.getText());
 

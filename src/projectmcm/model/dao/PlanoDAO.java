@@ -23,19 +23,18 @@ public class PlanoDAO {
     }
 
     public boolean inserir(Plano plano) {
-        String sql = "INSERT INTO plano (nome, regulamento, descricao, id_tipo, calculo_quilometragem, valor_quilometragem, custo_fixo, valor_custo, diaria, valor_diaria) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO plano (nome, regulamento, descricao, calculo_quilometragem, valor_quilometragem, custo_fixo, valor_custo, diaria, valor_diaria) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, plano.getNome());
             stmt.setString(2, plano.getRegulamento());
             stmt.setString(3, plano.getDescricao());
-            stmt.setInt(4, plano.getIdTipo());
-            stmt.setBoolean(5, plano.isCalculoQuilometragem());
-            stmt.setFloat(6, plano.getValorQuilometragem());
-            stmt.setBoolean(7, plano.isCustoFixo());
-            stmt.setFloat(8, plano.getValorCusto());
-            stmt.setBoolean(9, plano.isDiaria());
-            stmt.setFloat(10, plano.getValorDiaria());
+            stmt.setBoolean(4, plano.isCalculoQuilometragem());
+            stmt.setFloat(5, plano.getValorQuilometragem());
+            stmt.setBoolean(6, plano.isCustoFixo());
+            stmt.setFloat(7, plano.getValorCusto());
+            stmt.setBoolean(8, plano.isDiaria());
+            stmt.setFloat(9, plano.getValorDiaria());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -45,19 +44,18 @@ public class PlanoDAO {
     }
 
     public boolean alterar(Plano plano) {
-        String sql = "UPDATE plano SET nome=?, regulamento=?, descricao=?, id_tipo=?, calculo_quilometragem=?, valor_quilometragem=?, custo_fixo=?, valor_custo=?, diaria=?, valor_diaria=? WHERE id_plano=?";
+        String sql = "UPDATE plano SET nome=?, regulamento=?, descricao=?, calculo_quilometragem=?, valor_quilometragem=?, custo_fixo=?, valor_custo=?, diaria=?, valor_diaria=? WHERE id_plano=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, plano.getNome());
             stmt.setString(2, plano.getRegulamento());
             stmt.setString(3, plano.getDescricao());
-            stmt.setInt(4, plano.getIdTipo());
-            stmt.setBoolean(5, plano.isCalculoQuilometragem());
-            stmt.setFloat(6, plano.getValorQuilometragem());
-            stmt.setBoolean(7, plano.isCustoFixo());
-            stmt.setFloat(8, plano.getValorCusto());
-            stmt.setBoolean(9, plano.isDiaria());
-            stmt.setFloat(10, plano.getValorDiaria());
+            stmt.setBoolean(4, plano.isCalculoQuilometragem());
+            stmt.setFloat(5, plano.getValorQuilometragem());
+            stmt.setBoolean(6, plano.isCustoFixo());
+            stmt.setFloat(7, plano.getValorCusto());
+            stmt.setBoolean(8, plano.isDiaria());
+            stmt.setFloat(9, plano.getValorDiaria());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -90,7 +88,6 @@ public class PlanoDAO {
                 plano.setNome(resultado.getString("nome"));
                 plano.setRegulamento(resultado.getString("regulamento"));
                 plano.setDescricao(resultado.getString("descricao"));
-                plano.setIdTipo(resultado.getInt("id_tipo"));
                 plano.setCalculoQuilometragem(resultado.getBoolean("calculo_quilometragem"));
                 plano.setValorQuilometragem(resultado.getFloat("valor_quilometragem"));
                 plano.setCustoFixo(resultado.getBoolean("custo_fixo"));
@@ -117,7 +114,6 @@ public class PlanoDAO {
                 plano.setNome(resultado.getString("nome"));
                 plano.setRegulamento(resultado.getString("regulamento"));
                 plano.setDescricao(resultado.getString("descricao"));
-                plano.setIdTipo(resultado.getInt("id_tipo"));
                 plano.setCalculoQuilometragem(resultado.getBoolean("calculo_quilometragem"));
                 plano.setValorQuilometragem(resultado.getFloat("valor_quilometragem"));
                 plano.setCustoFixo(resultado.getBoolean("custo_fixo"));
@@ -144,7 +140,6 @@ public class PlanoDAO {
                 plano.setNome(resultado.getString("nome"));
                 plano.setRegulamento(resultado.getString("regulamento"));
                 plano.setDescricao(resultado.getString("descricao"));
-                plano.setIdTipo(resultado.getInt("id_tipo"));
                 plano.setCalculoQuilometragem(resultado.getBoolean("calculo_quilometragem"));
                 plano.setValorQuilometragem(resultado.getFloat("valor_quilometragem"));
                 plano.setCustoFixo(resultado.getBoolean("custo_fixo"));

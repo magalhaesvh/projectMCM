@@ -28,8 +28,6 @@ import projectmcm.model.domain.Funcionario;
  */
 public class FXMLVBoxAdminController implements Initializable {
 
-    private Funcionario logado;
-
     @FXML
     private MenuItem menuItemAdminSeguranca;
     @FXML
@@ -39,13 +37,11 @@ public class FXMLVBoxAdminController implements Initializable {
     @FXML
     private MenuItem menuItemGerenciarGerentes;
     @FXML
-    private MenuItem menuItemGerenciarSituacoes;
-    @FXML
     private AnchorPane anchorPane;
     @FXML
     private Menu menuAdmin;
-    @FXML
-    private FXMLAnchorPaneFuncionarioSegurancaController funcSeguranca;
+    
+    private Funcionario logado;
     private Stage stage;
 
     @Override

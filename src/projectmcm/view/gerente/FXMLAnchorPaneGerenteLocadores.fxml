@@ -20,6 +20,9 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <Button fx:id="buttonCadastrar" layoutX="315.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="25.0" prefWidth="67.0" text="Cadastrar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0" />
+                  <TextField fx:id="textFieldPesquisar" layoutX="8.0" layoutY="64.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="81.0" />
+                  <Button fx:id="buttonPesquisar" layoutX="315.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleButtonPesquisar" text="Pesquisar" AnchorPane.rightAnchor="14.0" />
                   <TableView fx:id="tableViewLocadores" layoutY="114.0" prefHeight="461.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="tableColumnLocadorNome" prefWidth="75.0" text="Nome" />
@@ -29,9 +32,6 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="8.0" layoutY="64.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="81.0" />
-                  <Button fx:id="buttonPesquisar" layoutX="315.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleButtonPesquisar" text="Pesquisar" AnchorPane.rightAnchor="14.0" />
-                  <Button fx:id="buttonCadastrar" layoutX="315.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="25.0" prefWidth="67.0" text="Cadastrar" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="372.0">
@@ -109,8 +109,8 @@
                   </GridPane>
                   <Group layoutX="-4.0" layoutY="87.0">
                      <children>
-                        <Button fx:id="buttonRemover" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="33.0" prefWidth="78.0" text="Excluir" />
                         <Button fx:id="buttonAlterar" layoutX="113.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="33.0" prefWidth="78.0" text="Alterar" />
+                        <Button fx:id="buttonRemover" layoutX="214.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="33.0" prefWidth="78.0" text="Excluir" />
                      </children>
                   </Group>
                </children></AnchorPane>

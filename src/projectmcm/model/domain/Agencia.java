@@ -7,7 +7,6 @@ public class Agencia implements Serializable {
     private String nome;
     private String cnpj;
     private String telefone;
-    private Endereco endereco;
 
        
     @Override
@@ -37,14 +36,6 @@ public class Agencia implements Serializable {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 
     public String getTelefone() {

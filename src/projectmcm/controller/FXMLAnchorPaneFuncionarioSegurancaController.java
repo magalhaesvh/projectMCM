@@ -77,19 +77,50 @@ public class FXMLAnchorPaneFuncionarioSegurancaController implements Initializab
         labelCpf.setText(funcionarioLogado.getCpf());
         labelRg.setText(funcionarioLogado.getRg());
     }
+    
+    private boolean validarEntradaDeDados() {
+        String errorMessage = "";
+
+        if (textFieldFuncionarioSegurancaNome.getText() == null || textFieldFuncionarioSegurancaNome.getText().length() == 0) {
+            errorMessage += "Nome inválido!\n";
+        }
+        if (textFieldFuncionarioSegurancaCpf.getText() == null || textFieldFuncionarioSegurancaCpf.getText().length() == 0 || !Seguranca.validarCpf(textFieldFuncionarioSegurancaCpf.getText())) {
+            errorMessage += "Cpf inválido!\n";
+        }
+        if (textFieldFuncionarioSegurancaEmail.getText() == null || textFieldFuncionarioSegurancaEmail.getText().length() == 0 || !Seguranca.validarEmail(textFieldFuncionarioSegurancaEmail.getText())) {
+            errorMessage += "E-mail inválido!\n";
+        }
+        if (textFieldFuncionarioSegurancaRg.getText() == null || textFieldFuncionarioSegurancaRg.getText().length() == 0 || !Seguranca.validarRg(textFieldFuncionarioSegurancaRg.getText())) {
+            errorMessage += "RG inválido!\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Mostrando a mensagem de erro
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro no cadastro");
+            alert.setHeaderText("Campos inválidos, por favor, corrija...");
+            alert.setContentText(errorMessage);
+            alert.show();
+            return false;
+        }
+    }
         
     public void handleSalvarDados(){
-        funcionarioLogado.setNome(textFieldFuncionarioSegurancaNome.getText());
-        funcionarioLogado.setCpf(textFieldFuncionarioSegurancaCpf.getText());
-        funcionarioLogado.setEmail(textFieldFuncionarioSegurancaEmail.getText());
-        funcionarioLogado.setRg(textFieldFuncionarioSegurancaRg.getText());
-        if (!funcionarioDAO.alterar(funcionarioLogado)){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Ocorreu um erro tente novamente!");
-            alert.show();
-        }else{
-            JOptionPane.showMessageDialog(null, "Dados alterados com sucesso");
-            this.setFuncionarioLogado(funcionarioLogado);
+        if (validarEntradaDeDados()){
+            funcionarioLogado.setNome(textFieldFuncionarioSegurancaNome.getText());
+            funcionarioLogado.setCpf(textFieldFuncionarioSegurancaCpf.getText());
+            funcionarioLogado.setEmail(textFieldFuncionarioSegurancaEmail.getText());
+            funcionarioLogado.setRg(textFieldFuncionarioSegurancaRg.getText());
+            if (!funcionarioDAO.alterar(funcionarioLogado)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Ocorreu um erro tente novamente!");
+                alert.show();
+            }else{
+                JOptionPane.showMessageDialog(null, "Dados alterados com sucesso");
+                this.setFuncionarioLogado(funcionarioLogado);
+            }
         }
     }
 

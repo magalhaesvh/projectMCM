@@ -116,7 +116,6 @@ public class FXMLAnchorPaneAdminGerentesDialogController implements Initializabl
 
     @FXML
     public void handleButtonConfirmar() {
-        System.out.println("");
         if (validarEntradaDeDados()) {
 
             gerente.setNome(textFieldGerenteNome.getText());

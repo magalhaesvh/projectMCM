@@ -178,14 +178,48 @@ public class FuncionarioDAO {
         }
         return retorno;
     }
+    
+    public List<Funcionario> buscarCpf(String cpf) {
+        String sql = "SELECT * FROM funcionario WHERE cpf=?";
+        List<Funcionario> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, cpf);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Funcionario gerente = new Funcionario();
+                gerente.setIdFuncionario(resultado.getInt("id_funcionario"));
+                gerente.setNome(resultado.getString("nome"));
+                gerente.setEmail(resultado.getString("email"));
+                gerente.setSenha(resultado.getString("senha"));
+                gerente.setCpf(resultado.getString("cpf"));
+                gerente.setRg(resultado.getString("rg"));
+                gerente.setDataContratacao(resultado.getDate("data_contratacao").toLocalDate());
+                gerente.setTipo(resultado.getByte("tipo"));
+
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                gerente.setAgencia(agenciaDAO.buscar(agencia));
+
+                retorno.add(gerente);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
 
     public List<Funcionario> buscarGerentes(String texto) {
-        String sql = "SELECT * FROM funcionario WHERE tipo=2 AND (nome=? OR CPF=?)";
+        String sql = "SELECT * FROM funcionario WHERE tipo=2 AND (nome LIKE ? OR CPF LIKE ?)";
         List<Funcionario> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = getConnection().prepareStatement(sql);
-            stmt.setString(1, texto);
-            stmt.setString(2, texto);
+            stmt.setString(1, "%"+texto+"%");
+            stmt.setString(2, "%"+texto+"%");
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Funcionario gerente = new Funcionario();

@@ -37,17 +37,7 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
     @FXML
     private TableColumn<Funcionario, String> tableColumnGerenteCpf;
     @FXML
-    private Button buttonCadastrar;
-    @FXML
-    private Button buttonAlterar;
-    @FXML
-    private Button buttonRemover;
-    @FXML
-    private Button buttonPesquisar;
-    @FXML
     private TextField textFieldPesquisar;
-    @FXML
-    private Label labelGerenteCodigo;
     @FXML
     private Label labelGerenteNome;
     @FXML
@@ -75,7 +65,6 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         gerenteDAO.setConnection(connection);
         carregarTableViewGerente();
 
-        // Listen acionado diante de quaisquer alterações na seleção de itens do TableView
         if (!listGerentes.isEmpty())
             tableViewGerentes.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selecionarItemTableViewGerentes(newValue));
@@ -117,8 +106,15 @@ public class FXMLAnchorPaneAdminGerentesController implements Initializable {
         Funcionario gerente = new Funcionario();
         boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminGerentesDialog(gerente);
         if (buttonConfirmarClicked) {
-            gerenteDAO.inserir(gerente);
-            carregarTableViewGerente();
+            if (!gerenteDAO.buscarCpf(gerente.getCpf()).isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro no cadastro");
+                alert.setHeaderText("CPF já cadastrado");
+                alert.show();
+            }else{
+                gerenteDAO.inserir(gerente);
+                carregarTableViewGerente();
+            }
         }
     }
 

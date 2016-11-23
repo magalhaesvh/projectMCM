@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import projectmcm.model.domain.Agencia;
+import util.Seguranca;
 
 public class FXMLAnchorPaneAdminAgenciasDialogController implements Initializable {
 
@@ -66,7 +67,6 @@ public class FXMLAnchorPaneAdminAgenciasDialogController implements Initializabl
         if (validarEntradaDeDados()) {
 
             agencia.setNome(textFieldAgenciaNome.getText());
-            agencia.setCnpj(textFieldAgenciaCnpj.getText());
 
             buttonConfirmarClicked = true;
             dialogStage.close();
@@ -86,7 +86,7 @@ public class FXMLAnchorPaneAdminAgenciasDialogController implements Initializabl
         if (textFieldAgenciaNome.getText() == null || textFieldAgenciaNome.getText().length() == 0) {
             errorMessage += "Nome inválido!\n";
         }
-        if (textFieldAgenciaCnpj.getText() == null || textFieldAgenciaCnpj.getText().length() == 0) {
+        if (textFieldAgenciaCnpj.getText() == null || textFieldAgenciaCnpj.getText().length() == 0 || !Seguranca.validarCnpj(textFieldAgenciaCnpj.getText())) {
             errorMessage += "Cnpj inválido!\n";
         }
 

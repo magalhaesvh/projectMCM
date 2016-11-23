@@ -13,7 +13,6 @@ import projectmcm.model.domain.Cliente;
 import projectmcm.model.domain.Funcionario;
 import projectmcm.model.domain.Locacao;
 import projectmcm.model.domain.Plano;
-import projectmcm.model.domain.Status;
 
 public class LocacaoDAO {
 
@@ -38,7 +37,6 @@ public class LocacaoDAO {
             stmt.setDate(5, locacao.getDataFinal());
             stmt.setFloat(6, locacao.getKmInicial());
             stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(8, locacao.getStatus().getIdStatus());
             stmt.setInt(9, locacao.getAgenciaDevolucao().getIdAgencia());
             stmt.execute();
             return true;
@@ -59,7 +57,6 @@ public class LocacaoDAO {
             stmt.setDate(5, locacao.getDataFinal());
             stmt.setFloat(6, locacao.getKmInicial());
             stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(8, locacao.getStatus().getIdStatus());
             stmt.setInt(9, locacao.getAgenciaDevolucao().getIdAgencia());
             stmt.setInt(10, locacao.getIdLocacao());
             stmt.execute();
@@ -121,11 +118,6 @@ public class LocacaoDAO {
                 agenciaDAO.setConnection(connection);
                 locacao.setAgenciaDevolucao(agenciaDAO.buscar(agencia));                
                 
-                Status status = new Status();                
-                status.setIdStatus(resultado.getInt("id_status")); 
-                StatusDAO statusDAO = new StatusDAO();
-                statusDAO.setConnection(connection);
-                locacao.setStatus(statusDAO.buscar(status));
                 retorno.add(locacao);
             }
         } catch (SQLException ex) {
@@ -172,12 +164,6 @@ public class LocacaoDAO {
                 agenciaDAO.setConnection(connection);
                 locacao.setAgenciaDevolucao(agenciaDAO.buscar(agencia));
                 
-                
-                Status status = new Status();                
-                status.setIdStatus(resultado.getInt("id_status")); 
-                StatusDAO statusDAO = new StatusDAO();
-                statusDAO.setConnection(connection);
-                locacao.setStatus(statusDAO.buscar(status));
                 retorno = locacao;
             }
         } catch (SQLException ex) {

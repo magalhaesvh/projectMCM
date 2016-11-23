@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/admin/FXMLVBoxAdminController.java</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/model/dao/FuncionarioDAO.java</file>
-            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/admin/FXMLAnchorPaneAdminAgenciasController.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/gerente/FXMLAnchorPaneGerentePlanosController.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/FXMLAnchorPaneRealizarLocacaoController.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/controller/gerente/FXMLAnchorPaneGerentePlanosDialogController.java</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/view/gerente/FXMLAnchorPaneGerentePlanosDialog.fxml</file>
+            <file>file:/C:/Users/Monica/Documents/NetBeansProjects/Outros/projectMCM/src/projectmcm/model/dao/PlanoDAO.java</file>
         </group>
     </open-files>
 </project-private>

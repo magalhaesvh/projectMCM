@@ -86,13 +86,12 @@ public class AgenciaDAO {
     }
     
     public List<Agencia> buscar(String texto) {
-        String sql = "SELECT * FROM agencia WHERE id_agencia=? OR nome=? OR cnpj=?";
+        String sql = "SELECT * FROM agencia WHERE nome LIKE ? OR cnpj LIKE ?";
         List<Agencia> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, texto);
-            stmt.setString(2, texto);
-            stmt.setString(3, texto);
+            stmt.setString(1, "%"+texto+"%");
+            stmt.setString(2, "%"+texto+"%");
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Agencia agencia = new Agencia();
@@ -126,7 +125,7 @@ public class AgenciaDAO {
     }
     
     public Map<String, Integer> listarStatusVeiculos(Agencia agencia){
-        String sql = "SELECT count(v.id_veiculo) AS quantidade, s.nome FROM veiculo AS v LEFT JOIN status AS s ON v.id_status=s.id_status WHERE v.id_agencia = ? AND s.tipo=1 GROUP BY v.id_status";
+        String sql = "SELECT count(v.id_veiculo) AS quantidade, s.nome FROM veiculo AS v LEFT JOIN status AS s ON v.id_status=s.id_status WHERE v.id_agencia = ? GROUP BY v.id_status";
         Map<String, Integer> retorno = new HashMap();
         
         try {

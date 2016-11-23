@@ -22,11 +22,6 @@
                   <MenuItem fx:id="menuItemGerenciarGerentes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarGerentes" text="Gerentes" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Relatórios">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Listar" />
-               </items>
-            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="800.0" />

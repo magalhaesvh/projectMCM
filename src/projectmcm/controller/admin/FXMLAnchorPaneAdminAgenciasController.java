@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,17 +44,7 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
     @FXML
     private TableColumn<Agencia, String> tableColumnAgenciaCnpj;
     @FXML
-    private Button buttonCadastrar;
-    @FXML
-    private Button buttonAlterar;
-    @FXML
-    private Button buttonRemover;
-    @FXML
-    private Button buttonPesquisar;
-    @FXML
     private TextField textFieldPesquisar;
-    @FXML
-    private Label labelAgenciaCodigo;
     @FXML
     private Label labelAgenciaNome;
     @FXML
@@ -62,14 +53,14 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
     private PieChart graficoVeiculoAgencia;
 
     private List<Agencia> listAgencias;
-    private ObservableList<Agencia> observableListAgencias;
+    private ObservableList<Agencia> observableListAgencias= FXCollections.observableArrayList();
     private ObservableList<PieChart.Data> pieChartData;
 
     //Atributos para manipulação de Banco de Dados
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
     private final AgenciaDAO agenciaDAO = new AgenciaDAO();
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         agenciaDAO.setConnection(connection);
@@ -88,7 +79,7 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
         listAgencias = agenciaDAO.listar();
 
         observableListAgencias = FXCollections.observableArrayList(listAgencias);
-        tableViewAgencias.setItems(observableListAgencias);
+        tableViewAgencias.setItems(observableListAgencias);        
     }
 
     public void selecionarItemTableViewAgencias(Agencia agencia) {
@@ -121,8 +112,15 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
         Agencia agencia = new Agencia();
         boolean buttonConfirmarClicked = showFXMLAnchorPaneAdminAgenciasDialog(agencia);
         if (buttonConfirmarClicked) {
-            agenciaDAO.inserir(agencia);
-            carregarTableViewAgencia();
+            if (!agenciaDAO.buscar(agencia.getCnpj()).isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro no cadastro");
+                alert.setHeaderText("CNPJ já cadastrado");
+                alert.show();
+            }else{
+                agenciaDAO.inserir(agencia);
+                carregarTableViewAgencia();
+            }
         }
     }
 
@@ -195,7 +193,7 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
     }
     
     @FXML
-    public void handleGeraRelatorioGeral(){
+    public void handleGeraRelatorio(){
         String src="Relatorios/Agencia.jasper";
         JasperPrint jasperPrint = null;
         try {
