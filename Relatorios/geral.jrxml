@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="geral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b41cc8f6-7a0e-4ffd-8ac3-f3d023c1e239">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2"/>
+	<property name="ireport.y" value="35"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -264,8 +264,8 @@
 	</subDataset>
 	<subDataset name="tblVeiculos" uuid="d9a95775-2db1-4fdd-8945-36cf9f56fc84">
 		<parameter name="id" class="java.lang.Integer" isForPrompting="false"/>
-		<queryString language="SQL">
-			<![CDATA[SELECT COUNT(modelo) FROM veiculo]]>
+		<queryString>
+			<![CDATA[SELECT COUNT(modelo) FROM veiculo WHERE id_agencia = $P{id}]]>
 		</queryString>
 		<field name="COUNT(modelo)" class="java.lang.Long"/>
 		<group name="COUNT(modelo)">
@@ -275,11 +275,18 @@
 	<subDataset name="tblLocacao" uuid="d6597de0-1d62-4a17-a552-f3fc27784329">
 		<parameter name="id" class="java.lang.Integer" isForPrompting="false"/>
 		<queryString>
-			<![CDATA[SELECT COUNT(id_locacao) FROM locacao WHERE id_agencia_devolucao = $P{id}]]>
+			<![CDATA[SELECT
+     COUNT(l.id_locacao) AS id_locacao
+FROM
+     locacao AS l INNER JOIN funcionario as LOC ON l.id_locador = LOC.id_funcionario
+WHERE
+     LOC.id_agencia = $P{id}]]>
 		</queryString>
-		<field name="COUNT(id_locacao)" class="java.lang.Long"/>
+		<field name="id_locacao" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
 		<group name="COUNT(id_locacao)">
-			<groupExpression><![CDATA[$F{COUNT(id_locacao)}]]></groupExpression>
+			<groupExpression><![CDATA[$F{id_locacao}]]></groupExpression>
 		</group>
 	</subDataset>
 	<subDataset name="listFunc" uuid="31639471-72f1-4cd7-bf4f-ea36d05a423e">
@@ -289,7 +296,7 @@
 WHEN 1 THEN "Administrador"
 WHEN 2 THEN "Gerente"
 WHEN 3 THEN "Locador" END) as nome_tipo
-FROM funcionario
+FROM funcionario  WHERE id_agencia = $P{id}
 ORDER BY tipo]]>
 		</queryString>
 		<field name="id_funcionario" class="java.lang.Integer">
@@ -312,7 +319,7 @@ ORDER BY tipo]]>
 	<subDataset name="listVeic" uuid="f7784bca-b2e4-4d30-821e-37e0dfeab2b9">
 		<parameter name="id" class="java.lang.Integer" isForPrompting="false"/>
 		<queryString>
-			<![CDATA[SELECT marca,modelo,placa,ano_fabricacao FROM veiculo]]>
+			<![CDATA[SELECT marca,modelo,placa,ano_fabricacao FROM veiculo  WHERE id_agencia = $P{id}]]>
 		</queryString>
 		<field name="marca" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
@@ -660,7 +667,7 @@ ORDER BY tipo]]>
 						<jr:detailCell style="table 7_TD" height="50" rowSpan="1">
 							<textField>
 								<reportElement x="42" y="13" width="90" height="20" uuid="2403b9bc-29bb-4df4-a790-305cb1a0759d"/>
-								<textFieldExpression><![CDATA[$F{COUNT(id_locacao)}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{id_locacao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

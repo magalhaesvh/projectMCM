@@ -1,18 +1,16 @@
 package projectmcm.model.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Locacao implements Serializable {
     private int idLocacao;
     private Cliente cliente;
     private Plano plano;
     private Funcionario locador;
-    private Date dataInicio;
-    private Date dataFinal;
+    private LocalDate dataInicio;
+    private LocalDate dataFinal;
     private float kmInicial;
-    private float kmFinal;
-    private Agencia agenciaDevolucao;
     private Veiculo veiculo;
 
     public int getIdLocacao() {
@@ -31,11 +29,11 @@ public class Locacao implements Serializable {
         return locador;
     }
 
-    public Date getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public Date getDataFinal() {
+    public LocalDate getDataFinal() {
         return dataFinal;
     }
 
@@ -43,13 +41,6 @@ public class Locacao implements Serializable {
         return kmInicial;
     }
 
-    public float getKmFinal() {
-        return kmFinal;
-    }
-
-    public Agencia getAgenciaDevolucao() {
-        return agenciaDevolucao;
-    }
 
     public void setIdLocacao(int idLocacao) {
         this.idLocacao = idLocacao;
@@ -67,24 +58,16 @@ public class Locacao implements Serializable {
         this.locador = locador;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public void setDataFinal(Date dataFinal) {
+    public void setDataFinal(LocalDate dataFinal) {
         this.dataFinal = dataFinal;
     }
 
     public void setKmInicial(float kmInicial) {
         this.kmInicial = kmInicial;
-    }
-
-    public void setKmFinal(float kmFinal) {
-        this.kmFinal = kmFinal;
-    }
-
-    public void setAgenciaDevolucao(Agencia agenciaDevolucao) {
-        this.agenciaDevolucao = agenciaDevolucao;
     }
 
     public Veiculo getVeiculo() {

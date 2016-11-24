@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import projectmcm.controller.admin.FXMLVBoxAdminController;
 import projectmcm.controller.gerente.FXMLVBoxGerenteController;
+import projectmcm.controller.locador.FXMLVBoxLocadorController;
 import projectmcm.model.dao.FuncionarioDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
@@ -78,6 +79,17 @@ public class FXMLLoginPrincipalController implements Initializable {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/gerente/FXMLVBoxGerente.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
                     FXMLVBoxGerenteController controller = fxmlLoader.<FXMLVBoxGerenteController>getController();
+                    controller.setLogado(funcionario);
+                    controller.setStage(stage);
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Aluguel de carros - Project MCM");
+                    stage.setResizable(false);
+                    stage.show();
+                } else if (funcionario.getTipo() == 3){
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/locador/FXMLVBoxLocador.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+                    FXMLVBoxLocadorController controller = fxmlLoader.<FXMLVBoxLocadorController>getController();
                     controller.setLogado(funcionario);
                     controller.setStage(stage);
                     Scene scene = new Scene(root);

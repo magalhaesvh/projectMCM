@@ -33,6 +33,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <Button layoutX="198.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleGeraRelatorio" prefHeight="25.0" prefWidth="105.0" text="Ralatório de uso" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="372.0">

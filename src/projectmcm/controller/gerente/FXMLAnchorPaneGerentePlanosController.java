@@ -10,6 +10,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +28,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import projectmcm.controller.admin.FXMLAnchorPaneAdminAgenciasController;
 import projectmcm.model.dao.PlanoDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
@@ -206,5 +213,19 @@ public class FXMLAnchorPaneGerentePlanosController implements Initializable {
 
         return controller.isButtonConfirmarClicked();
 
+    }
+    
+    @FXML
+    public void handleGeraRelatorio(){
+        String src="Relatorios/planos.jasper";
+        JasperPrint jasperPrint = null;
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, null, this.connection);
+        } catch (JRException ex) {
+            Logger.getLogger(FXMLAnchorPaneAdminAgenciasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        view.setVisible(true);
     }
 }

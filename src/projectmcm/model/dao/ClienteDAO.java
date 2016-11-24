@@ -136,6 +136,7 @@ public class ClienteDAO {
             if (resultado.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(resultado.getInt("id_cliente"));
+                cliente.setNome(resultado.getString("nome"));
                 cliente.setCpf(String.valueOf(resultado.getInt("cpf")));
                 cliente.setRg(resultado.getString("rg"));
                 cliente.setCnh(resultado.getString("cnh"));

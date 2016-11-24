@@ -14,29 +14,29 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import projectmcm.controller.gerente.FXMLAnchorPaneGerenteVeiculosController;
 import projectmcm.model.domain.Funcionario;
 
 public class FXMLVBoxLocadorController implements Initializable {
+    
     private Funcionario logado;
     @FXML
-    private Menu menuAdmin;
-    @FXML
-    private MenuItem menuItemLocadorSeguranca;
-    @FXML
-    private MenuItem menuItemLocadorSair;
-    @FXML
-    private MenuItem menuItemGerenciarClientes;    
+    private Menu menuAdmin;    
     @FXML
     private AnchorPane anchorPane;
+    
     private Stage stage;
     
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }
     
     @FXML
     public void handleMenuItemGerenciarSeguranca() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/FXMLAnchorPaneFuncionarioSeguranca.fxml"));
         AnchorPane a = (AnchorPane) fxmlLoader.load();
+
         anchorPane.getChildren().setAll(a);
         FXMLAnchorPaneFuncionarioSegurancaController funcionarioSeguranca = fxmlLoader.<FXMLAnchorPaneFuncionarioSegurancaController>getController();
         funcionarioSeguranca.setFuncionarioLogado(this.logado);
@@ -44,14 +44,27 @@ public class FXMLVBoxLocadorController implements Initializable {
     
     @FXML
     public void handleMenuItemGerenciarClientes() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/gerente/FXMLAnchorPaneLocadorClientes.fxml"));
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteClientes.fxml"));
+        anchorPane.getChildren().setAll(a);
+    }
+    
+    @FXML
+    public void handleMenuItemGerenciarVeiculos() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/gerente/FXMLAnchorPaneGerenteVeiculos.fxml"));
+        AnchorPane a = (AnchorPane) fxmlLoader.load();
+        FXMLAnchorPaneGerenteVeiculosController controller = fxmlLoader.<FXMLAnchorPaneGerenteVeiculosController>getController();
+        controller.setLogado(this.getLogado());
         anchorPane.getChildren().setAll(a);
     }
     
     @FXML
     public void handleMenuItemLocacaoRealizar() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/projectmcm/view/FXMLAnchorPaneRealizarLocacao.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/projectmcm/view/FXMLAnchorPaneRealizarLocacao.fxml"));
+        AnchorPane a = (AnchorPane) fxmlLoader.load();
+
         anchorPane.getChildren().setAll(a);
+        FXMLAnchorPaneRealizarLocacaoController funcionarioSeguranca = fxmlLoader.<FXMLAnchorPaneRealizarLocacaoController>getController();
+        funcionarioSeguranca.setLogado(this.logado);
     }
     
     @FXML
@@ -67,7 +80,6 @@ public class FXMLVBoxLocadorController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-    
     public Funcionario getLogado() {
         return logado;
     }
@@ -84,6 +96,5 @@ public class FXMLVBoxLocadorController implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
     
 }

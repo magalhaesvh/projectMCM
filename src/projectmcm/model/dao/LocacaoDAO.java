@@ -1,6 +1,7 @@
 package projectmcm.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import projectmcm.model.domain.Cliente;
 import projectmcm.model.domain.Funcionario;
 import projectmcm.model.domain.Locacao;
 import projectmcm.model.domain.Plano;
+import projectmcm.model.domain.Veiculo;
 
 public class LocacaoDAO {
 
@@ -27,17 +29,16 @@ public class LocacaoDAO {
     }
 
     public boolean inserir(Locacao locacao) {
-        String sql = "INSERT INTO locacao (id_cliente, id_plano, id_locador, data_inicio, data_final, km_inicial, km_final, id_status, id_agencia_devolucao) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO locacao (id_cliente, id_plano, id_locador, data_inicio, data_final, km_inicial, id_veiculo) VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, locacao.getCliente().getIdCliente());
             stmt.setInt(2, locacao.getPlano().getIdPlano());
             stmt.setInt(3, locacao.getLocador().getIdFuncionario());
-            stmt.setDate(4, locacao.getDataInicio());
-            stmt.setDate(5, locacao.getDataFinal());
+            stmt.setDate(4, Date.valueOf(locacao.getDataInicio()));
+            stmt.setDate(5, Date.valueOf(locacao.getDataFinal()));
             stmt.setFloat(6, locacao.getKmInicial());
-            stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(9, locacao.getAgenciaDevolucao().getIdAgencia());
+            stmt.setFloat(7, locacao.getVeiculo().getIdVeiculo());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -47,18 +48,17 @@ public class LocacaoDAO {
     }
 
     public boolean alterar(Locacao locacao) {
-        String sql = "UPDATE locacao SET (id_cliente=?, id_plano=?, id_locador=?, data_inicio=?, data_final=?, km_inicial=?, km_final=?, id_status=?, id_agencia_devolucao) WHERE id_locacao=?";
+        String sql = "UPDATE locacao SET id_cliente=?, id_plano=?, id_locador=?, data_inicio=?, data_final=?, km_inicial=?, id_veiculo=? WHERE id_locacao=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, locacao.getCliente().getIdCliente());
             stmt.setInt(2, locacao.getPlano().getIdPlano());
             stmt.setInt(3, locacao.getLocador().getIdFuncionario());
-            stmt.setDate(4, locacao.getDataInicio());
-            stmt.setDate(5, locacao.getDataFinal());
+            stmt.setDate(4, Date.valueOf(locacao.getDataInicio()));
+            stmt.setDate(5, Date.valueOf(locacao.getDataFinal()));
             stmt.setFloat(6, locacao.getKmInicial());
-            stmt.setFloat(7, locacao.getKmFinal());
-            stmt.setInt(9, locacao.getAgenciaDevolucao().getIdAgencia());
-            stmt.setInt(10, locacao.getIdLocacao());
+            stmt.setInt(7, locacao.getVeiculo().getIdVeiculo());
+            stmt.setInt(8, locacao.getIdLocacao());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -89,10 +89,9 @@ public class LocacaoDAO {
             while (resultado.next()) {
                 Locacao locacao = new Locacao();
                 locacao.setIdLocacao(resultado.getInt("id_locacao"));
-                locacao.setDataInicio(resultado.getDate("data_inicio"));
-                locacao.setDataFinal(resultado.getDate("data_final"));
+                locacao.setDataInicio(resultado.getDate("data_inicio").toLocalDate());
+                locacao.setDataFinal(resultado.getDate("data_final").toLocalDate());
                 locacao.setKmInicial(resultado.getFloat("km_inicial"));
-                locacao.setKmFinal(resultado.getFloat("km_final"));
                 
                 Cliente cliente = new Cliente();                
                 cliente.setIdCliente(resultado.getInt("id_cliente")); 
@@ -110,13 +109,13 @@ public class LocacaoDAO {
                 locador.setIdFuncionario(resultado.getInt("id_funcionario")); 
                 FuncionarioDAO locadorDAO = new FuncionarioDAO();
                 locadorDAO.setConnection(connection);
-                locacao.setLocador(locadorDAO.buscar(locador));
-                                
-                Agencia agencia = new Agencia();                
-                agencia.setIdAgencia(resultado.getInt("id_agencia")); 
-                AgenciaDAO agenciaDAO = new AgenciaDAO();
-                agenciaDAO.setConnection(connection);
-                locacao.setAgenciaDevolucao(agenciaDAO.buscar(agencia));                
+                locacao.setLocador(locadorDAO.buscar(locador));  
+                
+                Veiculo veiculo = new Veiculo();                
+                veiculo.setIdVeiculo(resultado.getInt("id_veiculo")); 
+                VeiculoDAO veiculoDAO = new VeiculoDAO();
+                veiculoDAO.setConnection(connection);
+                locacao.setVeiculo(veiculoDAO.buscar(veiculo)); 
                 
                 retorno.add(locacao);
             }
@@ -135,10 +134,9 @@ public class LocacaoDAO {
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 locacao.setIdLocacao(resultado.getInt("id_locacao"));
-                locacao.setDataInicio(resultado.getDate("data_inicio"));
-                locacao.setDataFinal(resultado.getDate("data_final"));
+                locacao.setDataInicio(resultado.getDate("data_inicio").toLocalDate());
+                locacao.setDataFinal(resultado.getDate("data_final").toLocalDate());
                 locacao.setKmInicial(resultado.getFloat("km_inicial"));
-                locacao.setKmFinal(resultado.getFloat("km_final"));
                 
                 Cliente cliente = new Cliente();                
                 cliente.setIdCliente(resultado.getInt("id_cliente")); 
@@ -158,11 +156,11 @@ public class LocacaoDAO {
                 locadorDAO.setConnection(connection);
                 locacao.setLocador(locadorDAO.buscar(locador));
                                 
-                Agencia agencia = new Agencia();                
-                agencia.setIdAgencia(resultado.getInt("id_agencia")); 
-                AgenciaDAO agenciaDAO = new AgenciaDAO();
-                agenciaDAO.setConnection(connection);
-                locacao.setAgenciaDevolucao(agenciaDAO.buscar(agencia));
+                Veiculo veiculo = new Veiculo();                
+                veiculo.setIdVeiculo(resultado.getInt("id_veiculo")); 
+                VeiculoDAO veiculoDAO = new VeiculoDAO();
+                veiculoDAO.setConnection(connection);
+                locacao.setVeiculo(veiculoDAO.buscar(veiculo)); 
                 
                 retorno = locacao;
             }

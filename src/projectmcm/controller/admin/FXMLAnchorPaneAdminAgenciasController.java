@@ -194,10 +194,13 @@ public class FXMLAnchorPaneAdminAgenciasController implements Initializable {
     
     @FXML
     public void handleGeraRelatorio(){
-        String src="Relatorios/Agencia.jasper";
+        Agencia agencia = tableViewAgencias.getSelectionModel().getSelectedItem();
+        String src="Relatorios/geral.jasper";
         JasperPrint jasperPrint = null;
+        HashMap<String, Object> map = new HashMap();
+        map.put("id", agencia.getIdAgencia());
         try {
-            jasperPrint = JasperFillManager.fillReport(src, null, this.connection);
+            jasperPrint = JasperFillManager.fillReport(src, map, this.connection);
         } catch (JRException ex) {
             Logger.getLogger(FXMLAnchorPaneAdminAgenciasController.class.getName()).log(Level.SEVERE, null, ex);
         }

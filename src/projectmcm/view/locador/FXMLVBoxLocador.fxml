@@ -18,22 +18,13 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Gerenciar">
                     <items>
-                        <MenuItem fx:id="menuItemGerenciarVeiculos" mnemonicParsing="false" onAction="#handleMenuItemGerenciarVeiculos" text="Veículos" />
-                        <MenuItem fx:id="menuItemGerenciarLocadores" mnemonicParsing="false" onAction="#handleMenuItemGerenciarLocadores" text="Locadores" />
                         <MenuItem fx:id="menuItemGerenciarClientes" mnemonicParsing="false" onAction="#handleMenuItemGerenciarClientes" text="Clientes" />
-                        <MenuItem fx:id="menuItemGerenciarPlanos" mnemonicParsing="false" onAction="#handleMenuItemGerenciarPlanos" text="Planos" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Locação">
                     <items>
                         <MenuItem fx:id="menuItemLocacaoRealizar" mnemonicParsing="false" onAction="#handleMenuItemLocacaoRealizar" text="Realizar Locação" />
                         <MenuItem fx:id="menuItemLocacalListar" mnemonicParsing="false" text="Ver Locações" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Vistoria">
-                    <items>
-                        <MenuItem fx:id="menuItemVistoriaRelizar" mnemonicParsing="false" text="Realizar Vistoria" />
-                        <MenuItem fx:id="menuItemVistoriaListar" mnemonicParsing="false" text="Ver Vistorias" />
                     </items>
                 </Menu>
             </menus>

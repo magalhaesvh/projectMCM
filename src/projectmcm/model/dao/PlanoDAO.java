@@ -86,6 +86,7 @@ public class PlanoDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Plano plano = new Plano();
+                plano.setIdPlano(resultado.getInt("id_plano"));
                 plano.setNome(resultado.getString("nome"));
                 plano.setRegulamento(resultado.getString("regulamento"));
                 plano.setDescricao(resultado.getString("descricao"));
@@ -112,6 +113,7 @@ public class PlanoDAO {
             stmt.setInt(1, plano.getIdPlano());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
+                plano.setIdPlano(resultado.getInt("id_plano"));
                 plano.setNome(resultado.getString("nome"));
                 plano.setRegulamento(resultado.getString("regulamento"));
                 plano.setDescricao(resultado.getString("descricao"));

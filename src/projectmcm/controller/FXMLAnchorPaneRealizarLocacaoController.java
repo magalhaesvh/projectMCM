@@ -5,10 +5,13 @@
  */
 package projectmcm.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,19 +23,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import projectmcm.model.dao.ClienteDAO;
+import projectmcm.model.dao.LocacaoDAO;
 import projectmcm.model.dao.PlanoDAO;
 import projectmcm.model.dao.VeiculoDAO;
 import projectmcm.model.database.Database;
 import projectmcm.model.database.DatabaseFactory;
 import projectmcm.model.domain.Cliente;
+import projectmcm.model.domain.Funcionario;
 import projectmcm.model.domain.Locacao;
 import projectmcm.model.domain.Plano;
 import projectmcm.model.domain.Veiculo;
@@ -46,6 +53,7 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
 
     private int passo = 0;
     private Locacao locacao = new Locacao();
+    private Funcionario logado;
 
     @FXML
     private TextField textFieldPesquisar;
@@ -67,6 +75,8 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
     private AnchorPane anchorPaneVeiculo;
     @FXML
     private AnchorPane anchorPanePlano;
+    @FXML
+    private TextField textfieldKMInicial;
 
     // Dados de clientes
     @FXML
@@ -151,6 +161,12 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
     private CheckBox checkBoxDiaria;
     @FXML
     private CheckBox checkBoxPlanoCustoFixo;
+    @FXML
+    private SplitPane splitPaneLocacao;
+    @FXML
+    private AnchorPane anchorPaneInformacoesAdicionais;
+    @FXML
+    private DatePicker datePickerDataFinal;
 
     private List<Cliente> listClientes;
     private ObservableList<Cliente> observableListClientes;
@@ -165,12 +181,14 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final VeiculoDAO veiculoDAO = new VeiculoDAO();
     private final PlanoDAO planoDAO = new PlanoDAO();
+    private final LocacaoDAO locacaoDAO = new LocacaoDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         clienteDAO.setConnection(connection);
         veiculoDAO.setConnection(connection);
         planoDAO.setConnection(connection);
+        locacaoDAO.setConnection(connection);
         carregarTableViewCliente();
         // Listen acionado diante de quaisquer alterações na seleção de itens do TableView
         tableView.getSelectionModel().selectedItemProperty().addListener(
@@ -190,11 +208,11 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
         tableColumn2.setText("Modelo");
         tableColumn1.setCellValueFactory(new PropertyValueFactory<>("marca"));
         tableColumn2.setCellValueFactory(new PropertyValueFactory<>("modelo"));
-        listVeiculos = veiculoDAO.listar();
+        listVeiculos = veiculoDAO.listarDisponiveis();
         observableListVeiculos = FXCollections.observableArrayList(listVeiculos);
         tableView.setItems(observableListVeiculos);
     }
-    
+
     public void carregarTableViewPlanos() {
         tableColumn1.setText("Plano");
         tableColumn2.setText("Descrição");
@@ -206,7 +224,13 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
     }
 
     private void alteraPasso(int passoAnterior, int novoPasso) {
-        if (novoPasso == 1) {
+        if (novoPasso == 0) {
+            anchorPaneCliente.setVisible(true);
+            anchorPanePlano.setVisible(false);
+            anchorPaneVeiculo.setVisible(false);
+            this.labelEscolha.setText("Escolha o cliente");
+            carregarTableViewCliente();
+        } else if (novoPasso == 1) {
             anchorPaneCliente.setVisible(false);
             anchorPanePlano.setVisible(false);
             anchorPaneVeiculo.setVisible(true);
@@ -218,6 +242,12 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
             anchorPaneVeiculo.setVisible(false);
             this.labelEscolha.setText("Escolha o Plano");
             carregarTableViewPlanos();
+        } else if (novoPasso == 3) {
+            anchorPaneCliente.setVisible(false);
+            anchorPanePlano.setVisible(false);
+            anchorPaneVeiculo.setVisible(false);
+            splitPaneLocacao.setVisible(false);
+            anchorPaneInformacoesAdicionais.setVisible(true);
         }
         this.passo = novoPasso;
 
@@ -344,10 +374,111 @@ public class FXMLAnchorPaneRealizarLocacaoController implements Initializable {
             alert.show();
         }
     }
-    
-    public void handlebuttonFinalizar(){
-        if (this.locacao.getCliente() != null && this.locacao.getPlano() != null && this.locacao.getVeiculo() != null){
-            
+
+    public void handlebuttonProximo3() {
+        Plano plano = null;
+        if (!this.listPlanos.isEmpty()) {
+            plano = (Plano) tableView.getSelectionModel().getSelectedItem();
         }
+        if (plano != null) {
+            locacao.setPlano(plano);
+            alteraPasso(this.passo, this.passo + 1);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, escolha um plano na tabela!");
+            alert.show();
+        }
+    }
+
+    public void handlebuttonAnterior2() {
+        alteraPasso(this.passo, this.passo - 1);
+    }
+
+    public void handlebuttonAnterior1() {
+        alteraPasso(this.passo, this.passo - 1);
+    }
+
+    public void handleButtonPesquisar() throws IOException {
+        switch (this.passo) {
+            case 0:
+                tableColumn1.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                tableColumn2.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+
+                if (!textFieldPesquisar.getText().equals("")) {
+                    listClientes = clienteDAO.search(textFieldPesquisar.getText());
+                    if (!listClientes.isEmpty()) {
+                        observableListClientes = FXCollections.observableArrayList(listClientes);
+                        tableView.setItems(observableListClientes);
+                    }
+                } else {
+                    carregarTableViewCliente();
+                }
+                break;
+            case 1:
+                tableColumn1.setText("Marca");
+                tableColumn2.setText("Modelo");
+                tableColumn1.setCellValueFactory(new PropertyValueFactory<>("marca"));
+                tableColumn2.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+
+                if (!textFieldPesquisar.getText().equals("")) {
+                    listVeiculos = veiculoDAO.searchDisponiveis(textFieldPesquisar.getText());
+                    if (!listVeiculos.isEmpty()) {
+                        observableListVeiculos = FXCollections.observableArrayList(listVeiculos);
+                        tableView.setItems(observableListVeiculos);
+                    }
+                } else {
+                    carregarTableViewVeiculos();
+                }
+                break;
+            case 2:
+                tableColumn1.setText("Plano");
+                tableColumn2.setText("Descrição");
+                tableColumn1.setCellValueFactory(new PropertyValueFactory<>("nome"));
+                tableColumn2.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+
+                if (!textFieldPesquisar.getText().equals("")) {
+                    listPlanos = planoDAO.buscarNome(textFieldPesquisar.getText());
+                    if (!listPlanos.isEmpty()) {
+                        observableListPlanos = FXCollections.observableArrayList(listPlanos);
+                        tableView.setItems(observableListPlanos);
+                    }
+                } else {
+                    carregarTableViewPlanos();
+                }
+                break;
+
+        }
+    }
+
+    public void handlebuttonFinalizar() {
+        this.locacao.setDataFinal(datePickerDataFinal.getValue());
+        this.locacao.setDataInicio(LocalDate.now());
+        this.locacao.setKmInicial(Float.parseFloat(textfieldKMInicial.getText()));
+        this.locacao.setLocador(this.getLogado());
+        if (this.locacao.getCliente() != null && this.locacao.getPlano() != null && this.locacao.getVeiculo() != null && this.locacao.getDataFinal() != null && this.locacao.getKmInicial() > 0) {
+            VeiculoDAO veiculoDAO = new VeiculoDAO();
+            veiculoDAO.setConnection(connection);
+            locacao.getVeiculo().getStatus().setIdStatus(6);
+            if (veiculoDAO.alterar(locacao.getVeiculo()) && locacaoDAO.inserir(this.locacao)) {
+                JOptionPane.showMessageDialog(null, "Locação realizada com sucesso");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Ocorreu um erro!Tente novamento masi tarde");
+                alert.show();
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, entre com campos válidos!");
+            alert.show();
+        }
+    }
+
+    public Funcionario getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Funcionario logado) {
+        this.logado = logado;
     }
 }

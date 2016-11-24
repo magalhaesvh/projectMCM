@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projectmcm.model.domain.Agencia;
 import projectmcm.model.domain.Status;
 import projectmcm.model.domain.Veiculo;
 
@@ -47,7 +48,7 @@ public class VeiculoDAO {
             stmt.setBoolean(16, veiculo.isTracao4x4());
             stmt.setInt(17, veiculo.getStatus().getIdStatus());
             stmt.setString(18, veiculo.getMarca());
-            stmt.setString(19, veiculo.getModelo());            
+            stmt.setString(19, veiculo.getModelo());
             stmt.setInt(20, veiculo.getAgencia().getIdAgencia());
             stmt.execute();
             return true;
@@ -79,7 +80,7 @@ public class VeiculoDAO {
             stmt.setBoolean(16, veiculo.isTracao4x4());
             stmt.setInt(17, veiculo.getStatus().getIdStatus());
             stmt.setString(18, veiculo.getMarca());
-            stmt.setString(19, veiculo.getModelo());            
+            stmt.setString(19, veiculo.getModelo());
             stmt.setInt(20, veiculo.getAgencia().getIdAgencia());
             stmt.setInt(21, veiculo.getIdVeiculo());
             stmt.execute();
@@ -130,7 +131,7 @@ public class VeiculoDAO {
                 veiculo.setAbs(resultado.getBoolean("abs"));
                 veiculo.setAirBag(resultado.getBoolean("air_bag"));
                 veiculo.setTracao4x4(resultado.getBoolean("4x4"));
-                
+
                 Status status = new Status();
                 status.setIdStatus(resultado.getInt("id_agencia"));
 
@@ -138,7 +139,116 @@ public class VeiculoDAO {
                 StatusDAO statusDAO = new StatusDAO();
                 statusDAO.setConnection(connection);
                 veiculo.setStatus(statusDAO.buscar(status));
-                
+
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                veiculo.setAgencia(agenciaDAO.buscar(agencia));
+
+                retorno.add(veiculo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+
+    public List<Veiculo> searchDisponiveis(String texto) {
+        String sql = "SELECT * FROM veiculo WHERE id_status = 5 AND (marca LIKE ? OR modelo LIKE ? or placa LIKE ?)";
+        List<Veiculo> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, "%"+texto+"%");
+            stmt.setString(2, "%"+texto+"%");
+            stmt.setString(3, "%"+texto+"%");
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Veiculo veiculo = new Veiculo();
+                veiculo.setIdVeiculo(resultado.getInt("id_veiculo"));
+                veiculo.setMarca(resultado.getString("marca"));
+                veiculo.setModelo(resultado.getString("modelo"));
+                veiculo.setCor(resultado.getString("cor"));
+                veiculo.setValor(resultado.getFloat("valor"));
+                veiculo.setPlaca(resultado.getString("placa"));
+                veiculo.setChassi(resultado.getString("chassi"));
+                veiculo.setAnoModelo(resultado.getInt("ano_modelo"));
+                veiculo.setAnoFabricacao(resultado.getInt("ano_fabricacao"));
+                veiculo.setObservacoes(resultado.getString("observacoes"));
+                veiculo.setMotor(resultado.getFloat("motor"));
+                veiculo.setArCondicionado(resultado.getBoolean("ar_condicionado"));
+                veiculo.setVidroEletrico(resultado.getBoolean("vidro_eletrico"));
+                veiculo.setTravaEletrica(resultado.getBoolean("trava_eletrica"));
+                veiculo.setDirecaoEletrica(resultado.getBoolean("direcao_eletrica"));
+                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_automatico"));
+                veiculo.setAbs(resultado.getBoolean("abs"));
+                veiculo.setAirBag(resultado.getBoolean("air_bag"));
+                veiculo.setTracao4x4(resultado.getBoolean("4x4"));
+
+                Status status = new Status();
+                status.setIdStatus(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                veiculo.setStatus(statusDAO.buscar(status));
+
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                veiculo.setAgencia(agenciaDAO.buscar(agencia));
+
+                retorno.add(veiculo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+
+    public List<Veiculo> listarDisponiveis() {
+        String sql = "SELECT * FROM veiculo WHERE id_status = 5";
+        List<Veiculo> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Veiculo veiculo = new Veiculo();
+                veiculo.setIdVeiculo(resultado.getInt("id_veiculo"));
+                veiculo.setMarca(resultado.getString("marca"));
+                veiculo.setModelo(resultado.getString("modelo"));
+                veiculo.setCor(resultado.getString("cor"));
+                veiculo.setValor(resultado.getFloat("valor"));
+                veiculo.setPlaca(resultado.getString("placa"));
+                veiculo.setChassi(resultado.getString("chassi"));
+                veiculo.setAnoModelo(resultado.getInt("ano_modelo"));
+                veiculo.setAnoFabricacao(resultado.getInt("ano_fabricacao"));
+                veiculo.setObservacoes(resultado.getString("observacoes"));
+                veiculo.setMotor(resultado.getFloat("motor"));
+                veiculo.setArCondicionado(resultado.getBoolean("ar_condicionado"));
+                veiculo.setVidroEletrico(resultado.getBoolean("vidro_eletrico"));
+                veiculo.setTravaEletrica(resultado.getBoolean("trava_eletrica"));
+                veiculo.setDirecaoEletrica(resultado.getBoolean("direcao_eletrica"));
+                veiculo.setCambioAutomatico(resultado.getBoolean("cambio_automatico"));
+                veiculo.setAbs(resultado.getBoolean("abs"));
+                veiculo.setAirBag(resultado.getBoolean("air_bag"));
+                veiculo.setTracao4x4(resultado.getBoolean("4x4"));
+
+                Status status = new Status();
+                status.setIdStatus(resultado.getInt("id_agencia"));
+
+                //Obtendo os dados completos da Agencia associada ao gerente
+                StatusDAO statusDAO = new StatusDAO();
+                statusDAO.setConnection(connection);
+                veiculo.setStatus(statusDAO.buscar(status));
+
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                veiculo.setAgencia(agenciaDAO.buscar(agencia));
+
                 retorno.add(veiculo);
             }
         } catch (SQLException ex) {
@@ -174,12 +284,19 @@ public class VeiculoDAO {
                 veiculo.setAirBag(resultado.getBoolean("air_bag"));
                 veiculo.setTracao4x4(resultado.getBoolean("4x4"));
                 Status status = new Status();
-                status.setIdStatus(resultado.getInt("id_agencia"));
+                status.setIdStatus(resultado.getInt("id_status"));
 
                 //Obtendo os dados completos da Agencia associada ao gerente
                 StatusDAO statusDAO = new StatusDAO();
                 statusDAO.setConnection(connection);
                 veiculo.setStatus(statusDAO.buscar(status));
+
+                Agencia agencia = new Agencia();
+                agencia.setIdAgencia(resultado.getInt("id_agencia"));
+                AgenciaDAO agenciaDAO = new AgenciaDAO();
+                agenciaDAO.setConnection(connection);
+                veiculo.setAgencia(agenciaDAO.buscar(agencia));
+
                 retorno = veiculo;
             }
         } catch (SQLException ex) {
@@ -188,12 +305,14 @@ public class VeiculoDAO {
         return retorno;
     }
 
-
-public List<Veiculo> buscar(String texto) {
-        String sql = "SELECT * FROM veiculo";
-        List<Veiculo> retorno = new ArrayList<>();
+    public ArrayList<Veiculo> buscar(String texto) {
+        String sql = "SELECT * FROM veiculo WHERE marca LIKE ? OR modelo LIKE ? or placa LIKE ?";
+        ArrayList<Veiculo> retorno = new ArrayList();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, "%"+texto+"%");
+            stmt.setString(2, "%"+texto+"%");
+            stmt.setString(3, "%"+texto+"%");
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Veiculo veiculo = new Veiculo();
